@@ -1,7 +1,7 @@
-const controller = require("../../controllers/homeController");
+const Controller = require("../../controllers/home");
 const express = require("express");
 const api = express.Router();
 
-api.post("/",controller.getHome);
+api.post("/",Controller.getHome);
 
 module.exports = api;

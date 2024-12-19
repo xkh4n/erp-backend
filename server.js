@@ -28,11 +28,12 @@ app.use(cors());
 
 
 /* ROUTES */
-const {home} = require("./src/routes");
+const {home, countries} = require("./src/routes");
 const base_path = '/api/' + process.env.API_VER;
 
 /* ROUTES CONFIGURE */
 app.use(base_path, home);
+app.use(base_path + "/countries", countries);
 
 /* STATICS FOLDERS */
 app.use(express.static("uploads"));
