@@ -44,12 +44,13 @@ switch (process.env.NODE_ENV) {
     SERVER = 'TESTING';
     break;
 }
-
+var PORT_DB = Number.parseInt(process.env.DB_PORT, 10);
 
 (async () => {
   try {
-    await mongo.connect(URI);
+    //await mongo.connect(URI);
     logger.info(`Connection to ${SERVER} it's Ok`);
+    logger.warn(URI);
     await app.listen(PORT, () => {
       logger.debug(`Server of ${SERVER} is Running in: http://${SERVER}:${PORT}/api/${process.env.API_VER}/`);
     });
