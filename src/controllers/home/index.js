@@ -12,9 +12,9 @@ const Validates = require("../../library/Validations");
 
 const getHome = async (req, res) => {
     try {
-        req.status(200).send({msg:"Ok"});
+        res.status(200).send({msg:"Ok"});
     } catch (error) {
-        req.status(400).send({msg:"Mal"});
+        res.status(400).send({msg:"Mal"});
     }
 }
 
