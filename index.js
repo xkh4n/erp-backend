@@ -41,8 +41,11 @@ switch (process.env.NODE_ENV) {
     break;
 }
 
+logger.warn(URI);
+
 (async () => {
     try {
+        logger.fatal(`Connecting to ${SERVER}...`);
         await mongo.connect(URI);
         logger.info(`Connection to ${SERVER} it's Ok`);
         await app.listen(PORT, () => {
