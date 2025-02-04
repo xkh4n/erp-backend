@@ -2,6 +2,6 @@ const Controller = require("../../controllers/home");
 const express = require("express");
 const api = express.Router();
 
-api.post("/",Controller.getHome);
+api.get("/",Controller.getHome);
 
 module.exports = api;
