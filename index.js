@@ -25,7 +25,6 @@ var URI = '';
 switch (process.env.NODE_ENV) {
   case 'production':
     PORT = 3030; //PUERTO DEL SERVIDOR EXPRESS PARA PRODUCCION
-     // CASSINI01
     URI = `mongodb://prd_${process.env.DB_USER}:${process.env.DB_PASS}p@${process.env.DB_HOST}01:${process.env.DB_PORT}/prd_${process.env.DB_NAME}?${process.env.DB_AUTH}`;
     SERVER = 'PRODUCTION';
     break;
@@ -42,15 +41,17 @@ switch (process.env.NODE_ENV) {
     break;
 }
 
+logger.warn(URI);
 
 (async () => {
-  try {
-    //await mongo.connect(URI);
-    logger.info(`Connection to ${SERVER} it's Ok`);
-    await app.listen(PORT, () => {
-      logger.debug(`Server of ${SERVER} is Running in: http://localhost:${PORT}/api/${process.env.API_VER}/`);
-    });
-  } catch (error) {
-    logger.error("Connection to BDD is Fail: ", error);
-  }
+    try {
+        logger.fatal(`Connecting to ${SERVER}...`);
+        await mongo.connect(URI);
+        logger.info(`Connection to ${SERVER} it's Ok`);
+        await app.listen(PORT, () => {
+            logger.debug(`Server of ${SERVER} is Running in: http://${SERVER}:${PORT}/api/${process.env.API_VER}/`);
+        });
+    } catch (error) {
+        logger.error("Connection to BDD is Fail: ", error);
+    }
 })();

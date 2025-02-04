@@ -1,0 +1,80 @@
+services:
+
+  #IMAGEN DE BASE DE DATOS DESARROLLO
+
+  bdd-dev:
+    image: mongo:7.0.16-jammy
+    container_name: CASSINI02
+    hostname: CASSINI02
+    volumes:
+      - data_dev:/data/db
+      - ./init-mongo.dev.js:/docker-entrypoint-initdb.d/init-mongo.dev.js:ro
+    networks:
+      - net-dev
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=dev_${DB_USER}
+      - MONGO_INITDB_ROOT_PASSWORD=${DB_PASS}d
+      - MONGO_INITDB_DATABASE=admin
+
+  ################################################################################################
+
+  #IMAGEN DE GESTOR BASE DE DATOS DESARROLLO
+
+  dbexpress-dev:
+    depends_on:
+      - bdd-dev
+    image: mongo-express:1.0.2-20-alpine3.19
+    container_name: DBEXPRESS02
+    hostname: DBEXPRESS02
+    ports:
+      - "82:8081"
+    networks:
+      - net-dev
+    restart: always
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=CASSINI02
+      - ME_CONFIG_MONGODB_PORT=27017
+      - ME_CONFIG_MONGODB_ENABLE_ADMIN=true
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=dev_${DB_USER}
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=${DB_PASS}d
+
+  ################################################################################################
+
+  #IMAGEN DE API DESARROLLO
+
+  api-dev:
+    depends_on:
+      - bdd-dev
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - .:/app
+      - /app/node_modules
+    container_name: VOYAGER02
+    hostname: VOYAGER02
+    ports:
+      - "3040:3040"
+    networks:
+      - net-dev
+    restart: always
+    environment:
+      DB_USER : ${DB_USER}
+      DB_PASS : ${DB_PASS}
+      DB_HOST : ${DB_HOST}
+      DB_AUTH : ${DB_AUTH}
+      DB_NAME : ${DB_NAME}
+      DB_PORT : ${DB_PORT}
+      API_VER : ${API_VER}
+      JWT_KEY : ${JWT_KEY}
+      PRIV_KEY : ${PRIV_KEY}
+      PUBL_KEY : ${PUBL_KEY}
+
+volumes:
+  data_dev:
+    external: true
+
+networks:
+  net-dev:
+    driver: bridge
