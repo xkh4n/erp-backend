@@ -1,10 +1,9 @@
 services:
-  dev:
+  # BASE DE DATOS
+  bdd:
     image: mongo:7.0.16-jammy
     container_name: CASSINI02
     hostname: CASSINI02
-    ports:
-      - "27017:27017"
     volumes:
       - mongodb_data:/data/db
       - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
@@ -16,9 +15,31 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=c009c5b4a30b8f1feb344526044d34543c1534d430b31789b6b5e03d4b6be50c5c4a359c604ff02ac3652f79036ceaa3711ea6d51936afd2883063b7356dd870
       - MONGO_INITDB_DATABASE=admin
 
+  # ADMINISTRADOR DE BASE DE DATOS
+  dbexpress:
+    depends_on:
+      - bdd
+    image: mongo-express:1.0.2-20-alpine3.19
+    container_name: DBEXPRESS02
+    hostname: DBEXPRESS02
+    ports:
+      - "82:8081"
+    networks:
+      - mongo-net
+    restart: always
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=bdd
+      - ME_CONFIG_MONGODB_PORT=27017
+      - ME_CONFIG_MONGODB_ENABLE_ADMIN=true
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=admindev
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=c009c5b4a30b8f1feb344526044d34543c1534d430b31789b6b5e03d4b6be50c5c4a359c604ff02ac3652f79036ceaa3711ea6d51936afd2883063b7356dd870
+      - ME_CONFIG_BASICAUTH_USERNAME=admin
+      - ME_CONFIG_BASICAUTH_PASSWORD=c009c5b4a30b8f1feb344526044d34543c1534d430b31789b6b5e03d4b6be50c5c4a359c604ff02ac3652f79036ceaa3711ea6d51936afd2883063b7356dd870
+
+  # API
   api:
     depends_on:
-      - dev
+      - bdd
     build:
       context: .
       dockerfile: Dockerfile
