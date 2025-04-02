@@ -4,8 +4,8 @@
   "description": "Backend para Sistema de Adquisiciones",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_ENV=production node index.js",
-    "dev": "NODE_ENV=development nodemon index.jx",
+    "start": "NODE_ENV=DEV node index.js",
+    "dev": "NODE_ENV=development nodemon index.js",
     "test": "NODE_ENV=testing nodemon index.js"
   },
   "author": "Osvaldo Rojas G.",
