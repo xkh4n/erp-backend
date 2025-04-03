@@ -47,9 +47,9 @@ switch (process.env.NODE_ENV) {
   
   (async () => {
       try {
-          logger.fatal(`Connecting to ${SERVER}...`);
+          logger.warn(`Connecting to ${SERVER}...`);
           await mongo.connect(URI);
-          logger.info(`Connection to ${SERVER} it's Ok`);
+          logger.warn(`Connection to ${SERVER} it's Ok`);
           await app.listen(PORT, () => {
               logger.debug(`Server of ${SERVER} is Running in: http://${SERVER}:${PORT}/api/${process.env.API_VER}/`);
           });
