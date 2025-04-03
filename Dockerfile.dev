@@ -10,9 +10,9 @@ WORKDIR /app
 COPY --from=dev-dependencies /app/node_modules ./node_modules
 COPY --from=dev-dependencies /app/package.json ./package.json
 COPY ./src ./src
-COPY ./index.js ./
-COPY ./server.js ./
-COPY .env ./.env
+COPY ./src/index.ts ./
+COPY ./src/server.ts ./
+COPY ./src/.env ./.env
 
 
 
