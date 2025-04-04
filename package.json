@@ -1,26 +1,29 @@
 {
-  "name": "erp-backend",
+  "name": "backend",
   "version": "1.0.1",
-  "description": "Backend para Sistema de Adquisiciones",
-  "main": "index.js",
-  "scripts": {
-    "start": "NODE_ENV=DEV node index.js",
-    "dev": "NODE_ENV=development nodemon index.js",
-    "test": "NODE_ENV=testing nodemon index.js"
-  },
-  "author": "Osvaldo Rojas G.",
+  "description": "API REST",
   "license": "MIT",
+  "author": "Osvaldo Rojas G.",
+  "type": "commonjs",
+  "main": "index.ts",
+  "scripts": {
+     "dev": "NODE_ENV=development nodemon"
+  },
   "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "body-parser": "^1.20.3",
+    "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
-    "express": "^4.21.2",
+    "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "log4js": "^6.9.1",
-    "mongoose": "^8.8.4"
+    "mongoose": "^8.13.1"
   },
   "devDependencies": {
-    "nodemon": "^3.1.7"
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.1",
+    "chokidar-cli": "^3.0.0",
+    "nodemon": "^3.1.9",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.2"
   }
 }
