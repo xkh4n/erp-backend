@@ -1,24 +1,22 @@
-FROM node:23-alpine3.20 as dev-dependencies
+### Etapa 1: Instalar dependencias en desarrollo
+FROM node AS dev-dependencies
 WORKDIR /app
-COPY ./package.json ./package.json
+COPY ./package.json ./
+COPY ./package-lock.json ./
 RUN npm install
 
-
-
-FROM node:23-alpine3.20 as builder-dev
+### Etapa 2: Preparar el entorno de desarrollo con código fuente
+FROM node AS builder-dev
 WORKDIR /app
 COPY --from=dev-dependencies /app/node_modules ./node_modules
 COPY --from=dev-dependencies /app/package.json ./package.json
 COPY ./src ./src
-COPY ./src/index.ts ./
-COPY ./src/server.ts ./
-COPY ./src/.env ./.env
+COPY ./tsconfig.json ./
 
-
-
-FROM node:23-alpine3.20 as dev
+### Etapa 3: Contenedor final para desarrollo
+FROM node AS dev
 WORKDIR /app
-COPY --from=builder-dev /app .
-EXPOSE 3010
-CMD [ "npm","run","dev" ]
-
+COPY --from=builder-dev /app ./
+EXPOSE 3040
+RUN npm install -g nodemon
+CMD ["npm", "run", "dev"]
