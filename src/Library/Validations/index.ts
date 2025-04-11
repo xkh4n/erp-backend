@@ -43,14 +43,14 @@ const IsIata = (iata:string) => {
 };
 
 const IsEmail = (email:string) => {
-    // Expresión regular para validar un correo electrónico
-    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    // Verificar si el valor no es una cadena o no cumple con la expresión regular
-    if (typeof email !== 'string' || !regex.test(email)) {
-      logger.error("The input is not a valid E-Mail");
-      return false;
-    }
-    return true;
+  // Expresión regular para validar un correo electrónico
+  const regex = /^[a-zA-Z0-9](?:[a-zA-Z0-9._-]*[a-zA-Z0-9])?@[a-zA-Z0-9](?:[a-zA-Z0-9.-]*[a-zA-Z0-9])?(?:\.[a-zA-Z]{2,})+$/;
+  // Verificar si el valor no es una cadena o no cumple con la expresión regular
+  if (typeof email !== 'string' || !regex.test(email)) {
+    console.warn("The input is not a valid E-Mail");
+    return false;
+  }
+  return true;
 };
 
 const IsParagraph = (paragraph:string) => {
