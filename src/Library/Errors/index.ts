@@ -1,6 +1,6 @@
 /* LOGGER */
 import log4js from 'log4js';
-const logger = log4js.getLogger('Login Controllers:');
+const logger = log4js.getLogger('CustomErrors:');
 logger.level = 'all';
 
 export enum ErrorType {
@@ -9,7 +9,8 @@ export enum ErrorType {
   AUTHORIZATION = 'AUTHORIZATION_ERROR',
   NOT_FOUND = 'NOT_FOUND_ERROR',
   DATABASE = 'DATABASE_ERROR',
-  SERVER = 'SERVER_ERROR'
+  SERVER = 'SERVER_ERROR',
+  CONFLICT = 'CONFLICT_ERROR',
 }
 
 export interface ErrorResponse {
@@ -30,12 +31,6 @@ export class CustomError extends Error {
     this.code = code;
     this.details = details;
     this.name = 'CustomError';
-
-    // Log the error
-    logger.error(`${this.type}: ${this.message}`, {
-      code: this.code,
-      details: this.details
-    });
   }
 
   public toJSON(): ErrorResponse {
@@ -71,4 +66,8 @@ export const createDatabaseError = (message: string, details?: any) => {
 
 export const createServerError = (message: string, details?: any) => {
   return new CustomError(ErrorType.SERVER, message, 500, details);
+};
+
+export const createConflictError = (message: string, details?: any) => {
+  return new CustomError(ErrorType.CONFLICT, message, 409, details);
 };

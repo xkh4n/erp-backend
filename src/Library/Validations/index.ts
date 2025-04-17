@@ -21,6 +21,23 @@ const IsUsername = (username: string) => {
     return true;
 };
 
+const IsName = (name: string) => {
+  // Verificar si el valor no es una cadena
+  if (typeof name !== 'string') {
+    logger.error("The input is not a string");
+    return false;
+  }
+  // Eliminar espacios en blanco al inicio y al final
+  name = name.trim();
+  const regex = /^[a-zA-ZÁÉÍÓÚáéíóúñÑ-]+( [a-zA-ZÁÉÍÓÚáéíóúñÑ-]+)*$/;
+  // Verificar si el valor no cumple con la expresión regular
+  if (!regex.test(name)) {
+    logger.error(`The input "${name}" is not a valid name`);
+    return false;
+  }
+  return true;
+};
+
 const IsPassword = (password:string) => {
     // Expresión regular para validar contraseñas
     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[.,;:!?'%$&#?¡@"()\[\]{}\-_*]).{8,}$/;
@@ -40,6 +57,15 @@ const IsIata = (iata:string) => {
       return false;
     }
     return true;
+};
+
+const IsISO = (iata:string) => {
+  const regex = /^[a-zA-ZÁÉÍÓÚáéíóúñÑ0-9]{2}$/;
+  if (typeof iata !== 'string' || !regex.test(iata)) {
+    logger.error("The input is not a valid ISO code");
+    return false;
+  }
+  return true;
 };
 
 const IsEmail = (email:string) => {
@@ -99,6 +125,48 @@ const IsPhone = (phone:string) => {
     }
     return true;
 }
+
+const IsId = (id:string) => {
+    // Verificar si el valor no es una cadena
+    const regex = /^[a-z0-9]{10,30}$/;
+    if (typeof id!=='string') {
+        logger.error("The input is not a string");
+        return false;
+    }
+    if (!regex.test(id)) {
+      logger.error(`The input "${id}" is not a valid ID`);
+      return false;
+    }
+    return true;
+}
+
+const IsPostal = (postal:string) => {
+  const regex = /^[0-9]{7,10}$/;
+  if (typeof postal !== 'number' || !regex.test(postal)) {
+    logger.error("The input is not a valid postal code");
+    return false;
+  }
+  return true;
+}
+
+const IsTerritorial = (code: string) => {
+  const regex = /^[a-zA-Z0-9]{3,5}$/;
+  if (typeof code !== 'string' || !regex.test(code)) {
+    logger.error("The input is not a valid territorial code");
+    return false;
+  }
+  return true;
+}
+
+const IsSii = (code: string) => {
+  const regex = /^[0-9]{4,7}$/;
+  if (typeof code !== 'number' || !regex.test(code)) {
+    logger.error("The input is not a valid SII code");
+    return false;
+  }
+  return true;
+}
+
 export{
     IsUsername,
     IsPassword,
@@ -107,4 +175,10 @@ export{
     IsParagraph,
     IsDecimal,
     IsPhone,
+    IsISO,
+    IsName,
+    IsId,
+    IsPostal,
+    IsTerritorial,
+    IsSii
 }

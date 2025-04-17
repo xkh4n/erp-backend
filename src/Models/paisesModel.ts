@@ -20,5 +20,6 @@ const paisesSchema = new Schema<IPaises>({
     }
 })
 
+
 const Paises = mongoose.model<IPaises>('Pais', paisesSchema);
 export default Paises;

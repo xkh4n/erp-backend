@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 const PORT = process.env.API_PORT || 3030;
 
 /* ROUTES */
-import {login, registro} from './Routes/index';
+import {login, registro, paises, ciudad} from './Routes/index';
 
 /* CORS CONFIGURE */
 app.use(cors());
@@ -29,6 +29,8 @@ app.use(cors());
 const base_path = '/api/' + process.env.API_VER + '/';
 app.use(base_path, login);
 app.use(base_path, registro);
+app.use(base_path, paises);
+app.use(base_path, ciudad);
 
 
 /* STATICS FOLDERS */
