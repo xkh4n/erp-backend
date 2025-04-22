@@ -1,0 +1,34 @@
+import mongoose from "mongoose";
+import { Schema } from "mongoose";
+import { IProceso } from "../Interfaces";
+
+const ProcesoSchema = new Schema<IProceso>({
+    codigo: {
+        type: Number,
+        required: true,
+        unique: true,
+        min: 10,
+        max: 99,
+    },
+    nombre: {
+        type: String,
+        required: true
+    },
+    descripcion: {
+        type: String,
+        required: true
+    },
+    estado: {
+        type: Boolean,
+        required: true
+    },
+    servicio: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Servicio",
+        required: true
+    }
+})
+
+const Proceso = mongoose.model<IProceso>("Proceso", ProcesoSchema)
+
+export default Proceso

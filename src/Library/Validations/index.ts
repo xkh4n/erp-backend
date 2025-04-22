@@ -167,6 +167,14 @@ const IsSii = (code: string) => {
   return true;
 }
 
+const IsCodGerencia = (number: string) => {
+  const regex = /^[0-9]{2}$/;
+  if (typeof number !== 'number' || !regex.test(number)) {
+    logger.error("The input is not a valid Number Range");
+    return false;
+  }
+  return true;
+}
 export{
     IsUsername,
     IsPassword,
@@ -180,5 +188,6 @@ export{
     IsId,
     IsPostal,
     IsTerritorial,
-    IsSii
+    IsSii,
+    IsCodGerencia,
 }
