@@ -1,32 +1,31 @@
 /* LOGGER */
 import log4js from 'log4js';
-const logger = log4js.getLogger('Gerencia Controllers:');
+const logger = log4js.getLogger('Sub-Gerencia Controllers:');
 logger.level = 'all';
 
 /** PERSONALIZED ERRORS */
 import {CustomError, createServerError, createNotFoundError, createConflictError, createValidationError} from "../../Library/Errors/index";
 
 /* INTERFACES */
-import { IGerencia } from '../../Interfaces';
+import { ISubGerencia } from '../../Interfaces';
 
 /* MODELS */
+import SubGerencia from '../../Models/subgerenciaModel';
 import Gerencia from '../../Models/gerenciaModel';
 
 /* DEPENDENCIES */
 import { Request, Response } from "express";
 import { IsBoolean, IsCodGerencia, IsName, IsParagraph } from '../../Library/Validations';
 
-const setGerencia = async (req: Request, res: Response) => {
+
+const setSubGerencia = async (req: Request, res: Response) => {
     try {
         const total = Object.keys(req.body).length;
-        if (total === 0) {
-            throw createValidationError('No se enviaron datos', []);
-        }
-        const promise: Promise<IGerencia>[] = [];
+        let promise: Promise<ISubGerencia>[] = [];
         let state = false;
-        for (const key in req.body) {
-            const { codigo, nombre, descripcion, estado } = req.body[key];
-            if(!IsName(nombre)){
+        for (let i = 0; i < total; i++) {
+            const {codigo, nombre, descripcion, gerencia, estado} = req.body[i];
+            if(!IsParagraph(nombre)){
                 throw createValidationError('El nombre no es válido', nombre);
             }
             if(!IsCodGerencia(codigo)){
@@ -35,34 +34,42 @@ const setGerencia = async (req: Request, res: Response) => {
             if(!IsParagraph(descripcion)){
                 throw createValidationError('La descripción no es válida', descripcion);
             }
-            if (!IsBoolean(estado)){
+            if(!IsBoolean(estado)){
                 throw createValidationError('El estado no es válido', estado);
             }
             if (estado === 'true' || estado === '1'){
                 state = true;
             }
-            const newGerencia = new Gerencia({
+            const fibdGerencia = await Gerencia.findOne({codigo: Number(gerencia)});
+            if(!fibdGerencia){
+                throw createNotFoundError('No existe una gerencia con ese código', gerencia);
+            }
+            const newSubGerencia = new SubGerencia({
                 codigo,
                 nombre,
                 descripcion,
-                estado: state
+                estado: state,
+                gerencia: fibdGerencia._id
             });
-            promise.push((newGerencia.save()
-                .then(() => {
-                    logger.info(`Gerencia: ${nombre} guardada correctamente.`);
-                    return newGerencia;
-                }).catch((err) =>  {
-                    if (err.code === 11000) {
-                        throw createConflictError('Ya existe una gerencia con ese código', codigo);
+            promise.push(newSubGerencia.save()
+                .then(
+                    () => {
+                        return newSubGerencia;
                     }
-                    throw createServerError('Sucedió un error Inesperado al guardar la gerencia', nombre);
-                }))
+                ).catch(
+                    (error) => {
+                        if (error.code === 11000) {
+                            throw createConflictError('Ya existe una sub-gerencia con ese código', codigo);
+                        }
+                        throw createServerError('Sucedió un error Inesperado');
+                    }
+                )
             );
         }
-        const gerencia = await Promise.all(promise);
+        const subgerencia = await Promise.all(promise);
         res.status(201).json({
             codigo: 201,
-            data: gerencia
+            data: subgerencia
         });
     } catch (error) {
         console.log(error);
@@ -75,6 +82,6 @@ const setGerencia = async (req: Request, res: Response) => {
     }
 }
 
-export {
-    setGerencia
+export{
+    setSubGerencia
 }

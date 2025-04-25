@@ -88,7 +88,7 @@ const IsParagraph = (paragraph:string) => {
     // Eliminar espacios en blanco al inicio y al final (opcional, pero recomendado)
     paragraph = paragraph.trim();
     // Expresión regular para validar párrafos
-    const regex = /^[a-zA-Z0-9\s.,;:!?'"()\[\]{}\-_*\/&@#%^~|\\+=]{1,}$/;  
+    const regex = /^[a-zA-ZÁÉÍÓÚáéíóúñÑ0-9\s.,;:!?'"()\[\]{}\-_*\/&@#%^~|\\+=]{1,}$/;  
     // Verificar si el valor no cumple con la expresión regular
     if (!regex.test(paragraph)) {
       logger.error(`The input "${paragraph}" is not a valid paragraph`);
@@ -175,6 +175,34 @@ const IsCodGerencia = (number: string) => {
   }
   return true;
 }
+
+const IsProceso = (proceso: string) => {
+  const regex = /^[a-zA-Z0-9]{8}$/;
+  if (typeof proceso!== 'number' || !regex.test(proceso)) {
+    logger.error("The input is not a valid Cod Process");
+    return false;
+  }
+  return true;
+}
+
+const IsBoolean = (boolean: string) => {
+  const regex = /^[0-1]$/i; // El modificador 'i' hace la búsqueda insensible a mayúsculas
+  let lowerCaseBoolean = '';
+  if(typeof boolean === 'string'){
+    lowerCaseBoolean = boolean.toLowerCase();
+    if (!regex.test(boolean) && lowerCaseBoolean !== "true" && lowerCaseBoolean !== "false") {
+      console.error("The input is not a valid boolean (0, 1, true, or false)");
+      return false;
+    }
+  }else{
+    if (!regex.test(boolean)) {
+      console.error("The input is not a valid boolean (0, 1, true, or false)");
+      return false;
+    }
+  }
+  return true;
+};
+
 export{
     IsUsername,
     IsPassword,
@@ -190,4 +218,6 @@ export{
     IsTerritorial,
     IsSii,
     IsCodGerencia,
+    IsProceso,
+    IsBoolean,
 }

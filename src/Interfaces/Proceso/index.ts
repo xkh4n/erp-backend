@@ -1,5 +1,5 @@
 export default interface IProceso {
-    codigo: Number;
+    codigo: string;
     nombre: string;
     descripcion: string;
     estado: boolean;

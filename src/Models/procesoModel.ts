@@ -4,11 +4,10 @@ import { IProceso } from "../Interfaces";
 
 const ProcesoSchema = new Schema<IProceso>({
     codigo: {
-        type: Number,
+        type: String,
         required: true,
         unique: true,
-        min: 10,
-        max: 99,
+        maxlength: 8
     },
     nombre: {
         type: String,
