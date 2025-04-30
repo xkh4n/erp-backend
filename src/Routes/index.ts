@@ -5,6 +5,8 @@ import ciudad from './Ciudades';
 import gerencia from './Gerencias';
 import subgerencia from './SubGerencia';
 import depto from './Departamento';
+import servicio from './Servicio';
+import proceso from './Proceso';
 
 
 export{
@@ -15,4 +17,6 @@ export{
     gerencia,
     subgerencia,
     depto,
+    servicio,
+    proceso,
 }

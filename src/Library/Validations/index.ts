@@ -178,31 +178,51 @@ const IsCodGerencia = (number: string) => {
 
 const IsProceso = (proceso: string) => {
   const regex = /^[a-zA-Z0-9]{8}$/;
-  if (typeof proceso!== 'number' || !regex.test(proceso)) {
+  if (typeof proceso !== 'string' || !regex.test(proceso)) {
     logger.error("The input is not a valid Cod Process");
     return false;
   }
   return true;
 }
 
-const IsBoolean = (boolean: string) => {
-  const regex = /^[0-1]$/i; // El modificador 'i' hace la búsqueda insensible a mayúsculas
-  let lowerCaseBoolean = '';
-  if(typeof boolean === 'string'){
-    lowerCaseBoolean = boolean.toLowerCase();
-    if (!regex.test(boolean) && lowerCaseBoolean !== "true" && lowerCaseBoolean !== "false") {
-      console.error("The input is not a valid boolean (0, 1, true, or false)");
-      return false;
-    }
-  }else{
-    if (!regex.test(boolean)) {
-      console.error("The input is not a valid boolean (0, 1, true, or false)");
-      return false;
-    }
+const IsBoolean = (value: any): boolean => {
+  // Si es un booleano nativo
+  if (typeof value === 'boolean') {
+      return true;
+  }
+  
+  // Si es un número
+  if (typeof value === 'number') {
+      return value === 0 || value === 1;
+  }
+  
+  // Si es una cadena
+  if (typeof value === 'string') {
+      const normalizedValue = value.toLowerCase().trim();
+      return ['true', 'false', '1', '0'].includes(normalizedValue);
+  }
+  
+  // Si no es ninguno de los tipos anteriores
+  console.error("El valor no es un booleano válido");
+  return false;
+};
+
+const IsNameDepto = (name: string) => {
+  // Verificar si el valor no es una cadena
+  if (typeof name !== 'string') {
+    logger.error("The input is not a string");
+    return false;
+  }
+  // Eliminar espacios en blanco al inicio y al final
+  name = name.trim();
+  const regex = /^[a-zA-ZÁÉÍÓÚáéíóúñÑ0-9(),.\-]+( [a-zA-ZÁÉÍÓÚáéíóúñÑ0-9(),.\-]+)*$/;
+  // Verificar si el valor no cumple con la expresión regular
+  if (!regex.test(name)) {
+    logger.error(`The input "${name}" is not a valid name`);
+    return false;
   }
   return true;
 };
-
 export{
     IsUsername,
     IsPassword,
@@ -220,4 +240,5 @@ export{
     IsCodGerencia,
     IsProceso,
     IsBoolean,
+    IsNameDepto,
 }

@@ -1,0 +1,30 @@
+[
+ {
+   "codigo": "PROC0001",
+   "nombre": "Solicitud de Cotización",
+   "descripcion": "Ingreso de una solicitud de Cotización de Compra",
+   "estado": 1,
+   "servicio": 10
+ },
+ {
+   "codigo": "PROC0002",
+   "nombre": "Ingreso Proveedor",
+   "descripcion": "Ingreso de los Datos de un Proveedor Nuevo",
+   "estado": 1,
+   "servicio": 14
+ },
+ {
+   "codigo": "PROC0003",
+   "nombre": "Ingreso Producto",
+   "descripcion": "Ingreso de un producto asociado a un proveedor existente",
+   "estado": 1,
+   "servicio": 15
+ },
+ {
+   "codigo": "PROC0004",
+   "nombre": "Baja de Activos",
+   "descripcion": "Baja de artículos TI",
+   "estado": 1,
+   "servicio": 13
+ }
+]

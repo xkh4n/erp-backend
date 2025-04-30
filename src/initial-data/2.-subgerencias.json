@@ -1,0 +1,282 @@
+[
+ {
+   "codigo": 10,
+   "nombre": "Gerencia de Gestión de Operaciones y Productividad (Gcia de Gestión de operaciones y productividad)",
+   "descripcion": "Responsable de analizar, optimizar y estandarizar los procesos operativos clave de la empresa para mejorar la eficiencia, reducir costos y aumentar la productividad general.",
+   "estado": 1,
+   "gerencia": 15
+ },
+ {
+   "codigo": 11,
+   "nombre": "Contabilidad",
+   "descripcion": "Encargada del registro sistemático de todas las transacciones económicas, preparación de estados financieros, cumplimiento de obligaciones fiscales y normativas contables.",
+   "estado": 1,
+   "gerencia": 11
+ },
+ {
+   "codigo": 12,
+   "nombre": "Control de Gestión",
+   "descripcion": "Se enfoca en medir, analizar y reportar el desempeño de la empresa frente a sus objetivos y presupuestos, proporcionando información clave para la toma de decisiones gerenciales.",
+   "estado": 1,
+   "gerencia": 11
+ },
+ {
+   "codigo": 13,
+   "nombre": "Producción y Operaciones TI",
+   "descripcion": "Gestiona el funcionamiento diario, mantenimiento y soporte de la infraestructura tecnológica (servidores, redes, comunicaciones) y los sistemas de información, asegurando su disponibilidad y rendimiento.",
+   "estado": 1,
+   "gerencia": 12
+ },
+ {
+   "codigo": 14,
+   "nombre": "Desarrollo",
+   "descripcion": "Centrada en el diseño, creación, implementación y/o mejora de soluciones tecnológicas, software o aplicaciones para satisfacer las necesidades del negocio y los usuarios.",
+   "estado": 1,
+   "gerencia": 12
+ },
+ {
+   "codigo": 15,
+   "nombre": "Gerencia Planificación y Control de Compras (Gerencia Planif. y Control de Compras)",
+   "descripcion": "Responsable de planificar las necesidades de abastecimiento, gestionar el proceso de compras, negociar con proveedores y controlar el inventario y los costos asociados a las adquisiciones.",
+   "estado": 1,
+   "gerencia": 11
+ },
+ {
+   "codigo": 16,
+   "nombre": "Servicios Generales",
+   "descripcion": "Administra los recursos y servicios necesarios para el funcionamiento físico de las instalaciones de la empresa, como mantenimiento de edificios, aseo, seguridad básica y logística interna menor.",
+   "estado": 1,
+   "gerencia": 10
+ },
+ {
+   "codigo": 18,
+   "nombre": "Legal",
+   "descripcion": "Provee asesoría jurídica integral a la empresa, gestiona contratos, se encarga del cumplimiento normativo y representa a la organización en asuntos y litigios legales.",
+   "estado": 1,
+   "gerencia": 10
+ },
+ {
+   "codigo": 19,
+   "nombre": "Gerencia de Negocios Fierro, Tabiquería y Techumbre (Gcia. Neg. Fierro, Tabiquería y Techumbre)",
+   "descripcion": "Dirige la estrategia comercial y operativa para la categoría de productos de fierro, materiales de tabiquería y soluciones de techumbre, enfocándose en ventas, margen y surtido.",
+   "estado": 1,
+   "gerencia": 16
+ },
+ {
+   "codigo": 20,
+   "nombre": "Gerencia de Negocios Maderas y Tableros, Aglomerados (Gcia. Neg. Maderas y Tableros, Aglom.)",
+   "descripcion": "Responsable de la gestión comercial de maderas, tableros y productos aglomerados, definiendo estrategias de precio, producto, promoción y distribución para esta línea.",
+   "estado": 1,
+   "gerencia": 16
+ },
+ {
+   "codigo": 21,
+   "nombre": "Gerencia de Negocios Pinturas y Accesorios (Gcia. Neg. Pinturas y Accesorios)",
+   "descripcion": "Gestiona integralmente la categoría de pinturas y sus accesorios, desde la selección de productos y proveedores hasta las estrategias de venta y marketing específicas.",
+   "estado": 1,
+   "gerencia": 16
+ },
+ {
+   "codigo": 22,
+   "nombre": "Gerencia de Negocios Herramientas, Ferretería, Automotriz (Gcia. Neg. Herramientas, Ferreteria, Aut)",
+   "descripcion": "Encargada de la estrategia comercial y gestión del surtido para herramientas manuales y eléctricas, productos generales de ferretería y, posiblemente, artículos del rubro automotriz.",
+   "estado": 1,
+   "gerencia": 16
+ },
+ {
+   "codigo": 23,
+   "nombre": "Tienda Serena",
+   "descripcion": "Gestiona la operación diaria y comercial de la sucursal ubicada en La Serena, incluyendo ventas, personal, inventario y atención al cliente.",
+   "estado": 1,
+   "gerencia": 17
+ },
+ {
+   "codigo": 24,
+   "nombre": "Tienda Puerto Montt",
+   "descripcion": "Responsable de la administración integral y resultados comerciales de la tienda localizada en Puerto Montt.",
+   "estado": 1,
+   "gerencia": 17
+ },
+ {
+   "codigo": 25,
+   "nombre": "Tienda Sta Rosa Ferreteria",
+   "descripcion": "Administra la sucursal específica de ferretería ubicada en Santa Rosa, enfocándose en la operación y ventas de esa tienda.",
+   "estado": 1,
+   "gerencia": 17
+ },
+ {
+   "codigo": 26,
+   "nombre": "Tienda Sta Rosa Maderas",
+   "descripcion": "Gestiona la sucursal especializada en maderas ubicada en Santa Rosa, responsable de su operación comercial y administrativa.",
+   "estado": 1,
+   "gerencia": 17
+ },
+ {
+   "codigo": 27,
+   "nombre": "Tienda Mapocho",
+   "descripcion": "Encargada de la gestión operativa y comercial de la tienda situada en el sector de Mapocho.",
+   "estado": 1,
+   "gerencia": 17
+ },
+ {
+   "codigo": 28,
+   "nombre": "Tienda Maipu",
+   "descripcion": "Responsable de la administración integral y resultados comerciales de la sucursal ubicada en Maipú.",
+   "estado": 1,
+   "gerencia": 17
+ },
+ {
+   "codigo": 29,
+   "nombre": "Tienda Vespucio",
+   "descripcion": "Gestiona la operación diaria y comercial de la tienda localizada en el eje de Américo Vespucio.",
+   "estado": 1,
+   "gerencia": 17
+ },
+ {
+   "codigo": 30,
+   "nombre": "Tienda Valparaiso",
+   "descripcion": "Administra la sucursal de la empresa en Valparaíso, supervisando ventas, personal y operaciones.",
+   "estado": 1,
+   "gerencia": 17
+ },
+ {
+   "codigo": 31,
+   "nombre": "Tienda Concepcion",
+   "descripcion": "Encargada de la gestión operativa y comercial de la tienda ubicada en Concepción.",
+   "estado": 1,
+   "gerencia": 17
+ },
+ {
+   "codigo": 32,
+   "nombre": "Tienda Huechuraba",
+   "descripcion": "Responsable de la administración integral y resultados comerciales de la sucursal en Huechuraba.",
+   "estado": 1,
+   "gerencia": 17
+ },
+ {
+   "codigo": 33,
+   "nombre": "Tienda Temuco",
+   "descripcion": "Gestiona la operación diaria y comercial de la tienda localizada en Temuco.",
+   "estado": 1,
+   "gerencia": 17
+ },
+ {
+   "codigo": 34,
+   "nombre": "Tienda Hualpen",
+   "descripcion": "Administra la sucursal de la empresa en Hualpén, supervisando ventas, personal y operaciones.",
+   "estado": 1,
+   "gerencia": 17
+ },
+ {
+   "codigo": 35,
+   "nombre": "Tienda Rancagua",
+   "descripcion": "Encargada de la gestión operativa y comercial de la tienda ubicada en Rancagua.",
+   "estado": 1,
+   "gerencia": 17
+ },
+ {
+   "codigo": 36,
+   "nombre": "Tienda Talca",
+   "descripcion": "Responsable de la administración integral y resultados comerciales de la sucursal en Talca.",
+   "estado": 1,
+   "gerencia": 17
+ },
+ {
+   "codigo": 37,
+   "nombre": "Tienda Reñaca Alto",
+   "descripcion": "Gestiona la operación diaria y comercial de la tienda localizada en Reñaca Alto.",
+   "estado": 1,
+   "gerencia": 17
+ },
+ {
+   "codigo": 38,
+   "nombre": "Tienda San Bernardo",
+   "descripcion": "Administra la sucursal de la empresa en San Bernardo, supervisando ventas, personal y operaciones.",
+   "estado": 1,
+   "gerencia": 17
+ },
+ {
+   "codigo": 39,
+   "nombre": "Gerencia Negocios Proceso Comerciales (Gcia. Negocios Proceso Comerciales)",
+   "descripcion": "Se enfoca en definir, estandarizar y optimizar los procesos transversales del área comercial (venta, postventa, atención) para mejorar la eficiencia y la experiencia del cliente.",
+   "estado": 1,
+   "gerencia": 16
+ },
+ {
+   "codigo": 40,
+   "nombre": "Gerencia de Plantas",
+   "descripcion": "Supervisa la gestión y operación de las plantas productivas, centros de distribución principales o grandes instalaciones operativas de la compañía, enfocándose en eficiencia, seguridad y producción/logística.",
+   "estado": 1,
+   "gerencia": 15
+ },
+ {
+   "codigo": 41,
+   "nombre": "Gerencia de Distribucion",
+   "descripcion": "Responsable de planificar, gestionar y controlar toda la cadena logística de distribución física de productos, desde los centros de origen hasta las tiendas o clientes finales, incluyendo almacenamiento y transporte.",
+   "estado": 1,
+   "gerencia": 15
+ },
+ {
+   "codigo": 42,
+   "nombre": "Gerencia de Constructoras y Mueblistas",
+   "descripcion": "Dedicada a desarrollar y gestionar la relación comercial con clientes del segmento profesional (empresas constructoras, mueblistas), ofreciendo atención y soluciones especializadas.",
+   "estado": 1,
+   "gerencia": 15
+ },
+ {
+   "codigo": 43,
+   "nombre": "Presupuesto Tecnologia",
+   "descripcion": "Encargada específica de la elaboración, seguimiento y control del presupuesto financiero asignado al área de Tecnologías de la Información (TI).",
+   "estado": 1,
+   "gerencia": 12
+ },
+ {
+   "codigo": 44,
+   "nombre": "Finanzas",
+   "descripcion": "Supervisa y gestiona las funciones financieras estratégicas de la empresa, incluyendo tesorería, planificación financiera, inversiones, gestión de riesgos financieros y relación con bancos.",
+   "estado": 1,
+   "gerencia": 11
+ },
+ {
+   "codigo": 45,
+   "nombre": "Marketing",
+   "descripcion": "Desarrolla e implementa estrategias de marca, producto y comunicación. Gestiona publicidad, promociones, investigación de mercado, redes sociales y relaciones públicas para posicionar a la empresa y atraer clientes.",
+   "estado": 1,
+   "gerencia": 16
+ },
+ {
+   "codigo": 46,
+   "nombre": "Seguridad y Prevencion",
+   "descripcion": "Enfocada en proteger los activos de la empresa (prevención de pérdidas, robos, mermas) y garantizar un ambiente de trabajo seguro para los empleados (prevención de riesgos laborales).",
+   "estado": 1,
+   "gerencia": 11
+ },
+ {
+   "codigo": 47,
+   "nombre": "Gestión Pago",
+   "descripcion": "Administra el proceso de cuentas por pagar, asegurando el registro, aprobación y pago oportuno de las facturas de proveedores y otros acreedores.",
+   "estado": 1,
+   "gerencia": 11
+ },
+ {
+   "codigo": 48,
+   "nombre": "Credito y Cobranza",
+   "descripcion": "Evalúa el riesgo crediticio de los clientes, otorga líneas de crédito y gestiona activamente el cobro de las cuentas pendientes para asegurar el flujo de caja.",
+   "estado": 1,
+   "gerencia": 11
+ },
+ {
+   "codigo": 49,
+   "nombre": "Judicial",
+   "descripcion": "Se encarga de gestionar los asuntos legales contenciosos de la empresa, especialmente los relacionados con cobranza judicial, litigios laborales, civiles o comerciales.",
+   "estado": 1,
+   "gerencia": 10
+ },
+ {
+   "codigo": 50,
+   "nombre": "Subgerencia de Transporte",
+   "descripcion": "Dependiente usualmente de Distribución, se enfoca en la gestión operativa del transporte de mercancías, incluyendo la administración de flotas, planificación de rutas y seguimiento de entregas.",
+   "estado": 1,
+   "gerencia": 18
+ }
+]

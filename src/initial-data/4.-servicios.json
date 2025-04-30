@@ -1,0 +1,51 @@
+[
+ {
+   "codigo": 10,
+   "nombre": "Compras",
+   "descripcion": "Adquisición de bienes y suministros necesarios para la operación.",
+   "estado": 1,
+   "departamento": 28
+ },
+ {
+   "codigo": 11,
+   "nombre": "Arriendo",
+   "descripcion": "Gestión de contratos de alquiler de propiedades o equipos.",
+   "estado": 1,
+   "departamento": 28
+ },
+ {
+   "codigo": 12,
+   "nombre": "Mantención",
+   "descripcion": "Programación y ejecución de revisiones y reparaciones para asegurar el funcionamiento.",
+   "estado": 1,
+   "departamento": 28
+ },
+ {
+   "codigo": 13,
+   "nombre": "Inventario",
+   "descripcion": "Control y registro de existencias de productos o materiales disponibles.",
+   "estado": 1,
+   "departamento": 28
+ },
+ {
+   "codigo": 14,
+   "nombre": "Proveedor",
+   "descripcion": "Administración de la relación con los suministradores de bienes o servicios.",
+   "estado": 1,
+   "departamento": 28
+ },
+ {
+   "codigo": 15,
+   "nombre": "Productos",
+   "descripcion": "Gestión de la información, precios y disponibilidad de los artículos ofrecidos.",
+   "estado": 1,
+   "departamento": 28
+ },
+ {
+   "codigo": 16,
+   "nombre": "Servicios",
+   "descripcion": "Administración de la oferta y prestación de las actividades profesionales.",
+   "estado": 1,
+   "departamento": 28
+ }
+]

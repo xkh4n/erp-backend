@@ -1,0 +1,177 @@
+[
+ {
+   "codigo": 10,
+   "nombre": "Proyectos TI",
+   "descripcion": "Responsable de la planificación, ejecución y control de los proyectos relacionados con la implementación o mejora de tecnologías de información dentro de la organización.",
+   "estado": 1,
+   "subgerencia": 14
+ },
+ {
+   "codigo": 11,
+   "nombre": "Bodega Materiales Peligrosos",
+   "descripcion": "Área de almacenamiento especializada en la gestión segura y conforme a normativa de productos clasificados como peligrosos (químicos, inflamables, etc.).",
+   "estado": 1,
+   "subgerencia": 50
+ },
+ {
+   "codigo": 12,
+   "nombre": "Unidad Subdistribución",
+   "descripcion": "Encargada de la logística y reparto de productos en una etapa secundaria de la cadena, posiblemente desde un centro regional a puntos de venta más pequeños o clientes en zonas específicas.",
+   "estado": 1,
+   "subgerencia": 41
+ },
+ {
+   "codigo": 13,
+   "nombre": "Unidad Constructoras",
+   "descripcion": "Equipo operativo enfocado en atender las necesidades específicas (pedidos, logística, despacho) del segmento de clientes de empresas constructoras.",
+   "estado": 1,
+   "subgerencia": 42
+ },
+ {
+   "codigo": 14,
+   "nombre": "Unidad Mueblistas",
+   "descripcion": "Unidad operativa dedicada a gestionar los requerimientos particulares (productos, despachos, servicios) para los clientes del sector mueblista o carpintería.",
+   "estado": 1,
+   "subgerencia": 42
+ },
+ {
+   "codigo": 15,
+   "nombre": "Unidad Venta Telefónica",
+   "descripcion": "Gestiona el proceso completo de ventas realizadas a través del canal telefónico, desde la toma del pedido hasta la coordinación de la entrega.",
+   "estado": 1,
+   "subgerencia": 41
+ },
+ {
+   "codigo": 16,
+   "nombre": "Despacho Distribución",
+   "descripcion": "Coordina y ejecuta la salida física de mercancías desde el centro de distribución principal hacia las tiendas, otros centros o rutas de entrega.",
+   "estado": 1,
+   "subgerencia": 41
+ },
+ {
+   "codigo": 17,
+   "nombre": "Centro de Distribución C07 Maderas (C.Distrib C07 Maderas)",
+   "descripcion": "Centro logístico específico (identificado como C07) dedicado al almacenamiento, manejo y despacho de productos de madera y tableros.",
+   "estado": 1,
+   "subgerencia": 50
+ },
+ {
+   "codigo": 18,
+   "nombre": "Unidad Mecanizado Linares",
+   "descripcion": "Planta o sección productiva ubicada en Linares, especializada en realizar procesos de mecanizado (cortes especiales, perforaciones, etc.) sobre materiales.",
+   "estado": 1,
+   "subgerencia": 40
+ },
+ {
+   "codigo": 19,
+   "nombre": "Unidad Centro de Corte Linares",
+   "descripcion": "Servicio operativo en Linares dedicado al dimensionado y corte preciso de materiales (ej. tableros) según las especificaciones de los clientes.",
+   "estado": 1,
+   "subgerencia": 40
+ },
+ {
+   "codigo": 20,
+   "nombre": "Unidad Fabrica RTA",
+   "descripcion": "",
+   "estado": 1,
+   "subgerencia": 40
+ },
+ {
+   "codigo": 21,
+   "nombre": "Bodega Pudahuel C-20",
+   "descripcion": "Instalación de almacenamiento específica (identificada como C-20) localizada en Pudahuel, destinada a guardar inventario.",
+   "estado": 1,
+   "subgerencia": 50
+ },
+ {
+   "codigo": 22,
+   "nombre": "Unidad Zinc",
+   "descripcion": "Área enfocada en la gestión (comercial, logística o productiva) de productos relacionados con el zinc, como planchas o materiales de hojalatería.",
+   "estado": 1,
+   "subgerencia": 40
+ },
+ {
+   "codigo": 23,
+   "nombre": "Centro de Distribución Retira Cliente (C. Distrib Retira Cliente)",
+   "descripcion": "Zona o proceso dentro de un centro de distribución habilitado para que los clientes recojan directamente sus compras.",
+   "estado": 1,
+   "subgerencia": 50
+ },
+ {
+   "codigo": 24,
+   "nombre": "Correo",
+   "descripcion": "Administra la gestión de la correspondencia interna y externa, así como los servicios de mensajería y paquetería de la empresa.",
+   "estado": 1,
+   "subgerencia": 48
+ },
+ {
+   "codigo": 25,
+   "nombre": "Cobranza",
+   "descripcion": "Ejecuta las acciones de seguimiento y recuperación de las cuentas por cobrar de clientes, gestionando los pagos adeudados.",
+   "estado": 1,
+   "subgerencia": 48
+ },
+ {
+   "codigo": 26,
+   "nombre": "Riesgo",
+   "descripcion": "Unidad encargada de identificar, evaluar y gestionar los diferentes tipos de riesgos (financieros, crediticios, operacionales) que enfrenta la organización.",
+   "estado": 1,
+   "subgerencia": 49
+ },
+ {
+   "codigo": 27,
+   "nombre": "Responsabilidad Social Empresarial 1",
+   "descripcion": "Desarrolla y gestiona las iniciativas y políticas de la empresa relacionadas con su impacto social, ambiental y comportamiento ético (el \"1\" podría indicar un equipo o enfoque específico).",
+   "estado": 1,
+   "subgerencia": 39
+ },
+ {
+   "codigo": 28,
+   "nombre": "Adquisiciones TI",
+   "descripcion": "Especializada en el proceso de compra y negociación para adquirir hardware, software, licencias y servicios tecnológicos para la empresa.",
+   "estado": 1,
+   "subgerencia": 13
+ },
+ {
+   "codigo": 29,
+   "nombre": "Testing QA (Quality Assurance)",
+   "descripcion": "Responsable de diseñar y ejecutar pruebas para verificar la calidad, funcionalidad y ausencia de errores en el software y los sistemas informáticos.",
+   "estado": 1,
+   "subgerencia": 13
+ },
+ {
+   "codigo": 30,
+   "nombre": "Soporte Centralizado",
+   "descripcion": "Provee el primer nivel de asistencia técnica (mesa de ayuda o help desk) a los usuarios internos, registrando y resolviendo incidentes o derivándolos al nivel correspondiente.",
+   "estado": 1,
+   "subgerencia": 13
+ },
+ {
+   "codigo": 31,
+   "nombre": "Redes y Comunicaciones",
+   "descripcion": "Administra y mantiene la infraestructura de redes de datos (LAN, WAN, WiFi) y los sistemas de comunicaciones (telefonía, etc.) de la empresa.",
+   "estado": 1,
+   "subgerencia": 13
+ },
+ {
+   "codigo": 32,
+   "nombre": "Servidores e Infraestructura",
+   "descripcion": "Gestiona el hardware de servidores, sistemas de almacenamiento, virtualización y otros componentes clave de la infraestructura tecnológica central.",
+   "estado": 1,
+   "subgerencia": 13
+ },
+ {
+   "codigo": 33,
+   "nombre": "Soporte Funcional",
+   "descripcion": "Brinda asistencia a los usuarios sobre el uso y funcionalidades de las aplicaciones de negocio (ERP, CRM, etc.), ayudando a resolver dudas operativas.",
+   "estado": 1,
+   "subgerencia": 13
+ },
+ {
+   "codigo": 34,
+   "nombre": "Soporte Terreno TI",
+   "descripcion": "Equipo técnico que entrega soporte informático presencial en las diferentes locaciones físicas de la empresa, resolviendo problemas de hardware, software o conectividad directamente en el puesto del usuario.",
+   "estado": 1,
+   "subgerencia": 13
+ }
+]
