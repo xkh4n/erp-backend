@@ -7,6 +7,7 @@ import subgerencia from './SubGerencia';
 import depto from './Departamento';
 import servicio from './Servicio';
 import proceso from './Proceso';
+import vistas from './Vistas/oindex';
 
 
 export{
@@ -19,4 +20,5 @@ export{
     depto,
     servicio,
     proceso,
+    vistas,
 }

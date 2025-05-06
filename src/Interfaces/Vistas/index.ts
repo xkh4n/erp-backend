@@ -1,7 +1,7 @@
 export default interface IVistas {
-    codigo: string;
-    nombre: string;
-    enlace: string;
-    submenu: boolean;
+    proceso: string;
+    label: string;
+    link: string;
+    title: string;
     vistas?: IVistas[];
 }

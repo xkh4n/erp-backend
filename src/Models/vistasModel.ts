@@ -3,20 +3,20 @@ import { Schema } from "mongoose";
 import { IVistas } from "../Interfaces";
 
 const vistasSchema = new Schema<IVistas>({
-    codigo: {
+    proceso: {
         type: String,
         required: true,
     },
-    nombre: {
+    label: {
         type: String,
         required: true,
     },
-    enlace: {
+    link: {
         type: String,
         required: true,
     },
-    submenu: {
-        type: Boolean,
+    title: {
+        type: String,
         required: true,
     },
     vistas: {
