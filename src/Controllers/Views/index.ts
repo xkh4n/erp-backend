@@ -12,9 +12,9 @@ import SubGerencia from '../../Models/subgerenciaModel';
 import Gerencia from '../../Models/gerenciaModel';
 
 /* ERRORS */
-import { CustomError, createServerError, createValidationError } from '../../Library/Errors';
+import { CustomError, createServerError, createValidationError, createConflictError } from '../../Library/Errors';
 import { IsProceso } from '../../Library/Validations';
-import { IDepartamento, IGerencia, IServicio, ISubGerencia, IProceso } from '../../Interfaces';
+import { IDepartamento, IGerencia, IServicio, ISubGerencia, IProceso, IVistas } from '../../Interfaces';
 
 const setVistas = async (req: any, res: any) => {
     /*
@@ -142,6 +142,104 @@ const setVistas = async (req: any, res: any) => {
     }
 }
 
+const crearVistas = async (req: any, res: any) => {
+    try {
+        /*
+            "gerencia": "6812104e646c4119dca299ab",
+            "subgerencia": "68121065646c4119dca299c7",
+            "departamento": "6812135fbd6d9f1830290512",
+            "servicio": "681bcfccf2d779289ad88b6e",
+            "proceso": "681bd63c8d36cfb08e0b9e79",
+            "pantalla":"Crear Cuenta"
+        */
+        const promise: Promise<IVistas>[] = [];
+        const {gerencia, subgerencia, departamento, servicio, proceso, pantalla } = req.body;
+        const gerenciaExiste = await Gerencia.findById(gerencia);
+        if(!gerenciaExiste){
+            throw createValidationError('La Gerencia no existe',gerencia);
+        }
+        const subgerenciaExiste = await SubGerencia.findById(subgerencia);
+        if(!subgerenciaExiste){
+            throw createValidationError('La SubGerencia no existe',subgerencia);
+        }
+        const departamentoExiste = await Departamento.findById(departamento);
+        if(!departamentoExiste){
+            throw createValidationError('El Departamento no existe',departamento);
+        }
+        const servicioExiste = await Servicio.findById(servicio);
+        if(!servicioExiste){
+            throw createValidationError('El Servicio no existe',servicio);
+        }
+        const procesoExiste = await Proceso.findById(proceso);
+        if(!procesoExiste){
+            throw createValidationError('El Proceso no existe',proceso);
+        }
+        //proceso + servicio + departamento + subgerencia + gerencia
+        /*
+            proceso: string;
+            label: string;
+            link: string;
+            title: string;
+            vistas?: IVistas[];
+        */
+        const codVista = procesoExiste.codigo + servicioExiste.codigo.toString() + departamentoExiste.codigo.toString() + subgerenciaExiste.codigo.toString() + gerenciaExiste.codigo.toString();
+        const vistaExiste = await Vistas.findOne({codVista});
+        if(vistaExiste){
+            throw createValidationError('La Vista ya existe',codVista);
+        }
+        const vista = new Vistas({
+            proceso: procesoExiste._id,
+            label: pantalla,
+            link: `/${codVista}`,
+            title: pantalla
+        })
+        try {
+            await vista.save();
+            promise.push(Promise.resolve(vista));
+        } catch (err) {
+            if (err.code === 11000) {
+                throw createConflictError('Ya existe una Servicio con ese código', codVista);
+            }
+            throw createServerError('Sucedió un error Inesperado al guardar el Servicio', codVista);
+        }
+        const vistas = await Promise.all(promise);
+        res.status(201).json({
+            codigo: 201,
+            data: vistas
+        });
+    } catch (error) {
+        console.log(error);
+        if (error instanceof CustomError) {
+            res.status(error.code).json(error.toJSON());
+        }else{
+            const serverError = createServerError('Sucedió un error Inesperado');
+            res.status(serverError.code).json(serverError.toJSON());
+        }
+    }
+}
+
+const getVistas = async (req: any, res: any) => {
+    try {
+        const vistas = await Vistas.find();
+        if(!vistas){
+            throw createValidationError('No existen Vistas',"vacío");
+        }
+        res.status(200).json({
+            codigo: 200,
+            data: vistas
+        });
+    } catch (error) {
+        console.log(error);
+        if (error instanceof CustomError) {
+            res.status(error.code).json(error.toJSON());
+        }else{
+            const serverError = createServerError('Sucedió un error Inesperado');
+            res.status(serverError.code).json(serverError.toJSON());
+        }
+    }
+}
 export{
     setVistas,
+    crearVistas,
+    getVistas,
 }

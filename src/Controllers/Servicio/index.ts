@@ -183,29 +183,29 @@ const updateServicioById = async (req: Request, res: Response) : Promise<void>  
             throw createNotFoundError('No existe un Servicio con ese id', id);
         }
         const {codigo, nombre, descripcion, departamento, estado} = req.body;
-        if (codigo && !IsCodGerencia(codigo)) {
+        if (!IsCodGerencia(codigo)) {
             throw createValidationError('El código no es válido', codigo);
         }
-        if (nombre && !IsNameDepto(nombre)) {
+        if (!IsNameDepto(nombre)) {
             throw createValidationError('El nombre no es válido', nombre);
         }
-        if (descripcion &&!IsParagraph(descripcion)) {
+        if (!IsParagraph(descripcion)) {
             throw createValidationError('La descripción no es válida', descripcion);
         }
-        if (departamento &&!IsCodGerencia(departamento)) {
+        if (!IsId(departamento)) {
             throw createValidationError('El código no es válido', departamento);
         }
         if (!IsBoolean(estado)){
             throw createValidationError('El estado no es válido', estado);
         }
-        const depto = await Departamento.findOne({codigo: departamento});
+        const depto = await Departamento.findOne({_id: departamento});
         if(!depto){
             throw createNotFoundError('No existe un Departamento con ese codigo: ', departamento);
         }
         const newServicio = await Servicio.findByIdAndUpdate(id, {
-            codigo,
-            nombre,
-            descripcion,
+            codigo: codigo,
+            nombre: nombre,
+            descripcion: descripcion,
             estado: estado,
             departamento: depto._id
         }, {new: true});
