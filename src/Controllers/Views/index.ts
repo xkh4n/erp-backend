@@ -238,6 +238,7 @@ const getVistas = async (req: any, res: any) => {
         }
     }
 }
+
 export{
     setVistas,
     crearVistas,
