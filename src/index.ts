@@ -33,7 +33,7 @@ switch (process.env.NODE_ENV) {
       break;
     case 'development':
       PORT = 3040; //PUERTO DE LA API PARA DESARROLLO
-      URI = `mongodb://dev_${process.env.DB_USER}:${process.env.DB_PASS}d@${process.env.DB_HOST.toUpperCase()}02DEV/dev_${process.env.DB_NAME}?${process.env.DB_AUTH}`;
+      URI = `mongodb://dev_${process.env.DB_USER}:${process.env.DB_PASS}d@${process.env.DB_HOST}02DEV/dev_${process.env.DB_NAME}?${process.env.DB_AUTH}`;
       SERVER = 'DEVELOPMENT';
       break;
     case 'testing':
