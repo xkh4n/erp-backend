@@ -79,22 +79,22 @@ const IsEmail = (email:string) => {
   return true;
 };
 
-const IsParagraph = (paragraph:string) => {
-    // Verificar si el valor no es una cadena
-    if (typeof paragraph !== 'string') {
-      logger.error("The input is not a string");
+const IsParagraph = (paragraph: string) => {
+  // Verificar si el valor no es una cadena
+  if (typeof paragraph !== 'string') {
+      console.warn("The input is not a string");
       return false;
-    }
-    // Eliminar espacios en blanco al inicio y al final (opcional, pero recomendado)
-    paragraph = paragraph.trim();
-    // Expresión regular para validar párrafos
-    const regex = /^[a-zA-ZÁÉÍÓÚáéíóúñÑ0-9\s.,;:!?'"()\[\]{}\-_*\/&@#%^~|\\+=]{1,}$/;  
-    // Verificar si el valor no cumple con la expresión regular
-    if (!regex.test(paragraph)) {
-      logger.error(`The input "${paragraph}" is not a valid paragraph`);
+  }
+  // Eliminar espacios en blanco al inicio y al final
+  paragraph = paragraph.trim();
+  // Expresión regular mejorada para validar párrafos
+  const regex = /^[a-zA-Z0-9\s.,;:!?'"()\[\]{}\-_*\/&@#%^~|\\+=™°®©]{1,}$/;  
+  // Verificar si el valor no cumple con la expresión regular
+  if (!regex.test(paragraph)) {
+      console.warn(`The input "${paragraph}" is not a valid paragraph`);
       return false;
-    }
-    return true;
+  }
+  return true;
 };
 
 const IsDecimal = (decimal:number) => {

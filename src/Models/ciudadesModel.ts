@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import ICiudad from "../Interfaces/Ciudad";
+import { ICiudad } from "../Interfaces";
 const ciudadSchema = new mongoose.Schema({
     iata_codes:{
         type: String,

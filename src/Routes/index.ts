@@ -8,6 +8,7 @@ import depto from './Departamento';
 import servicio from './Servicio';
 import proceso from './Proceso';
 import vistas from './Vistas';
+import producto from './Producto';
 
 
 export{
@@ -20,5 +21,6 @@ export{
     depto,
     servicio,
     proceso,
-    vistas
+    vistas,
+    producto
 }

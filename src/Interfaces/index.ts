@@ -8,8 +8,9 @@ import ISubGerencia from "./SubGerencia";
 import IDepartamento from "./Departamento";
 import IServicio from "./Servicio";
 import IProceso from "./Proceso";
+import IProducto from "./Producto";
 
-export{
+export type{
     IUser,
     IPaises,
     ICiudad,
@@ -20,4 +21,5 @@ export{
     IDepartamento,
     IServicio,
     IProceso,
+    IProducto,
 }
