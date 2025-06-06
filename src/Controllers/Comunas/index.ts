@@ -1,6 +1,6 @@
 /* LOGGER */
 import log4js from 'log4js';
-const logger = log4js.getLogger('Ciudad Controllers:');
+const logger = log4js.getLogger('Comunas Controllers:');
 logger.level = 'all';
 
 /** PERSONALIZED ERRORS */
@@ -25,7 +25,6 @@ const setStates = async (req: Request, res: Response) => {
         const promises = [];
         for(let i = 0; i < total; i++) {
             const { cod_territorial, cod_postal, name_comuna, ciudad, cod_sii } = req.body[i];
-            
             if(!IsTerritorial(cod_territorial)) {
                 throw createValidationError("Código territorial incorrecto", { field: "cod_territorial", value: cod_territorial });
             }
@@ -91,6 +90,60 @@ const setStates = async (req: Request, res: Response) => {
     }
 }
 
+const getAllComunas = async (req: Request, res: Response) => {
+    try {
+        const comunas = await Comuna.find({});
+        if(comunas.length === 0){
+            throw createNotFoundError('No se encontraron comunas', []);
+        }
+        res.status(200).json({
+            codigo: 200,
+            data: comunas
+        }); 
+    } catch (error) {
+        logger.error(error);
+        if (error instanceof CustomError) {
+            res.status(error.code).json(error.toJSON());
+        }else{
+            const serverError = createServerError('Sucedió un error Inesperado');
+            res.status(serverError.code).json(serverError.toJSON());
+        }
+    }
+}
+
+const getComunaByCity = async (req: Request, res: Response) => {
+    try {
+        const { ciudad } = req.body;
+        if(!IsIata(ciudad)){
+            throw createConflictError('El código ISO no es válido', ciudad);
+        }
+        logger.warn(ciudad);
+        const fndCiudad = await Ciudad.findOne({iata_codes: ciudad});
+        logger.info(fndCiudad);
+        if(!fndCiudad){
+            throw createNotFoundError('La Ciudad no existe', ciudad);
+        }
+        const findCity = await Comuna.find({ciudad: fndCiudad._id});
+        if(findCity.length === 0){
+            throw createNotFoundError('La Ciudad no tiene Comunas Registradas', ciudad);
+        }
+        res.status(200).json({
+            codigo: 200,
+            data: findCity 
+        })
+    } catch (error) {
+        logger.error(error);
+        if (error instanceof CustomError) {
+            res.status(error.code).json(error.toJSON());
+        }else{
+            const serverError = createServerError('Sucedió un error Inesperado');
+            res.status(serverError.code).json(serverError.toJSON());
+        }
+    }
+}
+
 export {
-    setStates
+    setStates,
+    getAllComunas,
+    getComunaByCity,
 }

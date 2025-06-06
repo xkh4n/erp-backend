@@ -9,6 +9,7 @@ import servicio from './Servicio';
 import proceso from './Proceso';
 import vistas from './Vistas';
 import producto from './Producto';
+import comuna from './Comunas';
 
 
 export{
@@ -22,5 +23,6 @@ export{
     servicio,
     proceso,
     vistas,
-    producto
+    producto,
+    comuna
 }

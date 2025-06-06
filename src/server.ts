@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 const PORT = process.env.API_PORT || 3030;
 
 /* ROUTES */
-import {login, registro, paises, ciudad, gerencia, subgerencia, depto, servicio, proceso, vistas, producto } from './Routes/index';
+import {login, registro, paises, ciudad, gerencia, subgerencia, depto, servicio, proceso, vistas, producto, comuna } from './Routes/index';
 
 /* CORS CONFIGURE */
 app.use(cors());
@@ -38,6 +38,8 @@ app.use(base_path, servicio);
 app.use(base_path, proceso);
 app.use(base_path, vistas);
 app.use(base_path, producto);
+app.use(base_path, comuna);
+
 
 
 /* STATICS FOLDERS */
