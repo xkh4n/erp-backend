@@ -10,6 +10,7 @@ import proceso from './Proceso';
 import vistas from './Vistas';
 import producto from './Producto';
 import comuna from './Comunas';
+import proveedor from './Proveedor';
 
 
 export{
@@ -24,5 +25,6 @@ export{
     proceso,
     vistas,
     producto,
-    comuna
+    comuna,
+    proveedor
 }
