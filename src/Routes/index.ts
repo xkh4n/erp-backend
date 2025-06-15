@@ -11,6 +11,8 @@ import vistas from './Vistas';
 import producto from './Producto';
 import comuna from './Comunas';
 import proveedor from './Proveedor';
+import health from './Health';
+import categoria from './Categoria';
 
 
 export{
@@ -26,5 +28,7 @@ export{
     vistas,
     producto,
     comuna,
-    proveedor
+    proveedor,
+    health,
+    categoria
 }

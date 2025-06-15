@@ -34,6 +34,8 @@ import {
     producto,
     comuna,
     proveedor,
+    health,
+    categoria
 } from './Routes/index';
 
 /* CORS CONFIGURE */
@@ -54,6 +56,8 @@ app.use(base_path, vistas);
 app.use(base_path, producto);
 app.use(base_path, comuna);
 app.use(base_path, proveedor);
+app.use(base_path, health);
+app.use(base_path, categoria);
 
 
 

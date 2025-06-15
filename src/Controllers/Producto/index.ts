@@ -11,18 +11,25 @@ import { IProducto } from '../../Interfaces';
 
 /* MODELS */
 import Producto from '../../Models/productoModel';
+import Tipos from '../../Models/tiposModel';
 
 /* DEPENDENCIES */
 import { Request, Response } from "express";
-import { IsCodGerencia, IsName, IsParagraph, IsProceso, IsBoolean, IsId } from '../../Library/Validations';
+import { IsParagraph, IsCodTipo } from '../../Library/Validations';
 
 const setProducto = async (req: Request, res: Response) : Promise<void> => {
     try {
         const total = Object.keys(req.body).length;
         const promise: Promise<IProducto>[] = [];
-        logger.info('Producto: ', req.body);
         for (let i = 0; i < total; i++) {
-            const {nombre, modelo, descripcion} = req.body[i];
+            const {nombre, modelo, descripcion, categoria} = req.body[i];
+            if(!IsCodTipo(categoria)) {
+                throw createValidationError('El código de la categoría debe tener 5 caracteres alfanuméricos', 'Categoría: ' + categoria);  
+            }
+            const tipo = await Tipos.findOne({codigo: categoria});
+            if (!tipo) {
+                throw createNotFoundError('No existe una categoría con ese código', 'Categoría: ' + categoria);
+            }
             if (!IsParagraph(nombre)) {
                 throw createValidationError('El nombre del producto debe tener entre 3 y 50 caracteres', 'Nombre: ' + nombre );
             }
@@ -35,7 +42,8 @@ const setProducto = async (req: Request, res: Response) : Promise<void> => {
             const newProducto = new Producto({
                 nombre,
                 modelo,
-                descripcion
+                descripcion,
+                categoria: tipo._id
             });
             try {
                 await newProducto.save();
@@ -63,4 +71,64 @@ const setProducto = async (req: Request, res: Response) : Promise<void> => {
     }
 }
 
-export { setProducto };
+const getAllProductos = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const productos = await Producto.find();
+        if (productos.length === 0) {
+            throw createNotFoundError('No existen Productos registrados');
+        }
+        res.status(200).json({
+            codigo: 200,
+            data: productos
+        });
+    } catch (error) {
+        console.log(error);
+        if (error instanceof CustomError) {
+            res.status(error.code).json(error.toJSON());
+        }else{
+            const serverError = createServerError('Sucedió un error Inesperado');
+            res.status(serverError.code).json(serverError.toJSON());
+        }
+    }
+}
+
+const getProductoByCategoria = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const total = Object.keys(req.body).length;
+        if (total < 1) {
+            const productos = {};
+            res.status(200).json({
+                codigo: 200,
+                data: productos
+            });
+        }
+        else{
+            const { categoria } = req.body;
+            if (!IsCodTipo(categoria)) {
+                throw createValidationError('El código de la categoría debe tener 5 caracteres alfanuméricos', 'Categoría: ' + categoria);
+            }
+            const tipo = await Tipos.findOne({ codigo: categoria });
+            if (!tipo) {
+                throw createNotFoundError('No existe una categoría con ese código', 'Categoría: ' + categoria);
+            }
+            const productos = await Producto.find({ categoria: tipo._id });
+            if (productos.length === 0) {
+                throw createNotFoundError('No existen Productos registrados para esta categoría');
+            }
+            res.status(200).json({
+                codigo: 200,
+                data: productos
+            });
+        }
+    } catch (error) {
+        console.log(error);
+        if (error instanceof CustomError) {
+            res.status(error.code).json(error.toJSON());
+        }else{
+            const serverError = createServerError('Sucedió un error Inesperado');
+            res.status(serverError.code).json(serverError.toJSON());
+        }
+    }
+}
+
+export { setProducto, getAllProductos, getProductoByCategoria };

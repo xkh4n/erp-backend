@@ -15,6 +15,11 @@ const productoSchema = new mongoose.Schema<IProducto>({
         type: String,
         required: true,
     },
+    categoria: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Categoria",
+        required: true,
+    },
 });
 
 const Producto = mongoose.model<IProducto>("Producto", productoSchema);

@@ -11,6 +11,7 @@ import IProceso from "./Proceso";
 import IProducto from "./Producto";
 import IProveedor from "./Proveedor";
 import IContacto from "./Contacto";
+import ITipo from "./Tipos";
 
 export type{
     IUser,
@@ -26,4 +27,5 @@ export type{
     IProducto,
     IProveedor,
     IContacto,
+    ITipo
 }

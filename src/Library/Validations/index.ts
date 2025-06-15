@@ -90,7 +90,7 @@ const IsParagraph = (paragraph: string) => {
   // Eliminar espacios en blanco al inicio y al final
   paragraph = paragraph.trim();
   // Expresión regular mejorada para validar párrafos
-  const regex = /^[a-zA-Z0-9\s.,;:!?'"()\[\]{}\-_*\/&@#%^~|\\+=™°®©]{1,}$/;  
+  const regex = /^[a-zA-ZÁÉÍÓÚáéíóúñÑ0-9\s.,;:!?'"()\[\]{}\-_*\/&@#%^~|\\+=™°®©]{1,}$/;  
   // Verificar si el valor no cumple con la expresión regular
   if (!regex.test(paragraph)) {
       console.warn(`The input "${paragraph}" is not a valid paragraph`);
@@ -242,6 +242,21 @@ const IsRut = (rut: string) => {
     }
 }
 
+const IsCodTipo = (codTipo: string) => {
+    // Verificar si el valor no es una cadena
+    if (typeof codTipo !== 'string') {
+        logger.error("The input is not a string");
+        return false;
+    }
+    // Expresión regular para validar el código de tipo
+    const regex = /^[A-Z0-9]{5}$/;
+    // Verificar si el valor no cumple con la expresión regular
+    if (!regex.test(codTipo)) {
+        logger.error(`The input "${codTipo}" is not a valid codTipo`);
+        return false;
+    }
+    return true;
+}
 
 export{
     IsUsername,
@@ -262,4 +277,5 @@ export{
     IsBoolean,
     IsNameDepto,
     IsRut,
+    IsCodTipo,
 }
