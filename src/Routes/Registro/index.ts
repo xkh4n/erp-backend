@@ -8,7 +8,7 @@ const registro = Router();
 /* CONTROLLER */
 import { NewUser } from '../../Controllers/Registro/index';
 
-registro.put('/registro/usuario', NewUser);
+registro.put('/registro/basic', NewUser);
 
 
 export default registro;

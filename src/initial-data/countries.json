@@ -1,0 +1,972 @@
+[
+    {
+      "iso_code": "AF",
+      "name_country": "AFGANISTAN",
+      "iata_code": "AFG"
+    },
+    {
+      "iso_code": "AL",
+      "name_country": "ALBANIA",
+      "iata_code": "ALB"
+    },
+    {
+      "iso_code": "DE",
+      "name_country": "ALEMANIA",
+      "iata_code": "DEU"
+    },
+    {
+      "iso_code": "AD",
+      "name_country": "ANDORRA",
+      "iata_code": "AND"
+    },
+    {
+      "iso_code": "AO",
+      "name_country": "ANGOLA",
+      "iata_code": "AGO"
+    },
+    {
+      "iso_code": "AG",
+      "name_country": "ANTIGUA Y BARBUDA",
+      "iata_code": "ATG"
+    },
+    {
+      "iso_code": "SA",
+      "name_country": "ARABIA SAUDITA",
+      "iata_code": "SAU"
+    },
+    {
+      "iso_code": "DZ",
+      "name_country": "ARGELIA",
+      "iata_code": "DZA"
+    },
+    {
+      "iso_code": "AR",
+      "name_country": "ARGENTINA",
+      "iata_code": "ARG"
+    },
+    {
+      "iso_code": "AM",
+      "name_country": "ARMENIA",
+      "iata_code": "ARM"
+    },
+    {
+      "iso_code": "AU",
+      "name_country": "AUSTRALIA",
+      "iata_code": "AUS"
+    },
+    {
+      "iso_code": "AT",
+      "name_country": "AUSTRIA",
+      "iata_code": "AUT"
+    },
+    {
+      "iso_code": "AZ",
+      "name_country": "AZERBAIYAN",
+      "iata_code": "AZE"
+    },
+    {
+      "iso_code": "BS",
+      "name_country": "BAHAMAS",
+      "iata_code": "BHS"
+    },
+    {
+      "iso_code": "BD",
+      "name_country": "BANGLADES",
+      "iata_code": "BGD"
+    },
+    {
+      "iso_code": "BB",
+      "name_country": "BARBADOS",
+      "iata_code": "BRB"
+    },
+    {
+      "iso_code": "BH",
+      "name_country": "BAREIN",
+      "iata_code": "BHR"
+    },
+    {
+      "iso_code": "BE",
+      "name_country": "BELGICA",
+      "iata_code": "BEL"
+    },
+    {
+      "iso_code": "BZ",
+      "name_country": "BELICE",
+      "iata_code": "BLZ"
+    },
+    {
+      "iso_code": "BJ",
+      "name_country": "BENIN",
+      "iata_code": "BEN"
+    },
+    {
+      "iso_code": "BY",
+      "name_country": "BIELORRUSIA",
+      "iata_code": "BLR"
+    },
+    {
+      "iso_code": "MM",
+      "name_country": "BIRMANIA",
+      "iata_code": "MMR"
+    },
+    {
+      "iso_code": "BO",
+      "name_country": "BOLIVIA",
+      "iata_code": "BOL"
+    },
+    {
+      "iso_code": "BA",
+      "name_country": "BOSNIA Y HERZEGOVINA",
+      "iata_code": "BIH"
+    },
+    {
+      "iso_code": "BW",
+      "name_country": "BOTSUANA",
+      "iata_code": "BWA"
+    },
+    {
+      "iso_code": "BR",
+      "name_country": "BRASIL",
+      "iata_code": "BRA"
+    },
+    {
+      "iso_code": "BN",
+      "name_country": "BRUNEI",
+      "iata_code": "BRN"
+    },
+    {
+      "iso_code": "BG",
+      "name_country": "BULGARIA",
+      "iata_code": "BGR"
+    },
+    {
+      "iso_code": "BF",
+      "name_country": "BURKINA FASO",
+      "iata_code": "BFA"
+    },
+    {
+      "iso_code": "BI",
+      "name_country": "BURUNDI",
+      "iata_code": "BDI"
+    },
+    {
+      "iso_code": "BT",
+      "name_country": "BUTAN",
+      "iata_code": "BTN"
+    },
+    {
+      "iso_code": "CV",
+      "name_country": "CABO VERDE",
+      "iata_code": "CPV"
+    },
+    {
+      "iso_code": "KH",
+      "name_country": "CAMBOYA",
+      "iata_code": "KHM"
+    },
+    {
+      "iso_code": "CM",
+      "name_country": "CAMERUN",
+      "iata_code": "CMR"
+    },
+    {
+      "iso_code": "CA",
+      "name_country": "CANADA",
+      "iata_code": "CAN"
+    },
+    {
+      "iso_code": "QA",
+      "name_country": "CATAR",
+      "iata_code": "QAT"
+    },
+    {
+      "iso_code": "TD",
+      "name_country": "CHAD",
+      "iata_code": "TCD"
+    },
+    {
+      "iso_code": "CN",
+      "name_country": "CHINA",
+      "iata_code": "CHN"
+    },
+    {
+      "iso_code": "CY",
+      "name_country": "CHIPRE",
+      "iata_code": "CYP"
+    },
+    {
+      "iso_code": "CO",
+      "name_country": "COLOMBIA",
+      "iata_code": "COL"
+    },
+    {
+      "iso_code": "KM",
+      "name_country": "COMORAS",
+      "iata_code": "COM"
+    },
+    {
+      "iso_code": "KP",
+      "name_country": "COREA DEL NORTE",
+      "iata_code": "PRK"
+    },
+    {
+      "iso_code": "KR",
+      "name_country": "COREA DEL SUR",
+      "iata_code": "KOR"
+    },
+    {
+      "iso_code": "CI",
+      "name_country": "COSTA DE MARFIL",
+      "iata_code": "CIV"
+    },
+    {
+      "iso_code": "CR",
+      "name_country": "COSTA RICA",
+      "iata_code": "CRI"
+    },
+    {
+      "iso_code": "HR",
+      "name_country": "CROACIA",
+      "iata_code": "HRV"
+    },
+    {
+      "iso_code": "CU",
+      "name_country": "CUBA",
+      "iata_code": "CUB"
+    },
+    {
+      "iso_code": "DK",
+      "name_country": "DINAMARCA",
+      "iata_code": "DNK"
+    },
+    {
+      "iso_code": "DM",
+      "name_country": "DOMINICA",
+      "iata_code": "DMA"
+    },
+    {
+      "iso_code": "EC",
+      "name_country": "ECUADOR",
+      "iata_code": "ECU"
+    },
+    {
+      "iso_code": "EG",
+      "name_country": "EGIPTO",
+      "iata_code": "EGY"
+    },
+    {
+      "iso_code": "SV",
+      "name_country": "EL SALVADOR",
+      "iata_code": "SLV"
+    },
+    {
+      "iso_code": "AE",
+      "name_country": "EMIRATOS ARABES UNIDOS",
+      "iata_code": "ARE"
+    },
+    {
+      "iso_code": "ER",
+      "name_country": "ERITREA",
+      "iata_code": "ERI"
+    },
+    {
+      "iso_code": "SK",
+      "name_country": "ESLOVAQUIA",
+      "iata_code": "SVK"
+    },
+    {
+      "iso_code": "SI",
+      "name_country": "ESLOVENIA",
+      "iata_code": "SVN"
+    },
+    {
+      "iso_code": "ES",
+      "name_country": "ESPANA",
+      "iata_code": "ESP"
+    },
+    {
+      "iso_code": "US",
+      "name_country": "ESTADOS UNIDOS",
+      "iata_code": "USA"
+    },
+    {
+      "iso_code": "EE",
+      "name_country": "ESTONIA",
+      "iata_code": "EST"
+    },
+    {
+      "iso_code": "ET",
+      "name_country": "ETIOPIA",
+      "iata_code": "ETH"
+    },
+    {
+      "iso_code": "PH",
+      "name_country": "FILIPINAS",
+      "iata_code": "PHL"
+    },
+    {
+      "iso_code": "FI",
+      "name_country": "FINLANDIA",
+      "iata_code": "FIN"
+    },
+    {
+      "iso_code": "FJ",
+      "name_country": "FIYI",
+      "iata_code": "FJI"
+    },
+    {
+      "iso_code": "FR",
+      "name_country": "FRANCIA",
+      "iata_code": "FRA"
+    },
+    {
+      "iso_code": "GA",
+      "name_country": "GABON",
+      "iata_code": "GAB"
+    },
+    {
+      "iso_code": "GM",
+      "name_country": "GAMBIA",
+      "iata_code": "GMB"
+    },
+    {
+      "iso_code": "GE",
+      "name_country": "GEORGIA",
+      "iata_code": "GEO"
+    },
+    {
+      "iso_code": "GH",
+      "name_country": "GHANA",
+      "iata_code": "GHA"
+    },
+    {
+      "iso_code": "GD",
+      "name_country": "GRANADA",
+      "iata_code": "GRD"
+    },
+    {
+      "iso_code": "GR",
+      "name_country": "GRECIA",
+      "iata_code": "GRC"
+    },
+    {
+      "iso_code": "GT",
+      "name_country": "GUATEMALA",
+      "iata_code": "GTM"
+    },
+    {
+      "iso_code": "GN",
+      "name_country": "GUINEA",
+      "iata_code": "GIN"
+    },
+    {
+      "iso_code": "GQ",
+      "name_country": "GUINEA ECUATORIAL",
+      "iata_code": "GNQ"
+    },
+    {
+      "iso_code": "GW",
+      "name_country": "GUINEA-BISAU",
+      "iata_code": "GNB"
+    },
+    {
+      "iso_code": "GY",
+      "name_country": "GUYANA",
+      "iata_code": "GUY"
+    },
+    {
+      "iso_code": "HT",
+      "name_country": "HAITI",
+      "iata_code": "HTI"
+    },
+    {
+      "iso_code": "HN",
+      "name_country": "HONDURAS",
+      "iata_code": "HND"
+    },
+    {
+      "iso_code": "HU",
+      "name_country": "HUNGRIA",
+      "iata_code": "HUN"
+    },
+    {
+      "iso_code": "IN",
+      "name_country": "INDIA",
+      "iata_code": "IND"
+    },
+    {
+      "iso_code": "ID",
+      "name_country": "INDONESIA",
+      "iata_code": "IDN"
+    },
+    {
+      "iso_code": "IQ",
+      "name_country": "IRAK",
+      "iata_code": "IRQ"
+    },
+    {
+      "iso_code": "IR",
+      "name_country": "IRAN",
+      "iata_code": "IRN"
+    },
+    {
+      "iso_code": "IE",
+      "name_country": "IRLANDA",
+      "iata_code": "IRL"
+    },
+    {
+      "iso_code": "IS",
+      "name_country": "ISLANDIA",
+      "iata_code": "ISL"
+    },
+    {
+      "iso_code": "MH",
+      "name_country": "ISLAS MARSHALL",
+      "iata_code": "MHL"
+    },
+    {
+      "iso_code": "SB",
+      "name_country": "ISLAS SALOMON",
+      "iata_code": "SLB"
+    },
+    {
+      "iso_code": "IL",
+      "name_country": "ISRAEL",
+      "iata_code": "ISR"
+    },
+    {
+      "iso_code": "IT",
+      "name_country": "ITALIA",
+      "iata_code": "ITA"
+    },
+    {
+      "iso_code": "JM",
+      "name_country": "JAMAICA",
+      "iata_code": "JAM"
+    },
+    {
+      "iso_code": "JP",
+      "name_country": "JAPON",
+      "iata_code": "JPN"
+    },
+    {
+      "iso_code": "JO",
+      "name_country": "JORDANIA",
+      "iata_code": "JOR"
+    },
+    {
+      "iso_code": "KZ",
+      "name_country": "KAZAJISTAN",
+      "iata_code": "KAZ"
+    },
+    {
+      "iso_code": "KE",
+      "name_country": "KENIA",
+      "iata_code": "KEN"
+    },
+    {
+      "iso_code": "KG",
+      "name_country": "KIRGUISTAN",
+      "iata_code": "KGZ"
+    },
+    {
+      "iso_code": "KI",
+      "name_country": "KIRIBATI",
+      "iata_code": "KIR"
+    },
+    {
+      "iso_code": "KW",
+      "name_country": "KUWAIT",
+      "iata_code": "KWT"
+    },
+    {
+      "iso_code": "LA",
+      "name_country": "LAOS",
+      "iata_code": "LAO"
+    },
+    {
+      "iso_code": "LS",
+      "name_country": "LESOTO",
+      "iata_code": "LSO"
+    },
+    {
+      "iso_code": "LV",
+      "name_country": "LETONIA",
+      "iata_code": "LVA"
+    },
+    {
+      "iso_code": "LB",
+      "name_country": "LIBANO",
+      "iata_code": "LBN"
+    },
+    {
+      "iso_code": "LR",
+      "name_country": "LIBERIA",
+      "iata_code": "LBR"
+    },
+    {
+      "iso_code": "LY",
+      "name_country": "LIBIA",
+      "iata_code": "LBY"
+    },
+    {
+      "iso_code": "LI",
+      "name_country": "LIECHTENSTEIN",
+      "iata_code": "LIE"
+    },
+    {
+      "iso_code": "LT",
+      "name_country": "LITUANIA",
+      "iata_code": "LTU"
+    },
+    {
+      "iso_code": "LU",
+      "name_country": "LUXEMBURGO",
+      "iata_code": "LUX"
+    },
+    {
+      "iso_code": "MK",
+      "name_country": "MACEDONIA DEL NORTE",
+      "iata_code": "MKD"
+    },
+    {
+      "iso_code": "MG",
+      "name_country": "MADAGASCAR",
+      "iata_code": "MDG"
+    },
+    {
+      "iso_code": "MY",
+      "name_country": "MALASIA",
+      "iata_code": "MYS"
+    },
+    {
+      "iso_code": "MW",
+      "name_country": "MALAWI",
+      "iata_code": "MWI"
+    },
+    {
+      "iso_code": "MV",
+      "name_country": "MALDIVAS",
+      "iata_code": "MDV"
+    },
+    {
+      "iso_code": "ML",
+      "name_country": "MALI",
+      "iata_code": "MLI"
+    },
+    {
+      "iso_code": "MT",
+      "name_country": "MALTA",
+      "iata_code": "MLT"
+    },
+    {
+      "iso_code": "MA",
+      "name_country": "MARRUECOS",
+      "iata_code": "MAR"
+    },
+    {
+      "iso_code": "MU",
+      "name_country": "MAURICIO",
+      "iata_code": "MUS"
+    },
+    {
+      "iso_code": "MR",
+      "name_country": "MAURITANIA",
+      "iata_code": "MRT"
+    },
+    {
+      "iso_code": "MX",
+      "name_country": "MEXICO",
+      "iata_code": "MEX"
+    },
+    {
+      "iso_code": "FM",
+      "name_country": "MICRONESIA",
+      "iata_code": "FSM"
+    },
+    {
+      "iso_code": "MD",
+      "name_country": "MOLDAVIA",
+      "iata_code": "MDA"
+    },
+    {
+      "iso_code": "MC",
+      "name_country": "MONACO",
+      "iata_code": "MCO"
+    },
+    {
+      "iso_code": "MN",
+      "name_country": "MONGOLIA",
+      "iata_code": "MNG"
+    },
+    {
+      "iso_code": "ME",
+      "name_country": "MONTENEGRO",
+      "iata_code": "MNE"
+    },
+    {
+      "iso_code": "MZ",
+      "name_country": "MOZAMBIQUE",
+      "iata_code": "MOZ"
+    },
+    {
+      "iso_code": "NA",
+      "name_country": "NAMIBIA",
+      "iata_code": "NAM"
+    },
+    {
+      "iso_code": "NR",
+      "name_country": "NAURU",
+      "iata_code": "NRU"
+    },
+    {
+      "iso_code": "NP",
+      "name_country": "NEPAL",
+      "iata_code": "NPL"
+    },
+    {
+      "iso_code": "NI",
+      "name_country": "NICARAGUA",
+      "iata_code": "NIC"
+    },
+    {
+      "iso_code": "NE",
+      "name_country": "NIGER",
+      "iata_code": "NER"
+    },
+    {
+      "iso_code": "NG",
+      "name_country": "NIGERIA",
+      "iata_code": "NGA"
+    },
+    {
+      "iso_code": "NO",
+      "name_country": "NORUEGA",
+      "iata_code": "NOR"
+    },
+    {
+      "iso_code": "NZ",
+      "name_country": "NUEVA ZELANDA",
+      "iata_code": "NZL"
+    },
+    {
+      "iso_code": "OM",
+      "name_country": "OMAN",
+      "iata_code": "OMN"
+    },
+    {
+      "iso_code": "NL",
+      "name_country": "PAISES BAJOS",
+      "iata_code": "NLD"
+    },
+    {
+      "iso_code": "PK",
+      "name_country": "PAKISTAN",
+      "iata_code": "PAK"
+    },
+    {
+      "iso_code": "PW",
+      "name_country": "PALAOS",
+      "iata_code": "PLW"
+    },
+    {
+      "iso_code": "PA",
+      "name_country": "PANAMA",
+      "iata_code": "PAN"
+    },
+    {
+      "iso_code": "PG",
+      "name_country": "PAPUA NUEVA GUINEA",
+      "iata_code": "PNG"
+    },
+    {
+      "iso_code": "PY",
+      "name_country": "PARAGUAY",
+      "iata_code": "PRY"
+    },
+    {
+      "iso_code": "PE",
+      "name_country": "PERU",
+      "iata_code": "PER"
+    },
+    {
+      "iso_code": "PL",
+      "name_country": "POLONIA",
+      "iata_code": "POL"
+    },
+    {
+      "iso_code": "PT",
+      "name_country": "PORTUGAL",
+      "iata_code": "PRT"
+    },
+    {
+      "iso_code": "GB",
+      "name_country": "REINO UNIDO",
+      "iata_code": "GBR"
+    },
+    {
+      "iso_code": "CF",
+      "name_country": "REPUBLICA CENTROAFRICANA",
+      "iata_code": "CAF"
+    },
+    {
+      "iso_code": "CZ",
+      "name_country": "REPUBLICA CHECA",
+      "iata_code": "CZE"
+    },
+    {
+      "iso_code": "CG",
+      "name_country": "REPUBLICA DEL CONGO",
+      "iata_code": "COG"
+    },
+    {
+      "iso_code": "CD",
+      "name_country": "REPUBLICA DEMOCRATICA DEL CONGO",
+      "iata_code": "COD"
+    },
+    {
+      "iso_code": "DO",
+      "name_country": "REPUBLICA DOMINICANA",
+      "iata_code": "DOM"
+    },
+    {
+      "iso_code": "RW",
+      "name_country": "RUANDA",
+      "iata_code": "RWA"
+    },
+    {
+      "iso_code": "RO",
+      "name_country": "RUMANIA",
+      "iata_code": "ROU"
+    },
+    {
+      "iso_code": "RU",
+      "name_country": "RUSIA",
+      "iata_code": "RUS"
+    },
+    {
+      "iso_code": "WS",
+      "name_country": "SAMOA",
+      "iata_code": "WSM"
+    },
+    {
+      "iso_code": "KN",
+      "name_country": "SAN CRISTOBAL Y NIEVES",
+      "iata_code": "KNA"
+    },
+    {
+      "iso_code": "SM",
+      "name_country": "SAN MARINO",
+      "iata_code": "SMR"
+    },
+    {
+      "iso_code": "VC",
+      "name_country": "SAN VICENTE Y LAS GRANADINAS",
+      "iata_code": "VCT"
+    },
+    {
+      "iso_code": "LC",
+      "name_country": "SANTA LUCIA",
+      "iata_code": "LCA"
+    },
+    {
+      "iso_code": "ST",
+      "name_country": "SANTO TOME Y PRINCIPE",
+      "iata_code": "STP"
+    },
+    {
+      "iso_code": "SN",
+      "name_country": "SENEGAL",
+      "iata_code": "SEN"
+    },
+    {
+      "iso_code": "RS",
+      "name_country": "SERBIA",
+      "iata_code": "SRB"
+    },
+    {
+      "iso_code": "SC",
+      "name_country": "SEYCHELLES",
+      "iata_code": "SYC"
+    },
+    {
+      "iso_code": "SL",
+      "name_country": "SIERRA LEONA",
+      "iata_code": "SLE"
+    },
+    {
+      "iso_code": "SG",
+      "name_country": "SINGAPUR",
+      "iata_code": "SGP"
+    },
+    {
+      "iso_code": "SY",
+      "name_country": "SIRIA",
+      "iata_code": "SYR"
+    },
+    {
+      "iso_code": "SO",
+      "name_country": "SOMALIA",
+      "iata_code": "SOM"
+    },
+    {
+      "iso_code": "LK",
+      "name_country": "SRI LANKA",
+      "iata_code": "LKA"
+    },
+    {
+      "iso_code": "SZ",
+      "name_country": "SUAZILANDIA",
+      "iata_code": "SWZ"
+    },
+    {
+      "iso_code": "ZA",
+      "name_country": "SUDAFRICA",
+      "iata_code": "ZAF"
+    },
+    {
+      "iso_code": "SD",
+      "name_country": "SUDAN",
+      "iata_code": "SDN"
+    },
+    {
+      "iso_code": "SS",
+      "name_country": "SUDAN DEL SUR",
+      "iata_code": "SSD"
+    },
+    {
+      "iso_code": "SE",
+      "name_country": "SUECIA",
+      "iata_code": "SWE"
+    },
+    {
+      "iso_code": "CH",
+      "name_country": "SUIZA",
+      "iata_code": "CHE"
+    },
+    {
+      "iso_code": "SR",
+      "name_country": "SURINAM",
+      "iata_code": "SUR"
+    },
+    {
+      "iso_code": "TH",
+      "name_country": "TAILANDIA",
+      "iata_code": "THA"
+    },
+    {
+      "iso_code": "TW",
+      "name_country": "TAIWAN",
+      "iata_code": "TWN"
+    },
+    {
+      "iso_code": "TZ",
+      "name_country": "TANZANIA",
+      "iata_code": "TZA"
+    },
+    {
+      "iso_code": "TJ",
+      "name_country": "TAYIKISTAN",
+      "iata_code": "TJK"
+    },
+    {
+      "iso_code": "TL",
+      "name_country": "TIMOR ORIENTAL",
+      "iata_code": "TLS"
+    },
+    {
+      "iso_code": "TG",
+      "name_country": "TOGO",
+      "iata_code": "TGO"
+    },
+    {
+      "iso_code": "TO",
+      "name_country": "TONGA",
+      "iata_code": "TON"
+    },
+    {
+      "iso_code": "TT",
+      "name_country": "TRINIDAD Y TOBAGO",
+      "iata_code": "TTO"
+    },
+    {
+      "iso_code": "TN",
+      "name_country": "TUNEZ",
+      "iata_code": "TUN"
+    },
+    {
+      "iso_code": "TM",
+      "name_country": "TURKMENISTAN",
+      "iata_code": "TKM"
+    },
+    {
+      "iso_code": "TR",
+      "name_country": "TURQUIA",
+      "iata_code": "TUR"
+    },
+    {
+      "iso_code": "TV",
+      "name_country": "TUVALU",
+      "iata_code": "TUV"
+    },
+    {
+      "iso_code": "UA",
+      "name_country": "UCRANIA",
+      "iata_code": "UKR"
+    },
+    {
+      "iso_code": "UG",
+      "name_country": "UGANDA",
+      "iata_code": "UGA"
+    },
+    {
+      "iso_code": "UY",
+      "name_country": "URUGUAY",
+      "iata_code": "URY"
+    },
+    {
+      "iso_code": "UZ",
+      "name_country": "UZBEKISTAN",
+      "iata_code": "UZB"
+    },
+    {
+      "iso_code": "VU",
+      "name_country": "VANUATU",
+      "iata_code": "VUT"
+    },
+    {
+      "iso_code": "VA",
+      "name_country": "VATICANO",
+      "iata_code": "VAT"
+    },
+    {
+      "iso_code": "VE",
+      "name_country": "VENEZUELA",
+      "iata_code": "VEN"
+    },
+    {
+      "iso_code": "VN",
+      "name_country": "VIETNAM",
+      "iata_code": "VNM"
+    },
+    {
+      "iso_code": "YE",
+      "name_country": "YEMEN",
+      "iata_code": "YEM"
+    },
+    {
+      "iso_code": "DJ",
+      "name_country": "YIBUTI",
+      "iata_code": "DJI"
+    },
+    {
+      "iso_code": "ZM",
+      "name_country": "ZAMBIA",
+      "iata_code": "ZMB"
+    },
+    {
+      "iso_code": "ZW",
+      "name_country": "ZIMBABUE",
+      "iata_code": "ZWE"
+    }
+   ]
