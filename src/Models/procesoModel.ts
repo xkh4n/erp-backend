@@ -11,7 +11,8 @@ const ProcesoSchema = new Schema<IProceso>({
     },
     nombre: {
         type: String,
-        required: true
+        required: true,
+        unique: true,
     },
     descripcion: {
         type: String,

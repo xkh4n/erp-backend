@@ -6,6 +6,7 @@ const vistasSchema = new Schema<IVistas>({
     proceso: {
         type: String,
         required: true,
+        unique: true,
     },
     label: {
         type: String,
@@ -14,6 +15,7 @@ const vistasSchema = new Schema<IVistas>({
     link: {
         type: String,
         required: true,
+        unique: true,
     },
     title: {
         type: String,

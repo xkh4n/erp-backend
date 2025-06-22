@@ -13,6 +13,8 @@ import comuna from './Comunas';
 import proveedor from './Proveedor';
 import health from './Health';
 import categoria from './Categoria';
+import estadoActivo from './EstadoActivos';
+import SubEstadosActivosRouter from './SubEstadoActivos';
 
 
 export{
@@ -30,5 +32,7 @@ export{
     comuna,
     proveedor,
     health,
-    categoria
+    categoria,
+    estadoActivo,
+    SubEstadosActivosRouter
 }

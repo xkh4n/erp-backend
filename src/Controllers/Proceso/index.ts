@@ -285,6 +285,56 @@ const updateProcesoByCodigo = async (req: Request, res: Response) : Promise<void
     }
 }
 
+const getProcesoByIdServicio = async (req: Request, res: Response) : Promise<void> => {
+    try {
+        const { id } = req.body;
+        if (!IsId(id)) {
+            throw createValidationError('El ID no es válido: ', id);
+        }
+        const proceso = await Proceso.find({ servicio: id });
+        if(!proceso){
+            throw createNotFoundError('No existen Proceso con ese servicio');
+        }
+        res.status(200).json({
+            codigo: 200,
+            data: proceso
+        });
+    } catch (error) {
+        console.log(error);
+        if (error instanceof CustomError) {
+            res.status(error.code).json(error.toJSON());
+        }else{
+            const serverError = createServerError('Sucedió un error Inesperado');
+            res.status(serverError.code).json(serverError.toJSON());
+        }
+    }
+}
+
+const deleteProcesoById = async (req: Request, res: Response) : Promise<void> => {
+    try {
+        const { id } = req.body;
+        if (!IsId(id)) {
+            throw createValidationError('El ID no es válido: ', id);
+        }
+        const proceso = await Proceso.findByIdAndDelete(id);
+        if(!proceso){
+            throw createNotFoundError('No existe un Proceso con ese ID', id);
+        }
+        res.status(200).json({
+            codigo: 200,
+            data: proceso
+        });
+    } catch (error) {
+        console.log(error);
+        if (error instanceof CustomError) {
+            res.status(error.code).json(error.toJSON());
+        }else{
+            const serverError = createServerError('Sucedió un error Inesperado');
+            res.status(serverError.code).json(serverError.toJSON());
+        }
+    }
+}
+
 export {
     setProceso,
     getAllProceso,
@@ -292,5 +342,7 @@ export {
     getProcesoByCodigo,
     getProcesoByServicio,
     updateProcesoById,
-    updateProcesoByCodigo
+    updateProcesoByCodigo,
+    getProcesoByIdServicio,
+    deleteProcesoById
 }

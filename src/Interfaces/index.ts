@@ -12,6 +12,9 @@ import IProducto from "./Producto";
 import IProveedor from "./Proveedor";
 import IContacto from "./Contacto";
 import ITipo from "./Tipos";
+import ISolicitud from "./Solicitudes";
+import IEstadosActivos from "./EstadosActivos";
+import ISubEstadosActivos from "./SubEstadosActivos";
 
 export type{
     IUser,
@@ -27,5 +30,8 @@ export type{
     IProducto,
     IProveedor,
     IContacto,
-    ITipo
+    ITipo,
+    ISolicitud,
+    IEstadosActivos,
+    ISubEstadosActivos
 }
