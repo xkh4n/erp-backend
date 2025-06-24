@@ -3,6 +3,7 @@ import log4js from 'log4js';
 const logger = log4js.getLogger('Validations file:');
 logger.level = 'all';
 
+import { validateRut } from '@fdograph/rut-utilities'; // Importar la librería para validar RUT
 
 const IsUsername = (username: string) => {
     // Verificar si el valor no es una cadena
@@ -72,6 +73,7 @@ const IsEmail = (email:string) => {
   // Expresión regular para validar un correo electrónico
   const regex = /^[a-zA-Z0-9](?:[a-zA-Z0-9._-]*[a-zA-Z0-9])?@[a-zA-Z0-9](?:[a-zA-Z0-9.-]*[a-zA-Z0-9])?(?:\.[a-zA-Z]{2,})+$/;
   // Verificar si el valor no es una cadena o no cumple con la expresión regular
+  logger.debug(`Validating phone number: ${regex.test(email)}`);
   if (typeof email !== 'string' || !regex.test(email)) {
     console.warn("The input is not a valid E-Mail");
     return false;
@@ -88,7 +90,7 @@ const IsParagraph = (paragraph: string) => {
   // Eliminar espacios en blanco al inicio y al final
   paragraph = paragraph.trim();
   // Expresión regular mejorada para validar párrafos
-  const regex = /^[a-zA-Z0-9\s.,;:!?'"()\[\]{}\-_*\/&@#%^~|\\+=™°®©]{1,}$/;  
+  const regex = /^[a-zA-ZÁÉÍÓÚáéíóúñÑ0-9\s.,;:!?'"()\[\]{}\-_*\/&@#%^~|\\+=™°®©]{1,}$/;  
   // Verificar si el valor no cumple con la expresión regular
   if (!regex.test(paragraph)) {
       console.warn(`The input "${paragraph}" is not a valid paragraph`);
@@ -111,16 +113,16 @@ const IsDecimal = (decimal:number) => {
 const IsPhone = (phone:string) => {
     // Verificar si el valor no es una cadena
     if (typeof phone !== 'string') {
-        logger.error("The input is not a string");
+        console.warn("The input is not a string");
         return false;
     }
     // Eliminar espacios en blanco al inicio y al final (opcional, pero recomendado)
     phone = phone.trim();
     // Expresión regular para validar números de teléfono
-    const regex = /^(?:\+56)? ?(?:9 ?)?\d{4}(?: ?\d{4})?$/;
+    const regex = /^(\+?56\s?\d{1,2}|\(56\s?\d{1,2}\))\s?\d{4,5}\s?\d{4}$|^\d{7,11}$/;
     // Verificar si el valor no cumple con la expresión regular
     if (!regex.test(phone)) {
-        logger.error(`The input "${phone}" is not a valid phone number`);
+        console.warn(`The input "${phone}" is not a valid phone number`);
         return false;
     }
     return true;
@@ -223,6 +225,39 @@ const IsNameDepto = (name: string) => {
   }
   return true;
 };
+
+const IsRut = (rut: string) => {
+    // Verificar si el valor no es una cadena
+    if (typeof rut !== 'string') {
+        console.warn("The input is not a string");
+        return false;
+    }
+    const newRut = rut.replace(".","");
+    const isValid = validateRut(newRut);
+    if (isValid) {
+        return true;
+    }else{
+        console.warn(`The input "${rut}" is not a valid RUT`);
+        return false;
+    }
+}
+
+const IsCodTipo = (codTipo: string) => {
+    // Verificar si el valor no es una cadena
+    if (typeof codTipo !== 'string') {
+        logger.error("The input is not a string");
+        return false;
+    }
+    // Expresión regular para validar el código de tipo
+    const regex = /^[A-Z0-9]{5}$/;
+    // Verificar si el valor no cumple con la expresión regular
+    if (!regex.test(codTipo)) {
+        logger.error(`The input "${codTipo}" is not a valid codTipo`);
+        return false;
+    }
+    return true;
+}
+
 export{
     IsUsername,
     IsPassword,
@@ -241,4 +276,6 @@ export{
     IsProceso,
     IsBoolean,
     IsNameDepto,
+    IsRut,
+    IsCodTipo,
 }

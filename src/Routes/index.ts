@@ -9,6 +9,12 @@ import servicio from './Servicio';
 import proceso from './Proceso';
 import vistas from './Vistas';
 import producto from './Producto';
+import comuna from './Comunas';
+import proveedor from './Proveedor';
+import health from './Health';
+import categoria from './Categoria';
+import estadoActivo from './EstadoActivos';
+import SubEstadosActivosRouter from './SubEstadoActivos';
 
 
 export{
@@ -22,5 +28,11 @@ export{
     servicio,
     proceso,
     vistas,
-    producto
+    producto,
+    comuna,
+    proveedor,
+    health,
+    categoria,
+    estadoActivo,
+    SubEstadosActivosRouter
 }

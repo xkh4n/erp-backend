@@ -24,7 +24,7 @@ const setServicio = async (req: Request, res: Response) : Promise<void>  => {
         const total = Object.keys(req.body).length;
         const promise: Promise<IServicio>[] = [];
         for (let i = 0; i < total; i++) {
-            const {codigo, nombre, descripcion, departamento} = req.body[i];
+            const {codigo, nombre, descripcion, departamento, estado} = req.body[i];
             if (!IsCodGerencia(codigo)) {
                 throw createValidationError('El código debe tener 4 dígitos', codigo);
             }
@@ -33,6 +33,9 @@ const setServicio = async (req: Request, res: Response) : Promise<void>  => {
             }
             if (!IsParagraph(descripcion)) {
                 throw createValidationError('La descripción debe tener entre 3 y 100 caracteres', descripcion);
+            }
+            if (!IsBoolean(estado)) {
+                throw createValidationError('El estado debe ser verdadero o falso', estado);
             }
             const fibdDepartamento = await Departamento.findOne({codigo: departamento});
             if (!fibdDepartamento) {
@@ -118,7 +121,7 @@ const getServicioById = async (req: Request, res: Response) : Promise<void>  => 
     }
 }
 
-const getServicioByDepartamento = async (req: Request, res: Response) : Promise<void>  => {
+const getServicioByDeptoCode = async (req: Request, res: Response) : Promise<void>  => {
     try {
         const {departamento} = req.body;
         if(!IsCodGerencia(departamento)) {
@@ -275,7 +278,7 @@ export {
     getAllServicios,
     getServicioById,
     getServicioByCodigo,
-    getServicioByDepartamento,
+    getServicioByDeptoCode,
     updateServicioById,
     updateServicioByCodigo
 }
