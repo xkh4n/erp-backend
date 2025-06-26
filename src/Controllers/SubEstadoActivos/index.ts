@@ -15,7 +15,7 @@ import EstadoActivos from '../../Models/estadoActivosModel';
 
 /* DEPENDENCIES */
 import { Request, Response } from "express";
-import { IsId, IsName, IsParagraph } from '../../Library/Validations';
+import { IsId, IsName, IsNumero, IsParagraph } from '../../Library/Validations';
 
 const setSubEstadoActivo = async (req: Request, res: Response) => {
     try {
@@ -26,21 +26,15 @@ const setSubEstadoActivo = async (req: Request, res: Response) => {
         }
         for (let i = 0; i < total; i++) {
             const subEstadoActivo: ISubEstadosActivos = req.body[i];
+            const { codigoestado } = req.body[i]
             if (!subEstadoActivo.nombre || typeof subEstadoActivo.nombre !== 'string' || subEstadoActivo.nombre.trim() === '' || IsName(subEstadoActivo.nombre) === false) {
                 throw createConflictError('El nombre del sub estado activo no es válido', subEstadoActivo.nombre);
             }
             if (!subEstadoActivo.descripcion || typeof subEstadoActivo.descripcion !== 'string' || subEstadoActivo.descripcion.trim() === '' || IsParagraph(subEstadoActivo.descripcion) === false) {
                 throw createConflictError('La descripción del sub estado activo no es válida', subEstadoActivo.descripcion);
             }
-            if (
-                !subEstadoActivo.estadoActivo ||
-                !IsId(
-                    typeof subEstadoActivo.estadoActivo === 'string'
-                        ? subEstadoActivo.estadoActivo
-                        : subEstadoActivo.estadoActivo.toString()
-                )
-            ) {
-                throw createConflictError('El ID del estado activo no es válido', subEstadoActivo.estadoActivo);
+            if (!IsNumero(codigoestado) || codigoestado <= 0) {
+                throw createConflictError('El código del estado activo no es válido', codigoestado);
             }
 
             const existingSubEstado = await SubEstadosActivos.findOne({ nombre: subEstadoActivo.nombre });
@@ -48,15 +42,15 @@ const setSubEstadoActivo = async (req: Request, res: Response) => {
                 throw createConflictError('El sub estado activo ya existe', subEstadoActivo.nombre);
             }
 
-            const estadoActivo = await EstadoActivos.findById(subEstadoActivo.estadoActivo);
+            const estadoActivo = await EstadoActivos.findOne({ codigo:codigoestado });
             if (!estadoActivo) {
-                throw createNotFoundError('El estado activo asociado no existe', subEstadoActivo.estadoActivo);
+                throw createNotFoundError('El estado activo asociado no existe', codigoestado);
             }
 
             const newSubEstado = new SubEstadosActivos({
                 nombre: subEstadoActivo.nombre,
                 descripcion: subEstadoActivo.descripcion,
-                estadoActivo: estadoActivo._id
+                codigoestado: estadoActivo.codigo
             });
 
             promises.push(newSubEstado.save()
@@ -88,7 +82,7 @@ const setSubEstadoActivo = async (req: Request, res: Response) => {
 
 const getSubEstadosActivos = async (req: Request, res: Response) => {
     try {
-        const subEstadosActivos = await SubEstadosActivos.find().populate('estadoActivo');
+        const subEstadosActivos = await SubEstadosActivos.find().populate('codigoestado');
         if (subEstadosActivos.length === 0) {
             throw createNotFoundError('No se encontraron Sub Estados Activos');
         }

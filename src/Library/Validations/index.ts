@@ -179,7 +179,7 @@ const IsCodGerencia = (number: string) => {
 }
 
 const IsProceso = (proceso: string) => {
-  const regex = /^[a-zA-Z0-9]{8}$/;
+  const regex = /^[a-zA-Z0-9]{5,8}$/;
   if (typeof proceso !== 'string' || !regex.test(proceso)) {
     logger.error("The input is not a valid Cod Process");
     return false;
@@ -258,6 +258,22 @@ const IsCodTipo = (codTipo: string) => {
     return true;
 }
 
+const IsNumero = (numero: string) => {
+  // Verificar si el valor no es una cadena
+  if (typeof numero === 'string') {
+    logger.error("The input is a string");
+    return false;
+  }
+  // Expresión regular para validar números
+  const regex = /^[0-9]+$/;
+  // Verificar si el valor no cumple con la expresión regular
+  if (!regex.test(numero)) {
+    logger.error(`The input "${numero}" is not a valid number`);
+    return false;
+  }
+  return true;
+};
+
 export{
     IsUsername,
     IsPassword,
@@ -278,4 +294,5 @@ export{
     IsNameDepto,
     IsRut,
     IsCodTipo,
+    IsNumero
 }
