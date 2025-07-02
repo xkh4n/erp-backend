@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-import { ITipo } from "../Interfaces";
-const tiposSchema = new mongoose.Schema<ITipo>({
+import { ICategoria } from "../Interfaces";
+const tiposSchema = new mongoose.Schema<ICategoria>({
     codigo: {
         type: String,
         required: true,
@@ -15,6 +15,10 @@ const tiposSchema = new mongoose.Schema<ITipo>({
         type: String,
         required: true
     },
+    tipo: {
+        type: String,
+        required: true
+    },
     estado: {
         type: Boolean,
         default: true
@@ -22,5 +26,6 @@ const tiposSchema = new mongoose.Schema<ITipo>({
 }, {
     timestamps: true
 });
-const Tipos = mongoose.model<ITipo>("Tipos", tiposSchema);
+
+const Tipos = mongoose.model<ICategoria>("Tipos", tiposSchema);
 export default Tipos;

@@ -11,7 +11,7 @@ import IProceso from "./Proceso";
 import IProducto from "./Producto";
 import IProveedor from "./Proveedor";
 import IContacto from "./Contacto";
-import ITipo from "./Tipos";
+import ICategoria from "./Categorias";
 import ISolicitud from "./Solicitudes";
 import IEstadosActivos from "./EstadosActivos";
 import ISubEstadosActivos from "./SubEstadosActivos";
@@ -30,7 +30,7 @@ export type{
     IProducto,
     IProveedor,
     IContacto,
-    ITipo,
+    ICategoria,
     ISolicitud,
     IEstadosActivos,
     ISubEstadosActivos

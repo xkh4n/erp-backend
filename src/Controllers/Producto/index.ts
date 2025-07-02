@@ -11,7 +11,7 @@ import { IProducto } from '../../Interfaces';
 
 /* MODELS */
 import Producto from '../../Models/productoModel';
-import Tipos from '../../Models/tiposModel';
+import Tipos from '../../Models/categoriasModel';
 
 /* DEPENDENCIES */
 import { Request, Response } from "express";

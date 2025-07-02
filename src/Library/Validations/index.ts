@@ -249,7 +249,7 @@ const IsCodTipo = (codTipo: string) => {
         return false;
     }
     // Expresión regular para validar el código de tipo
-    const regex = /^[A-Z0-9]{5}$/;
+    const regex = /^[A-Z0-9]{6}$/;
     // Verificar si el valor no cumple con la expresión regular
     if (!regex.test(codTipo)) {
         logger.error(`The input "${codTipo}" is not a valid codTipo`);
@@ -258,19 +258,56 @@ const IsCodTipo = (codTipo: string) => {
     return true;
 }
 
-const IsNumero = (numero: string) => {
-  // Verificar si el valor no es una cadena
-  if (typeof numero === 'string') {
-    logger.error("The input is a string");
+const IsNumero = (numero: any) => {
+  // Verificar si el valor es null o undefined
+  if (numero === null || numero === undefined) {
+    logger.error("The input is null or undefined");
     return false;
   }
-  // Expresión regular para validar números
+  
+  // Convertir a string si es número
+  const numeroStr = typeof numero === 'number' ? numero.toString() : numero;
+  
+  // Verificar si no es una cadena después de la conversión
+  if (typeof numeroStr !== 'string') {
+    logger.error("The input cannot be converted to string");
+    return false;
+  }
+  
+  // Expresión regular para validar números enteros positivos
   const regex = /^[0-9]+$/;
+  
   // Verificar si el valor no cumple con la expresión regular
-  if (!regex.test(numero)) {
-    logger.error(`The input "${numero}" is not a valid number`);
+  if (!regex.test(numeroStr)) {
+    logger.error(`The input "${numeroStr}" is not a valid number`);
     return false;
   }
+  
+  // Verificar que sea un número válido y no sea NaN
+  const parsedNumber = parseInt(numeroStr, 10);
+  if (isNaN(parsedNumber)) {
+    logger.error(`The input "${numeroStr}" cannot be parsed as a number`);
+    return false;
+  }
+  
+  return true;
+};
+
+const IsCodVista = (codVista: string) => {
+  // Verificar si el valor no es una cadena
+  if (typeof codVista !== 'string') {
+    logger.error("The input is not a string");
+    return false;
+  }
+  // Expresión regular para validar el código de vista: PROC seguido de dígitos
+  // PROC + hasta 12 dígitos (ejemplo: PROC00115131214)
+  const regex = /^PROC\d{4,12}$/;
+  // Verificar si el valor no cumple con la expresión regular
+  if (!regex.test(codVista)) {
+    logger.error(`The input "${codVista}" is not a valid codVista. Expected format: PROC + 4-12 digits`);
+    return false;
+  }
+  
   return true;
 };
 
@@ -294,5 +331,6 @@ export{
     IsNameDepto,
     IsRut,
     IsCodTipo,
-    IsNumero
+    IsNumero,
+    IsCodVista
 }

@@ -6,11 +6,12 @@ import { Router } from 'express';
 const ciudad = Router();
 
 /* CONTROLLER */
-import { setCity, getAllCities, cityById, cityByCountry, updateCity, deleteCity } from '../../Controllers/Ciudad';
+import { setCity, getAllCities, cityById, cityByCountry, updateCity, deleteCity, getCiudadByIata } from '../../Controllers/Ciudad';
 
 ciudad.put('/ciudad/nueva', setCity);
 ciudad.post('/ciudad/todas', getAllCities);
 ciudad.post('/ciudad/citybyid', cityById);
+ciudad.post('/ciudad/citybyiata', getCiudadByIata);
 ciudad.post('/ciudad/citybycountry', cityByCountry);
 ciudad.patch('/ciudad/actualizar', updateCity);
 ciudad.delete('/ciudad/eliminar', deleteCity);

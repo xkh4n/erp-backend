@@ -156,13 +156,13 @@ const getServicioByCodigo = async (req: Request, res: Response) : Promise<void> 
         if(!IsCodGerencia(codigo)) {
             throw createValidationError('El código no es válido', codigo);
         }
-        const departamento = await Departamento.findOne({codigo: codigo});
-        if(!departamento){
+        const servicios = await Servicio.findOne({codigo: codigo});
+        if(!servicios){
             throw createNotFoundError('No existe un Departamento con ese codigo: ', codigo);
         }
         res.status(200).json({
             codigo: 200,
-            data: departamento
+            data: servicios
         })
     } catch (error) {
         console.log(error);
@@ -230,6 +230,7 @@ const updateServicioById = async (req: Request, res: Response) : Promise<void>  
     }
 }
 
+
 const updateServicioByCodigo = async (req: Request, res: Response) : Promise<void>  => {
     try {
         const {codigo, nombre, descripcion, estado, departamento} = req.body;
@@ -280,5 +281,5 @@ export {
     getServicioByCodigo,
     getServicioByDeptoCode,
     updateServicioById,
-    updateServicioByCodigo
+    updateServicioByCodigo,
 }

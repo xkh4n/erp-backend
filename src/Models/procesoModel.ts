@@ -26,8 +26,9 @@ const ProcesoSchema = new Schema<IProceso>({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Servicio",
         required: true
-    }
-})
+    }}, {
+    timestamps: true
+});
 
 const Proceso = mongoose.model<IProceso>("Proceso", ProcesoSchema)
 

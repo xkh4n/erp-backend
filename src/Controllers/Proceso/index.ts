@@ -335,6 +335,27 @@ const deleteProcesoById = async (req: Request, res: Response) : Promise<void> =>
     }
 }
 
+const getLastProceso = async (req: Request, res: Response) : Promise<void> => {
+    try {
+        const proceso = await Proceso.find().sort({ createdAt: -1 }).limit(1);
+        if(!proceso || proceso.length === 0){
+            throw createNotFoundError('No existen Proceso');
+        }
+        res.status(200).json({
+            codigo: 200,
+            data: proceso[0]
+        });
+    } catch (error) {
+        console.log(error);
+        if (error instanceof CustomError) {
+            res.status(error.code).json(error.toJSON());
+        }else{
+            const serverError = createServerError('Sucedió un error Inesperado');
+            res.status(serverError.code).json(serverError.toJSON());
+        }
+    }
+}
+
 export {
     setProceso,
     getAllProceso,
@@ -344,5 +365,6 @@ export {
     updateProcesoById,
     updateProcesoByCodigo,
     getProcesoByIdServicio,
-    deleteProcesoById
+    deleteProcesoById,
+    getLastProceso
 }

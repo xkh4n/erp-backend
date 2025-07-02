@@ -95,6 +95,31 @@ const getAllCities = async (req: Request, res: Response) => {
     }
 }
 
+const getCiudadByIata = async (req: Request, res: Response) => {
+    try {
+        const { iata } = req.body;
+        if(!IsIata(iata)){
+            throw createConflictError('El código IATA no es válido', iata);
+        }
+        const ciudad = await Ciudades.findOne({iata_codes: iata}).populate('country');
+        if(!ciudad){
+            throw createNotFoundError('La ciudad no existe', iata);
+        }
+        res.status(200).json({
+            codigo: 200,
+            data: ciudad
+        });
+    } catch (error) {
+        logger.error(error);
+        if (error instanceof CustomError) {
+            res.status(error.code).json(error.toJSON());
+        }else{
+            const serverError = createServerError('Sucedió un error Inesperado');
+            res.status(serverError.code).json(serverError.toJSON());
+        }
+    }
+}
+
 const cityById = async (req: Request, res: Response) => {
     try {
         const { id } = req.body;
@@ -254,6 +279,7 @@ export{
     setCity,
     getAllCities,
     cityById,
+    getCiudadByIata,
     cityByCountry,
     deleteCity,
     updateCity

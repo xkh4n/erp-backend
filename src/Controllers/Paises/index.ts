@@ -98,6 +98,32 @@ const getAllCountries = async (req: Request, res: Response) => {
     }
 }
 
+const getPaisByIso = async (req: Request, res: Response) => {
+    try {
+        const { iso_code } = req.body;
+        if(!IsISO(iso_code)){
+            throw createNotFoundError('Debe proporsionar un código ISO válido');
+        }
+        const pais = await Paises.findOne({ iso_code });
+        if(!pais){
+            throw createNotFoundError('No se encontraron datos');
+        }
+        res.status(200).json({
+            codigo: 200,
+            data: pais
+        }); 
+    } catch (error) {
+        logger.error(error);
+        if (error instanceof CustomError) {
+            res.status(error.code).json(error.toJSON());
+        }
+        else{
+            const serverError = createServerError('Sucedió un error Inesperado');
+            res.status(serverError.code).json(serverError.toJSON());
+        }
+    }
+}
+
 const getCountryById = async (req: Request, res: Response) => {
     try {
         const { id } = req.body
@@ -122,6 +148,32 @@ const getCountryById = async (req: Request, res: Response) => {
         }
     }
 }
+
+const getPaisByIata = async (req: Request, res: Response) => {
+    try {
+        const { iata_code } = req.body;
+        if(!IsIata(iata_code)){
+            throw createNotFoundError('Debe proporsionar un código IATA válido');
+        }
+        const pais = await Paises.findOne({ iata_code });
+        if(!pais){
+            throw createNotFoundError('No se encontraron datos');
+        }
+        res.status(200).json({
+            codigo: 200,
+            data: pais
+        }); 
+    } catch (error) {
+        logger.error(error);
+        if (error instanceof CustomError) {
+            res.status(error.code).json(error.toJSON());
+        } else {
+            const serverError = createServerError('Sucedió un error Inesperado');
+            res.status(serverError.code).json(serverError.toJSON());
+        }
+    }
+}
+
 
 const updateCountry = async (req: Request, res: Response) => {
     try {
@@ -183,6 +235,120 @@ const updateCountry = async (req: Request, res: Response) => {
     }
 };
 
+const updateCountryByIso = async (req: Request, res: Response) => {
+    try {
+        const { iso_code } = req.body;
+        const updateData: IPaises = req.body;
+
+        if(!IsISO(iso_code)){
+            throw createNotFoundError('Debe proporsionar un código ISO válido');
+        }
+
+        if(updateData.iata_code && !IsIata(updateData.iata_code)){
+            throw createAuthorizationError('El código IATA no es válido');
+        }
+        if(updateData.name_country && !IsName(updateData.name_country)){
+            throw createAuthorizationError('El nombre no es válido');
+        }
+
+        const existingCountry = await Paises.findOne({ iso_code });
+        if(!existingCountry){
+            throw createNotFoundError('País no encontrado');
+        }
+
+        if(updateData.iso_code || updateData.iata_code) {
+            const duplicateCountry = await Paises.findOne({
+                _id: { $ne: existingCountry._id },
+                $or: [
+                    { iso_code: updateData.iso_code || existingCountry.iso_code },
+                    { iata_code: updateData.iata_code || existingCountry.iata_code }
+                ]
+            });
+            if(duplicateCountry) {
+                throw createConflictError("Código ISO o IATA ya existe en otro país");
+            }
+        }
+
+        const updatedCountry = await Paises.findOneAndUpdate(
+            { iso_code },
+            updateData,
+            { new: true, runValidators: true }
+        );
+
+        logger.info(`País ISO: ${iso_code} actualizado correctamente.`);
+        res.status(200).json({
+            codigo: 200,
+            data: updatedCountry
+        });
+
+    } catch (error) {
+        logger.error(error);
+        if (error instanceof CustomError) {
+            res.status(error.code).json(error.toJSON());
+        } else {
+            const serverError = createServerError('Sucedió un error Inesperado');
+            res.status(serverError.code).json(serverError.toJSON());
+        }
+    }
+};
+
+const updateCountryByIata = async (req: Request, res: Response) => {
+    try {
+        const { iata_code } = req.body;
+        const updateData: IPaises = req.body;
+
+        if(!IsIata(iata_code)){
+            throw createNotFoundError('Debe proporsionar un código IATA válido');
+        }
+
+        if(updateData.iso_code && !IsISO(updateData.iso_code)){
+            throw createAuthorizationError('El código ISO no es válido');
+        }
+        if(updateData.name_country && !IsName(updateData.name_country)){
+            throw createAuthorizationError('El nombre no es válido');
+        }
+
+        const existingCountry = await Paises.findOne({ iata_code });
+        if(!existingCountry){
+            throw createNotFoundError('País no encontrado');
+        }
+
+        if(updateData.iso_code || updateData.iata_code) {
+            const duplicateCountry = await Paises.findOne({
+                _id: { $ne: existingCountry._id },
+                $or: [
+                    { iso_code: updateData.iso_code || existingCountry.iso_code },
+                    { iata_code: updateData.iata_code || existingCountry.iata_code }
+                ]
+            });
+            if(duplicateCountry) {
+                throw createConflictError("Código ISO o IATA ya existe en otro país");
+            }
+        }
+
+        const updatedCountry = await Paises.findOneAndUpdate(
+            { iata_code },
+            updateData,
+            { new: true, runValidators: true }
+        );
+
+        logger.info(`País IATA: ${iata_code} actualizado correctamente.`);
+        res.status(200).json({
+            codigo: 200,
+            data: updatedCountry
+        });
+
+    } catch (error) {
+        logger.error(error);
+        if (error instanceof CustomError) {
+            res.status(error.code).json(error.toJSON());
+        } else {
+            const serverError = createServerError('Sucedió un error Inesperado');
+            res.status(serverError.code).json(serverError.toJSON());
+        }
+    }
+};
+
 const deleteCountry = async (req: Request, res: Response) => {
     try {
         const { id } = req.body;
@@ -220,6 +386,10 @@ export {
     setPaises,
     getAllCountries,
     getCountryById,
+    getPaisByIso,
+    getPaisByIata,
     updateCountry,
+    updateCountryByIso,
+    updateCountryByIata,
     deleteCountry
 }
