@@ -1,3 +1,4 @@
+import { getChileDateTime } from '../Library/Utils/ManageDate';
 import mongoose from "mongoose";
 import { ICategoria } from "../Interfaces";
 const tiposSchema = new mongoose.Schema<ICategoria>({
@@ -22,9 +23,16 @@ const tiposSchema = new mongoose.Schema<ICategoria>({
     estado: {
         type: Boolean,
         default: true
-    }
+    },
+    fechaCreacion: { type: Date, default: getChileDateTime },
+    fechaModificacion: { type: Date, default: getChileDateTime }
 }, {
-    timestamps: true
+    timestamps: { 
+        createdAt: 'fechaCreacion', 
+        updatedAt: 'fechaModificacion',
+        currentTime: getChileDateTime
+    },
+    versionKey: false // Desactivar el campo __v
 });
 
 const Tipos = mongoose.model<ICategoria>("Tipos", tiposSchema);

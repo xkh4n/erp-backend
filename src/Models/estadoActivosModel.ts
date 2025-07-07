@@ -1,24 +1,7 @@
 import mongoose  from 'mongoose';
-import moment from 'moment-timezone';
+import { getChileDateTime } from '../Library/Utils/ManageDate';
 import { IEstadosActivos } from '../Interfaces';
 
-// Función para obtener fecha en zona horaria de Chile 
-function getChileDateTime(): Date {
-    // Simplemente crear la fecha en Chile y convertirla directamente
-    const chileTime = moment.tz('America/Santiago');
-    
-    // Obtener los componentes de fecha/hora en Chile
-    const year = chileTime.year();
-    const month = chileTime.month(); // moment usa 0-11
-    const day = chileTime.date();
-    const hour = chileTime.hour();
-    const minute = chileTime.minute();
-    const second = chileTime.second();
-    const millisecond = chileTime.millisecond();
-    
-    // Crear una nueva fecha UTC con los valores de Chile
-    return new Date(Date.UTC(year, month, day, hour, minute, second, millisecond));
-}
 
 const estadoActivosSchema = new mongoose.Schema<IEstadosActivos>({
     codigo: { type: Number, unique: true }, // Campo autoincrementable

@@ -15,6 +15,7 @@ import health from './Health';
 import categoria from './Categoria';
 import estadoActivo from './EstadoActivos';
 import SubEstadosActivosRouter from './SubEstadoActivos';
+import solicitud from './Solicitud';
 
 
 export{
@@ -34,5 +35,6 @@ export{
     health,
     categoria,
     estadoActivo,
-    SubEstadosActivosRouter
+    SubEstadosActivosRouter,
+    solicitud
 }
