@@ -7,23 +7,33 @@
   "type": "commonjs",
   "main": "index.ts",
   "scripts": {
-     "dev": "NODE_ENV=development nodemon"
+    "dev": "NODE_ENV=development nodemon",
+    "build": "tsc",
+    "start": "NODE_ENV=production node dist/index.js",
+    "test": "NODE_ENV=testing node dist/index.js"
   },
   "dependencies": {
+    "@fdograph/rut-utilities": "^1.4.0",
     "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "log4js": "^6.9.1",
+    "moment-timezone": "^0.6.0",
     "mongoose": "^8.13.1"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.1",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^24.0.3",
+    "@types/supertest": "^6.0.3",
     "chokidar-cli": "^3.0.0",
+    "mongodb-memory-server": "^10.1.4",
     "nodemon": "^3.1.9",
+    "ts-jest": "^29.3.2",
     "ts-node": "^10.9.2",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.3"
   }
 }

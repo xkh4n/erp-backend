@@ -18,18 +18,45 @@ import { hashPassword } from '../../Library/Encrypt';
 
 const NewUser = async (req: Request, res: Response) => {
     try {
-        const { name, email, password } = req.body;
-        if(!IsEmail(email)){
-            throw createAuthorizationError('El email no es válido');
-        }
-        if(!IsPassword(password)){
-            throw createAuthorizationError('La contraseña no es válida'); 
-        }
-        if(!name){
-            throw createAuthorizationError('El nombre es obligatorio');
-        }
-        if(!IsParagraph(name)){
-            throw createAuthorizationError('El nombre no es válido');
+        const total = Object.keys(req.body).length;
+        const promise = [];
+        for (let i = 0; i < total; i++) {
+            const { name, email, password } = req.body[i];
+            logger.info(`Registrando usuario: ${name} - ${email}`);
+            if(!IsEmail(email)){
+                throw createAuthorizationError('El email no es válido');
+            }
+            if(!IsPassword(password)){
+                throw createAuthorizationError('La contraseña no es válida'); 
+            }
+            if(!name){
+                throw createAuthorizationError('El nombre es obligatorio');
+            }
+            if(!IsParagraph(name)){
+                throw createAuthorizationError('El nombre no es válido');
+            }
+            const passwordHash = hashPassword(password);
+            if(!passwordHash){
+                throw createServerError('Sucedió un error Inesperado');
+            }
+            const newUser: IUser = {
+                name: name,
+                email: email.toLowerCase().trim(),
+                password: passwordHash,
+                role: "guest",
+                isActive: false,
+                createdAt: new Date(),
+                updatedAt: new Date()
+            };
+            const userExists = await User.findOne({ email: email });
+            if (userExists) {
+                throw createAuthorizationError('El email ya está registrado');
+            }
+            promise.push(User.create(newUser).then().catch((error: any) => {
+                if (error.code === 11000) {
+                    throw createAuthorizationError('El email ya está registrado en la creacion'); 
+                } 
+            }));
         }
         const passwordHash = hashPassword(password);
         if(!passwordHash){
@@ -53,9 +80,6 @@ const NewUser = async (req: Request, res: Response) => {
                 throw createServerError('Sucedió un error Inesperado');
             }
         });
-        if (!userSave) {
-            throw createServerError('Sucedió un error Inesperado');
-        }
         res.status(200).json({
             message: "Registro realizado con éxito",
             data: userSave

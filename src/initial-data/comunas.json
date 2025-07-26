@@ -1,0 +1,2424 @@
+[
+    {
+      "cod_territorial": "15101",
+      "cod_postal": 1000000,
+      "name_comuna": "ARICA",
+      "ciudad": "ARI",
+      "cod_sii": 1101
+    },
+    {
+      "cod_territorial": "15102",
+      "cod_postal": 1000000,
+      "name_comuna": "CAMARONES",
+      "ciudad": "ARI",
+      "cod_sii": 1106
+    },
+    {
+      "cod_territorial": "1101",
+      "cod_postal": 1100000,
+      "name_comuna": "IQUIQUE",
+      "ciudad": "IQQ",
+      "cod_sii": 1201
+    },
+    {
+      "cod_territorial": "1405",
+      "cod_postal": 1140000,
+      "name_comuna": "PICA",
+      "ciudad": "IQQ",
+      "cod_sii": 1203
+    },
+    {
+      "cod_territorial": "1401",
+      "cod_postal": 1120000,
+      "name_comuna": "POZO ALMONTE",
+      "ciudad": "IQQ",
+      "cod_sii": 1204
+    },
+    {
+      "cod_territorial": "1404",
+      "cod_postal": 1140000,
+      "name_comuna": "HUARA",
+      "ciudad": "IQQ",
+      "cod_sii": 1206
+    },
+    {
+      "cod_territorial": "1402",
+      "cod_postal": 1140000,
+      "name_comuna": "CAMINA",
+      "ciudad": "IQQ",
+      "cod_sii": 1208
+    },
+    {
+      "cod_territorial": "1403",
+      "cod_postal": 1140000,
+      "name_comuna": "COLCHANE",
+      "ciudad": "IQQ",
+      "cod_sii": 1210
+    },
+    {
+      "cod_territorial": "1107",
+      "cod_postal": 1100000,
+      "name_comuna": "ALTO HOSPICIO",
+      "ciudad": "IQQ",
+      "cod_sii": 1211
+    },
+    {
+      "cod_territorial": "15201",
+      "cod_postal": 1010000,
+      "name_comuna": "PUTRE",
+      "ciudad": "ARI",
+      "cod_sii": 1301
+    },
+    {
+      "cod_territorial": "15202",
+      "cod_postal": 1060000,
+      "name_comuna": "GENERAL LAGOS",
+      "ciudad": "ARI",
+      "cod_sii": 1302
+    },
+    {
+      "cod_territorial": "2301",
+      "cod_postal": 1290000,
+      "name_comuna": "TOCOPILLA",
+      "ciudad": "ANF",
+      "cod_sii": 2101
+    },
+    {
+      "cod_territorial": "2302",
+      "cod_postal": 1390000,
+      "name_comuna": "MARIA ELENA",
+      "ciudad": "ANF",
+      "cod_sii": 2103
+    },
+    {
+      "cod_territorial": "2101",
+      "cod_postal": 1200000,
+      "name_comuna": "ANTOFAGASTA",
+      "ciudad": "ANF",
+      "cod_sii": 2201
+    },
+    {
+      "cod_territorial": "2104",
+      "cod_postal": 1290000,
+      "name_comuna": "TALTAL",
+      "ciudad": "ANF",
+      "cod_sii": 2202
+    },
+    {
+      "cod_territorial": "2102",
+      "cod_postal": 1240000,
+      "name_comuna": "MEJILLONES",
+      "ciudad": "ANF",
+      "cod_sii": 2203
+    },
+    {
+      "cod_territorial": "2103",
+      "cod_postal": 1260000,
+      "name_comuna": "SIERRA GORDA",
+      "ciudad": "ANF",
+      "cod_sii": 2206
+    },
+    {
+      "cod_territorial": "2201",
+      "cod_postal": 1390000,
+      "name_comuna": "CALAMA",
+      "ciudad": "ANF",
+      "cod_sii": 2301
+    },
+    {
+      "cod_territorial": "2202",
+      "cod_postal": 1420000,
+      "name_comuna": "OLLAGUE",
+      "ciudad": "ANF",
+      "cod_sii": 2302
+    },
+    {
+      "cod_territorial": "2203",
+      "cod_postal": 1410000,
+      "name_comuna": "SAN PEDRO DE ATACAMA",
+      "ciudad": "ANF",
+      "cod_sii": 2303
+    },
+    {
+      "cod_territorial": "3201",
+      "cod_postal": 1530000,
+      "name_comuna": "CHANARAL",
+      "ciudad": "CPO",
+      "cod_sii": 3101
+    },
+    {
+      "cod_territorial": "3202",
+      "cod_postal": 1550000,
+      "name_comuna": "DIEGO DE ALMAGRO",
+      "ciudad": "CPO",
+      "cod_sii": 3102
+    },
+    {
+      "cod_territorial": "3101",
+      "cod_postal": 1530000,
+      "name_comuna": "COPIAPO",
+      "ciudad": "CPO",
+      "cod_sii": 3201
+    },
+    {
+      "cod_territorial": "3102",
+      "cod_postal": 1570000,
+      "name_comuna": "CALDERA",
+      "ciudad": "CPO",
+      "cod_sii": 3202
+    },
+    {
+      "cod_territorial": "3103",
+      "cod_postal": 1560000,
+      "name_comuna": "TIERRA AMARILLA",
+      "ciudad": "CPO",
+      "cod_sii": 3203
+    },
+    {
+      "cod_territorial": "3301",
+      "cod_postal": 1640000,
+      "name_comuna": "VALLENAR",
+      "ciudad": "CPO",
+      "cod_sii": 3301
+    },
+    {
+      "cod_territorial": "3303",
+      "cod_postal": 1650000,
+      "name_comuna": "FREIRINA",
+      "ciudad": "CPO",
+      "cod_sii": 3302
+    },
+    {
+      "cod_territorial": "3304",
+      "cod_postal": 1650000,
+      "name_comuna": "HUASCO",
+      "ciudad": "CPO",
+      "cod_sii": 3303
+    },
+    {
+      "cod_territorial": "3302",
+      "cod_postal": 1650000,
+      "name_comuna": "ALTO DEL CARMEN",
+      "ciudad": "CPO",
+      "cod_sii": 3304
+    },
+    {
+      "cod_territorial": "4101",
+      "cod_postal": 1700000,
+      "name_comuna": "LA SERENA",
+      "ciudad": "LSC",
+      "cod_sii": 4101
+    },
+    {
+      "cod_territorial": "4104",
+      "cod_postal": 1710000,
+      "name_comuna": "LA HIGUERA",
+      "ciudad": "LSC",
+      "cod_sii": 4102
+    },
+    {
+      "cod_territorial": "4102",
+      "cod_postal": 1780000,
+      "name_comuna": "COQUIMBO",
+      "ciudad": "LSC",
+      "cod_sii": 4103
+    },
+    {
+      "cod_territorial": "4103",
+      "cod_postal": 1750000,
+      "name_comuna": "ANDACOLLO",
+      "ciudad": "LSC",
+      "cod_sii": 4104
+    },
+    {
+      "cod_territorial": "4106",
+      "cod_postal": 1710000,
+      "name_comuna": "VICUNA",
+      "ciudad": "LSC",
+      "cod_sii": 4105
+    },
+    {
+      "cod_territorial": "4105",
+      "cod_postal": 1710000,
+      "name_comuna": "PAIHUANO",
+      "ciudad": "LSC",
+      "cod_sii": 4106
+    },
+    {
+      "cod_territorial": "4301",
+      "cod_postal": 1840000,
+      "name_comuna": "OVALLE",
+      "ciudad": "LSC",
+      "cod_sii": 4201
+    },
+    {
+      "cod_territorial": "4303",
+      "cod_postal": 1840000,
+      "name_comuna": "MONTE PATRIA",
+      "ciudad": "LSC",
+      "cod_sii": 4203
+    },
+    {
+      "cod_territorial": "4304",
+      "cod_postal": 1840000,
+      "name_comuna": "PUNITAQUI",
+      "ciudad": "LSC",
+      "cod_sii": 4204
+    },
+    {
+      "cod_territorial": "4302",
+      "cod_postal": 1840000,
+      "name_comuna": "COMBARBALA",
+      "ciudad": "LSC",
+      "cod_sii": 4205
+    },
+    {
+      "cod_territorial": "4305",
+      "cod_postal": 1840000,
+      "name_comuna": "RIO HURTADO",
+      "ciudad": "LSC",
+      "cod_sii": 4206
+    },
+    {
+      "cod_territorial": "4201",
+      "cod_postal": 1860000,
+      "name_comuna": "ILLAPEL",
+      "ciudad": "LSC",
+      "cod_sii": 4301
+    },
+    {
+      "cod_territorial": "4204",
+      "cod_postal": 1890000,
+      "name_comuna": "SALAMANCA",
+      "ciudad": "LSC",
+      "cod_sii": 4302
+    },
+    {
+      "cod_territorial": "4203",
+      "cod_postal": 1860000,
+      "name_comuna": "LOS VILOS",
+      "ciudad": "LSC",
+      "cod_sii": 4303
+    },
+    {
+      "cod_territorial": "4202",
+      "cod_postal": 1860000,
+      "name_comuna": "CANELA",
+      "ciudad": "LSC",
+      "cod_sii": 4304
+    },
+    {
+      "cod_territorial": "5201",
+      "cod_postal": 2770000,
+      "name_comuna": "ISLA DE PASCUA",
+      "ciudad": "IPC",
+      "cod_sii": 5101
+    },
+    {
+      "cod_territorial": "5401",
+      "cod_postal": 2200000,
+      "name_comuna": "LA LIGUA",
+      "ciudad": "IPC",
+      "cod_sii": 5201
+    },
+    {
+      "cod_territorial": "5404",
+      "cod_postal": 2280000,
+      "name_comuna": "PETORCA",
+      "ciudad": "IPC",
+      "cod_sii": 5202
+    },
+    {
+      "cod_territorial": "5402",
+      "cod_postal": 2280000,
+      "name_comuna": "CABILDO",
+      "ciudad": "IPC",
+      "cod_sii": 5203
+    },
+    {
+      "cod_territorial": "5405",
+      "cod_postal": 2280000,
+      "name_comuna": "ZAPALLAR",
+      "ciudad": "IPC",
+      "cod_sii": 5204
+    },
+    {
+      "cod_territorial": "5403",
+      "cod_postal": 2280000,
+      "name_comuna": "PAPUDO",
+      "ciudad": "IPC",
+      "cod_sii": 5205
+    },
+    {
+      "cod_territorial": "5101",
+      "cod_postal": 2340000,
+      "name_comuna": "VALPARAISO",
+      "ciudad": "IPC",
+      "cod_sii": 5301
+    },
+    {
+      "cod_territorial": "5109",
+      "cod_postal": 2520000,
+      "name_comuna": "VINA DEL MAR",
+      "ciudad": "IPC",
+      "cod_sii": 5302
+    },
+    {
+      "cod_territorial": "5804",
+      "cod_postal": 2530000,
+      "name_comuna": "VILLA ALEMANA",
+      "ciudad": "IPC",
+      "cod_sii": 5303
+    },
+    {
+      "cod_territorial": "5801",
+      "cod_postal": 2430000,
+      "name_comuna": "QUILPUE",
+      "ciudad": "IPC",
+      "cod_sii": 5304
+    },
+    {
+      "cod_territorial": "5102",
+      "cod_postal": 2480000,
+      "name_comuna": "CASABLANCA",
+      "ciudad": "IPC",
+      "cod_sii": 5305
+    },
+    {
+      "cod_territorial": "5107",
+      "cod_postal": 2440000,
+      "name_comuna": "QUINTERO",
+      "ciudad": "IPC",
+      "cod_sii": 5306
+    },
+    {
+      "cod_territorial": "5105",
+      "cod_postal": 2500000,
+      "name_comuna": "PUCHUNCAVI",
+      "ciudad": "IPC",
+      "cod_sii": 5307
+    },
+    {
+      "cod_territorial": "5104",
+      "cod_postal": 2700000,
+      "name_comuna": "JUAN FERNANDEZ",
+      "ciudad": "IPC",
+      "cod_sii": 5308
+    },
+    {
+      "cod_territorial": "5103",
+      "cod_postal": 2510000,
+      "name_comuna": "CONCON",
+      "ciudad": "IPC",
+      "cod_sii": 5309
+    },
+    {
+      "cod_territorial": "5601",
+      "cod_postal": 2660000,
+      "name_comuna": "SAN ANTONIO",
+      "ciudad": "IPC",
+      "cod_sii": 5401
+    },
+    {
+      "cod_territorial": "5606",
+      "cod_postal": 2710000,
+      "name_comuna": "SANTO DOMINGO",
+      "ciudad": "IPC",
+      "cod_sii": 5402
+    },
+    {
+      "cod_territorial": "5603",
+      "cod_postal": 2710000,
+      "name_comuna": "CARTAGENA",
+      "ciudad": "IPC",
+      "cod_sii": 5403
+    },
+    {
+      "cod_territorial": "5605",
+      "cod_postal": 2710000,
+      "name_comuna": "EL TABO",
+      "ciudad": "IPC",
+      "cod_sii": 5404
+    },
+    {
+      "cod_territorial": "5604",
+      "cod_postal": 2710000,
+      "name_comuna": "EL QUISCO",
+      "ciudad": "IPC",
+      "cod_sii": 5405
+    },
+    {
+      "cod_territorial": "5602",
+      "cod_postal": 2710000,
+      "name_comuna": "ALGARROBO",
+      "ciudad": "IPC",
+      "cod_sii": 5406
+    },
+    {
+      "cod_territorial": "5501",
+      "cod_postal": 2430000,
+      "name_comuna": "QUILLOTA",
+      "ciudad": "IPC",
+      "cod_sii": 5501
+    },
+    {
+      "cod_territorial": "5506",
+      "cod_postal": 2290000,
+      "name_comuna": "NOGALES",
+      "ciudad": "IPC",
+      "cod_sii": 5502
+    },
+    {
+      "cod_territorial": "5503",
+      "cod_postal": 2290000,
+      "name_comuna": "HIJUELAS",
+      "ciudad": "IPC",
+      "cod_sii": 5503
+    },
+    {
+      "cod_territorial": "5502",
+      "cod_postal": 2290000,
+      "name_comuna": "LA CALERA",
+      "ciudad": "IPC",
+      "cod_sii": 5504
+    },
+    {
+      "cod_territorial": "5504",
+      "cod_postal": 2290000,
+      "name_comuna": "LA CRUZ",
+      "ciudad": "IPC",
+      "cod_sii": 5505
+    },
+    {
+      "cod_territorial": "5802",
+      "cod_postal": 2440000,
+      "name_comuna": "LIMACHE",
+      "ciudad": "IPC",
+      "cod_sii": 5506
+    },
+    {
+      "cod_territorial": "5803",
+      "cod_postal": 2430000,
+      "name_comuna": "OLMUE",
+      "ciudad": "IPC",
+      "cod_sii": 5507
+    },
+    {
+      "cod_territorial": "5701",
+      "cod_postal": 2170000,
+      "name_comuna": "SAN FELIPE",
+      "ciudad": "IPC",
+      "cod_sii": 5601
+    },
+    {
+      "cod_territorial": "5704",
+      "cod_postal": 2170000,
+      "name_comuna": "PANQUEHUE",
+      "ciudad": "IPC",
+      "cod_sii": 5602
+    },
+    {
+      "cod_territorial": "5702",
+      "cod_postal": 2170000,
+      "name_comuna": "CATEMU",
+      "ciudad": "IPC",
+      "cod_sii": 5603
+    },
+    {
+      "cod_territorial": "5705",
+      "cod_postal": 2170000,
+      "name_comuna": "PUTAENDO",
+      "ciudad": "IPC",
+      "cod_sii": 5604
+    },
+    {
+      "cod_territorial": "5706",
+      "cod_postal": 2170000,
+      "name_comuna": "SANTA MARIA",
+      "ciudad": "IPC",
+      "cod_sii": 5605
+    },
+    {
+      "cod_territorial": "5703",
+      "cod_postal": 2170000,
+      "name_comuna": "LLAY-LLAY",
+      "ciudad": "IPC",
+      "cod_sii": 5606
+    },
+    {
+      "cod_territorial": "5301",
+      "cod_postal": 2100000,
+      "name_comuna": "LOS ANDES",
+      "ciudad": "IPC",
+      "cod_sii": 5701
+    },
+    {
+      "cod_territorial": "5302",
+      "cod_postal": 2100000,
+      "name_comuna": "CALLE LARGA",
+      "ciudad": "IPC",
+      "cod_sii": 5702
+    },
+    {
+      "cod_territorial": "5304",
+      "cod_postal": 2100000,
+      "name_comuna": "SAN ESTEBAN",
+      "ciudad": "IPC",
+      "cod_sii": 5703
+    },
+    {
+      "cod_territorial": "5303",
+      "cod_postal": 2100000,
+      "name_comuna": "RINCONADA",
+      "ciudad": "IPC",
+      "cod_sii": 5704
+    },
+    {
+      "cod_territorial": "6101",
+      "cod_postal": 2820000,
+      "name_comuna": "RANCAGUA",
+      "ciudad": "QRC",
+      "cod_sii": 6101
+    },
+    {
+      "cod_territorial": "6108",
+      "cod_postal": 2820000,
+      "name_comuna": "MACHALI",
+      "ciudad": "QRC",
+      "cod_sii": 6102
+    },
+    {
+      "cod_territorial": "6106",
+      "cod_postal": 2820000,
+      "name_comuna": "GRANEROS",
+      "ciudad": "QRC",
+      "cod_sii": 6103
+    },
+    {
+      "cod_territorial": "6110",
+      "cod_postal": 2820000,
+      "name_comuna": "SAN FRANCISCO DE MOSTAZAL",
+      "ciudad": "QRC",
+      "cod_sii": 6104
+    },
+    {
+      "cod_territorial": "6105",
+      "cod_postal": 2820000,
+      "name_comuna": "DONIHUE",
+      "ciudad": "QRC",
+      "cod_sii": 6105
+    },
+    {
+      "cod_territorial": "6104",
+      "cod_postal": 2820000,
+      "name_comuna": "COLTAUCO",
+      "ciudad": "QRC",
+      "cod_sii": 6106
+    },
+    {
+      "cod_territorial": "6102",
+      "cod_postal": 2820000,
+      "name_comuna": "CODEGUA",
+      "ciudad": "QRC",
+      "cod_sii": 6107
+    },
+    {
+      "cod_territorial": "6112",
+      "cod_postal": 2820000,
+      "name_comuna": "PEUMO",
+      "ciudad": "QRC",
+      "cod_sii": 6108
+    },
+    {
+      "cod_territorial": "6107",
+      "cod_postal": 2820000,
+      "name_comuna": "LAS CABRAS",
+      "ciudad": "QRC",
+      "cod_sii": 6109
+    },
+    {
+      "cod_territorial": "6117",
+      "cod_postal": 2820000,
+      "name_comuna": "SAN VICENTE",
+      "ciudad": "QRC",
+      "cod_sii": 6110
+    },
+    {
+      "cod_territorial": "6113",
+      "cod_postal": 2820000,
+      "name_comuna": "PICHIDEGUA",
+      "ciudad": "QRC",
+      "cod_sii": 6111
+    },
+    {
+      "cod_territorial": "6115",
+      "cod_postal": 2820000,
+      "name_comuna": "RENGO",
+      "ciudad": "QRC",
+      "cod_sii": 6112
+    },
+    {
+      "cod_territorial": "6116",
+      "cod_postal": 2820000,
+      "name_comuna": "REQUINOA",
+      "ciudad": "QRC",
+      "cod_sii": 6113
+    },
+    {
+      "cod_territorial": "6111",
+      "cod_postal": 2820000,
+      "name_comuna": "OLIVAR",
+      "ciudad": "QRC",
+      "cod_sii": 6114
+    },
+    {
+      "cod_territorial": "6109",
+      "cod_postal": 2820000,
+      "name_comuna": "MALLOA",
+      "ciudad": "QRC",
+      "cod_sii": 6115
+    },
+    {
+      "cod_territorial": "6103",
+      "cod_postal": 2820000,
+      "name_comuna": "COINCO",
+      "ciudad": "QRC",
+      "cod_sii": 6116
+    },
+    {
+      "cod_territorial": "6114",
+      "cod_postal": 2820000,
+      "name_comuna": "QUINTA DE TILCOCO",
+      "ciudad": "QRC",
+      "cod_sii": 6117
+    },
+    {
+      "cod_territorial": "6301",
+      "cod_postal": 3070000,
+      "name_comuna": "SAN FERNANDO",
+      "ciudad": "QRC",
+      "cod_sii": 6201
+    },
+    {
+      "cod_territorial": "6303",
+      "cod_postal": 3070000,
+      "name_comuna": "CHIMBARONGO",
+      "ciudad": "QRC",
+      "cod_sii": 6202
+    },
+    {
+      "cod_territorial": "6305",
+      "cod_postal": 3070000,
+      "name_comuna": "NANCAGUA",
+      "ciudad": "QRC",
+      "cod_sii": 6203
+    },
+    {
+      "cod_territorial": "6308",
+      "cod_postal": 3070000,
+      "name_comuna": "PLACILLA",
+      "ciudad": "QRC",
+      "cod_sii": 6204
+    },
+    {
+      "cod_territorial": "6310",
+      "cod_postal": 3130000,
+      "name_comuna": "SANTA CRUZ",
+      "ciudad": "QRC",
+      "cod_sii": 6205
+    },
+    {
+      "cod_territorial": "6304",
+      "cod_postal": 3070000,
+      "name_comuna": "LOLOL",
+      "ciudad": "QRC",
+      "cod_sii": 6206
+    },
+    {
+      "cod_territorial": "6306",
+      "cod_postal": 3070000,
+      "name_comuna": "PALMILLA",
+      "ciudad": "QRC",
+      "cod_sii": 6207
+    },
+    {
+      "cod_territorial": "6307",
+      "cod_postal": 3070000,
+      "name_comuna": "PERALILLO",
+      "ciudad": "QRC",
+      "cod_sii": 6208
+    },
+    {
+      "cod_territorial": "6302",
+      "cod_postal": 3070000,
+      "name_comuna": "CHEPICA",
+      "ciudad": "QRC",
+      "cod_sii": 6209
+    },
+    {
+      "cod_territorial": "6309",
+      "cod_postal": 3070000,
+      "name_comuna": "PUMANQUE",
+      "ciudad": "QRC",
+      "cod_sii": 6214
+    },
+    {
+      "cod_territorial": "6201",
+      "cod_postal": 3220000,
+      "name_comuna": "PICHILEMU",
+      "ciudad": "QRC",
+      "cod_sii": 6301
+    },
+    {
+      "cod_territorial": "6205",
+      "cod_postal": 3220000,
+      "name_comuna": "NAVIDAD",
+      "ciudad": "QRC",
+      "cod_sii": 6302
+    },
+    {
+      "cod_territorial": "6203",
+      "cod_postal": 3220000,
+      "name_comuna": "LITUECHE",
+      "ciudad": "QRC",
+      "cod_sii": 6303
+    },
+    {
+      "cod_territorial": "6202",
+      "cod_postal": 3220000,
+      "name_comuna": "LA ESTRELLA",
+      "ciudad": "QRC",
+      "cod_sii": 6304
+    },
+    {
+      "cod_territorial": "6204",
+      "cod_postal": 3220000,
+      "name_comuna": "MARCHIGUE",
+      "ciudad": "QRC",
+      "cod_sii": 6305
+    },
+    {
+      "cod_territorial": "6206",
+      "cod_postal": 3220000,
+      "name_comuna": "PAREDONES",
+      "ciudad": "QRC",
+      "cod_sii": 6306
+    },
+    {
+      "cod_territorial": "7301",
+      "cod_postal": 3340000,
+      "name_comuna": "CURICO",
+      "ciudad": "ZLR",
+      "cod_sii": 7101
+    },
+    {
+      "cod_territorial": "7308",
+      "cod_postal": 3370000,
+      "name_comuna": "TENO",
+      "ciudad": "ZLR",
+      "cod_sii": 7102
+    },
+    {
+      "cod_territorial": "7306",
+      "cod_postal": 3380000,
+      "name_comuna": "ROMERAL",
+      "ciudad": "ZLR",
+      "cod_sii": 7103
+    },
+    {
+      "cod_territorial": "7305",
+      "cod_postal": 3340000,
+      "name_comuna": "RAUCO",
+      "ciudad": "ZLR",
+      "cod_sii": 7104
+    },
+    {
+      "cod_territorial": "7303",
+      "cod_postal": 3340000,
+      "name_comuna": "LICANTEN",
+      "ciudad": "ZLR",
+      "cod_sii": 7105
+    },
+    {
+      "cod_territorial": "7309",
+      "cod_postal": 3370000,
+      "name_comuna": "VICHUQUEN",
+      "ciudad": "ZLR",
+      "cod_sii": 7106
+    },
+    {
+      "cod_territorial": "7302",
+      "cod_postal": 3340000,
+      "name_comuna": "HUALANE",
+      "ciudad": "ZLR",
+      "cod_sii": 7107
+    },
+    {
+      "cod_territorial": "7304",
+      "cod_postal": 3370000,
+      "name_comuna": "MOLINA",
+      "ciudad": "ZLR",
+      "cod_sii": 7108
+    },
+    {
+      "cod_territorial": "7307",
+      "cod_postal": 3380000,
+      "name_comuna": "SAGRADA FAMILIA",
+      "ciudad": "ZLR",
+      "cod_sii": 7109
+    },
+    {
+      "cod_territorial": "7101",
+      "cod_postal": 3460000,
+      "name_comuna": "TALCA",
+      "ciudad": "ZLR",
+      "cod_sii": 7201
+    },
+    {
+      "cod_territorial": "7109",
+      "cod_postal": 3460000,
+      "name_comuna": "SAN CLEMENTE",
+      "ciudad": "ZLR",
+      "cod_sii": 7202
+    },
+    {
+      "cod_territorial": "7106",
+      "cod_postal": 3460000,
+      "name_comuna": "PELARCO",
+      "ciudad": "ZLR",
+      "cod_sii": 7203
+    },
+    {
+      "cod_territorial": "7108",
+      "cod_postal": 3460000,
+      "name_comuna": "RIO CLARO",
+      "ciudad": "ZLR",
+      "cod_sii": 7204
+    },
+    {
+      "cod_territorial": "7107",
+      "cod_postal": 3460000,
+      "name_comuna": "PENCAHUE",
+      "ciudad": "ZLR",
+      "cod_sii": 7205
+    },
+    {
+      "cod_territorial": "7105",
+      "cod_postal": 3460000,
+      "name_comuna": "MAULE",
+      "ciudad": "ZLR",
+      "cod_sii": 7206
+    },
+    {
+      "cod_territorial": "7103",
+      "cod_postal": 3470000,
+      "name_comuna": "CUREPTO",
+      "ciudad": "ZLR",
+      "cod_sii": 7207
+    },
+    {
+      "cod_territorial": "7102",
+      "cod_postal": 3420000,
+      "name_comuna": "CONSTITUCION",
+      "ciudad": "ZLR",
+      "cod_sii": 7208
+    },
+    {
+      "cod_territorial": "7104",
+      "cod_postal": 3460000,
+      "name_comuna": "EMPEDRADO",
+      "ciudad": "ZLR",
+      "cod_sii": 7209
+    },
+    {
+      "cod_territorial": "7110",
+      "cod_postal": 3460000,
+      "name_comuna": "SAN RAFAEL",
+      "ciudad": "ZLR",
+      "cod_sii": 7210
+    },
+    {
+      "cod_territorial": "7401",
+      "cod_postal": 3580000,
+      "name_comuna": "LINARES",
+      "ciudad": "ZLR",
+      "cod_sii": 7301
+    },
+    {
+      "cod_territorial": "7408",
+      "cod_postal": 3580000,
+      "name_comuna": "YERBAS BUENAS",
+      "ciudad": "ZLR",
+      "cod_sii": 7302
+    },
+    {
+      "cod_territorial": "7402",
+      "cod_postal": 3580000,
+      "name_comuna": "COLBUN",
+      "ciudad": "ZLR",
+      "cod_sii": 7303
+    },
+    {
+      "cod_territorial": "7403",
+      "cod_postal": 3580000,
+      "name_comuna": "LONGAVI",
+      "ciudad": "ZLR",
+      "cod_sii": 7304
+    },
+    {
+      "cod_territorial": "7404",
+      "cod_postal": 3630000,
+      "name_comuna": "PARRAL",
+      "ciudad": "ZLR",
+      "cod_sii": 7305
+    },
+    {
+      "cod_territorial": "7405",
+      "cod_postal": 3580000,
+      "name_comuna": "RETIRO",
+      "ciudad": "ZLR",
+      "cod_sii": 7306
+    },
+    {
+      "cod_territorial": "7407",
+      "cod_postal": 3580000,
+      "name_comuna": "VILLA ALEGRE",
+      "ciudad": "ZLR",
+      "cod_sii": 7309
+    },
+    {
+      "cod_territorial": "7406",
+      "cod_postal": 3580000,
+      "name_comuna": "SAN JAVIER",
+      "ciudad": "ZLR",
+      "cod_sii": 7310
+    },
+    {
+      "cod_territorial": "7201",
+      "cod_postal": 3540000,
+      "name_comuna": "CAUQUENES",
+      "ciudad": "ZLR",
+      "cod_sii": 7401
+    },
+    {
+      "cod_territorial": "7203",
+      "cod_postal": 3540000,
+      "name_comuna": "PELLUHUE",
+      "ciudad": "ZLR",
+      "cod_sii": 7402
+    },
+    {
+      "cod_territorial": "7202",
+      "cod_postal": 3540000,
+      "name_comuna": "CHANCO",
+      "ciudad": "ZLR",
+      "cod_sii": 7403
+    },
+    {
+      "cod_territorial": "16101",
+      "cod_postal": 3780000,
+      "name_comuna": "CHILLAN",
+      "ciudad": "YAI",
+      "cod_sii": 8101
+    },
+    {
+      "cod_territorial": "16106",
+      "cod_postal": 3920000,
+      "name_comuna": "PINTO",
+      "ciudad": "YAI",
+      "cod_sii": 8102
+    },
+    {
+      "cod_territorial": "16302",
+      "cod_postal": 3780000,
+      "name_comuna": "COIHUECO",
+      "ciudad": "YAI",
+      "cod_sii": 8103
+    },
+    {
+      "cod_territorial": "16201",
+      "cod_postal": 3970000,
+      "name_comuna": "QUIRIHUE",
+      "ciudad": "YAI",
+      "cod_sii": 8104
+    },
+    {
+      "cod_territorial": "16204",
+      "cod_postal": 3970000,
+      "name_comuna": "NINHUE",
+      "ciudad": "YAI",
+      "cod_sii": 8105
+    },
+    {
+      "cod_territorial": "16205",
+      "cod_postal": 3970000,
+      "name_comuna": "PORTEZUELO",
+      "ciudad": "YAI",
+      "cod_sii": 8106
+    },
+    {
+      "cod_territorial": "16202",
+      "cod_postal": 3970000,
+      "name_comuna": "COBQUECURA",
+      "ciudad": "YAI",
+      "cod_sii": 8107
+    },
+    {
+      "cod_territorial": "16207",
+      "cod_postal": 3970000,
+      "name_comuna": "TREHUACO",
+      "ciudad": "YAI",
+      "cod_sii": 8108
+    },
+    {
+      "cod_territorial": "16301",
+      "cod_postal": 3780000,
+      "name_comuna": "SAN CARLOS",
+      "ciudad": "YAI",
+      "cod_sii": 8109
+    },
+    {
+      "cod_territorial": "16303",
+      "cod_postal": 3780000,
+      "name_comuna": "NIQUEN",
+      "ciudad": "YAI",
+      "cod_sii": 8110
+    },
+    {
+      "cod_territorial": "16304",
+      "cod_postal": 3780000,
+      "name_comuna": "SAN FABIAN",
+      "ciudad": "YAI",
+      "cod_sii": 8111
+    },
+    {
+      "cod_territorial": "16305",
+      "cod_postal": 3780000,
+      "name_comuna": "SAN NICOLAS",
+      "ciudad": "YAI",
+      "cod_sii": 8112
+    },
+    {
+      "cod_territorial": "16102",
+      "cod_postal": 3910000,
+      "name_comuna": "BULNES",
+      "ciudad": "YAI",
+      "cod_sii": 8113
+    },
+    {
+      "cod_territorial": "16108",
+      "cod_postal": 3920000,
+      "name_comuna": "SAN IGNACIO",
+      "ciudad": "YAI",
+      "cod_sii": 8114
+    },
+    {
+      "cod_territorial": "16107",
+      "cod_postal": 3920000,
+      "name_comuna": "QUILLON",
+      "ciudad": "YAI",
+      "cod_sii": 8115
+    },
+    {
+      "cod_territorial": "16109",
+      "cod_postal": 3980000,
+      "name_comuna": "YUNGAY",
+      "ciudad": "YAI",
+      "cod_sii": 8116
+    },
+    {
+      "cod_territorial": "16105",
+      "cod_postal": 3910000,
+      "name_comuna": "PEMUCO",
+      "ciudad": "YAI",
+      "cod_sii": 8117
+    },
+    {
+      "cod_territorial": "16104",
+      "cod_postal": 3940000,
+      "name_comuna": "EL CARMEN",
+      "ciudad": "YAI",
+      "cod_sii": 8118
+    },
+    {
+      "cod_territorial": "16206",
+      "cod_postal": 3970000,
+      "name_comuna": "RANQUIL",
+      "ciudad": "YAI",
+      "cod_sii": 8119
+    },
+    {
+      "cod_territorial": "16203",
+      "cod_postal": 3970000,
+      "name_comuna": "COELEMU",
+      "ciudad": "YAI",
+      "cod_sii": 8120
+    },
+    {
+      "cod_territorial": "16103",
+      "cod_postal": 3950000,
+      "name_comuna": "CHILLAN VIEJO",
+      "ciudad": "YAI",
+      "cod_sii": 8121
+    },
+    {
+      "cod_territorial": "8101",
+      "cod_postal": 4030000,
+      "name_comuna": "CONCEPCION",
+      "ciudad": "CCP",
+      "cod_sii": 8201
+    },
+    {
+      "cod_territorial": "8107",
+      "cod_postal": 4090000,
+      "name_comuna": "PENCO",
+      "ciudad": "CCP",
+      "cod_sii": 8202
+    },
+    {
+      "cod_territorial": "8105",
+      "cod_postal": 4140000,
+      "name_comuna": "HUALQUI",
+      "ciudad": "CCP",
+      "cod_sii": 8203
+    },
+    {
+      "cod_territorial": "8104",
+      "cod_postal": 4060000,
+      "name_comuna": "FLORIDA",
+      "ciudad": "CCP",
+      "cod_sii": 8204
+    },
+    {
+      "cod_territorial": "8111",
+      "cod_postal": 4180000,
+      "name_comuna": "TOME",
+      "ciudad": "CCP",
+      "cod_sii": 8205
+    },
+    {
+      "cod_territorial": "8110",
+      "cod_postal": 4260000,
+      "name_comuna": "TALCAHUANO",
+      "ciudad": "CCP",
+      "cod_sii": 8206
+    },
+    {
+      "cod_territorial": "8102",
+      "cod_postal": 4190000,
+      "name_comuna": "CORONEL",
+      "ciudad": "CCP",
+      "cod_sii": 8207
+    },
+    {
+      "cod_territorial": "8106",
+      "cod_postal": 4030000,
+      "name_comuna": "LOTA",
+      "ciudad": "CCP",
+      "cod_sii": 8208
+    },
+    {
+      "cod_territorial": "8109",
+      "cod_postal": 4030000,
+      "name_comuna": "SANTA JUANA",
+      "ciudad": "CCP",
+      "cod_sii": 8209
+    },
+    {
+      "cod_territorial": "8108",
+      "cod_postal": 4130000,
+      "name_comuna": "SAN PEDRO DE LA PAZ",
+      "ciudad": "CCP",
+      "cod_sii": 8210
+    },
+    {
+      "cod_territorial": "8103",
+      "cod_postal": 4030000,
+      "name_comuna": "CHIGUAYANTE",
+      "ciudad": "CCP",
+      "cod_sii": 8211
+    },
+    {
+      "cod_territorial": "8112",
+      "cod_postal": 4650000,
+      "name_comuna": "HUALPEN",
+      "ciudad": "CCP",
+      "cod_sii": 8212
+    },
+    {
+      "cod_territorial": "8202",
+      "cod_postal": 4330000,
+      "name_comuna": "ARAUCO",
+      "ciudad": "CCP",
+      "cod_sii": 8301
+    },
+    {
+      "cod_territorial": "8205",
+      "cod_postal": 4360000,
+      "name_comuna": "CURANILAHUE",
+      "ciudad": "CCP",
+      "cod_sii": 8302
+    },
+    {
+      "cod_territorial": "8201",
+      "cod_postal": 4260000,
+      "name_comuna": "LEBU",
+      "ciudad": "CCP",
+      "cod_sii": 8303
+    },
+    {
+      "cod_territorial": "8206",
+      "cod_postal": 4350000,
+      "name_comuna": "LOS ALAMOS",
+      "ciudad": "CCP",
+      "cod_sii": 8304
+    },
+    {
+      "cod_territorial": "8203",
+      "cod_postal": 4380000,
+      "name_comuna": "CANETE",
+      "ciudad": "CCP",
+      "cod_sii": 8305
+    },
+    {
+      "cod_territorial": "8204",
+      "cod_postal": 4330000,
+      "name_comuna": "CONTULMO",
+      "ciudad": "CCP",
+      "cod_sii": 8306
+    },
+    {
+      "cod_territorial": "8207",
+      "cod_postal": 4370000,
+      "name_comuna": "TIRUA",
+      "ciudad": "CCP",
+      "cod_sii": 8307
+    },
+    {
+      "cod_territorial": "8301",
+      "cod_postal": 4440000,
+      "name_comuna": "LOS ANGELES",
+      "ciudad": "CCP",
+      "cod_sii": 8401
+    },
+    {
+      "cod_territorial": "8311",
+      "cod_postal": 4630000,
+      "name_comuna": "SANTA BARBARA",
+      "ciudad": "CCP",
+      "cod_sii": 8402
+    },
+    {
+      "cod_territorial": "8304",
+      "cod_postal": 4440000,
+      "name_comuna": "LAJA",
+      "ciudad": "CCP",
+      "cod_sii": 8403
+    },
+    {
+      "cod_territorial": "8309",
+      "cod_postal": 4630000,
+      "name_comuna": "QUILLECO",
+      "ciudad": "CCP",
+      "cod_sii": 8404
+    },
+    {
+      "cod_territorial": "8306",
+      "cod_postal": 4550000,
+      "name_comuna": "NACIMIENTO",
+      "ciudad": "CCP",
+      "cod_sii": 8405
+    },
+    {
+      "cod_territorial": "8307",
+      "cod_postal": 4600000,
+      "name_comuna": "NEGRETE",
+      "ciudad": "CCP",
+      "cod_sii": 8406
+    },
+    {
+      "cod_territorial": "8305",
+      "cod_postal": 4440000,
+      "name_comuna": "MULCHEN",
+      "ciudad": "CCP",
+      "cod_sii": 8407
+    },
+    {
+      "cod_territorial": "8308",
+      "cod_postal": 4630000,
+      "name_comuna": "QUILACO",
+      "ciudad": "CCP",
+      "cod_sii": 8408
+    },
+    {
+      "cod_territorial": "8313",
+      "cod_postal": 4610000,
+      "name_comuna": "YUMBEL",
+      "ciudad": "CCP",
+      "cod_sii": 8409
+    },
+    {
+      "cod_territorial": "8303",
+      "cod_postal": 4410000,
+      "name_comuna": "CABRERO",
+      "ciudad": "CCP",
+      "cod_sii": 8410
+    },
+    {
+      "cod_territorial": "8310",
+      "cod_postal": 4600000,
+      "name_comuna": "SAN ROSENDO",
+      "ciudad": "CCP",
+      "cod_sii": 8411
+    },
+    {
+      "cod_territorial": "8312",
+      "cod_postal": 4630000,
+      "name_comuna": "TUCAPEL",
+      "ciudad": "CCP",
+      "cod_sii": 8412
+    },
+    {
+      "cod_territorial": "8302",
+      "cod_postal": 4430000,
+      "name_comuna": "ANTUCO",
+      "ciudad": "CCP",
+      "cod_sii": 8413
+    },
+    {
+      "cod_territorial": "8314",
+      "cod_postal": 4640000,
+      "name_comuna": "ALTO BIOBIO",
+      "ciudad": "CCP",
+      "cod_sii": 8414
+    },
+    {
+      "cod_territorial": "9201",
+      "cod_postal": 4640000,
+      "name_comuna": "ANGOL",
+      "ciudad": "ZCO",
+      "cod_sii": 9101
+    },
+    {
+      "cod_territorial": "9208",
+      "cod_postal": 4720000,
+      "name_comuna": "PUREN",
+      "ciudad": "ZCO",
+      "cod_sii": 9102
+    },
+    {
+      "cod_territorial": "9206",
+      "cod_postal": 4690000,
+      "name_comuna": "LOS SAUCES",
+      "ciudad": "ZCO",
+      "cod_sii": 9103
+    },
+    {
+      "cod_territorial": "9209",
+      "cod_postal": 4680000,
+      "name_comuna": "RENAICO",
+      "ciudad": "ZCO",
+      "cod_sii": 9104
+    },
+    {
+      "cod_territorial": "9202",
+      "cod_postal": 4680000,
+      "name_comuna": "COLLIPULLI",
+      "ciudad": "ZCO",
+      "cod_sii": 9105
+    },
+    {
+      "cod_territorial": "9204",
+      "cod_postal": 4680000,
+      "name_comuna": "ERCILLA",
+      "ciudad": "ZCO",
+      "cod_sii": 9106
+    },
+    {
+      "cod_territorial": "9210",
+      "cod_postal": 4740000,
+      "name_comuna": "TRAIGUEN",
+      "ciudad": "ZCO",
+      "cod_sii": 9107
+    },
+    {
+      "cod_territorial": "9207",
+      "cod_postal": 4710000,
+      "name_comuna": "LUMACO",
+      "ciudad": "ZCO",
+      "cod_sii": 9108
+    },
+    {
+      "cod_territorial": "9211",
+      "cod_postal": 4730000,
+      "name_comuna": "VICTORIA",
+      "ciudad": "ZCO",
+      "cod_sii": 9109
+    },
+    {
+      "cod_territorial": "9203",
+      "cod_postal": 4690000,
+      "name_comuna": "CURACAUTIN",
+      "ciudad": "ZCO",
+      "cod_sii": 9110
+    },
+    {
+      "cod_territorial": "9205",
+      "cod_postal": 4690000,
+      "name_comuna": "LONQUIMAY",
+      "ciudad": "ZCO",
+      "cod_sii": 9111
+    },
+    {
+      "cod_territorial": "9101",
+      "cod_postal": 4780000,
+      "name_comuna": "TEMUCO",
+      "ciudad": "ZCO",
+      "cod_sii": 9201
+    },
+    {
+      "cod_territorial": "9119",
+      "cod_postal": 4700000,
+      "name_comuna": "VILCUN",
+      "ciudad": "ZCO",
+      "cod_sii": 9202
+    },
+    {
+      "cod_territorial": "9105",
+      "cod_postal": 4700000,
+      "name_comuna": "FREIRE",
+      "ciudad": "ZCO",
+      "cod_sii": 9203
+    },
+    {
+      "cod_territorial": "9103",
+      "cod_postal": 4760000,
+      "name_comuna": "CUNCO",
+      "ciudad": "ZCO",
+      "cod_sii": 9204
+    },
+    {
+      "cod_territorial": "9108",
+      "cod_postal": 4770000,
+      "name_comuna": "LAUTARO",
+      "ciudad": "ZCO",
+      "cod_sii": 9205
+    },
+    {
+      "cod_territorial": "9113",
+      "cod_postal": 4810000,
+      "name_comuna": "PERQUENCO",
+      "ciudad": "ZCO",
+      "cod_sii": 9206
+    },
+    {
+      "cod_territorial": "9106",
+      "cod_postal": 4800000,
+      "name_comuna": "GALVARINO",
+      "ciudad": "ZCO",
+      "cod_sii": 9207
+    },
+    {
+      "cod_territorial": "9111",
+      "cod_postal": 4850000,
+      "name_comuna": "NUEVA IMPERIAL",
+      "ciudad": "ZCO",
+      "cod_sii": 9208
+    },
+    {
+      "cod_territorial": "9102",
+      "cod_postal": 4790000,
+      "name_comuna": "CARAHUE",
+      "ciudad": "ZCO",
+      "cod_sii": 9209
+    },
+    {
+      "cod_territorial": "9116",
+      "cod_postal": 4860000,
+      "name_comuna": "SAAVEDRA",
+      "ciudad": "ZCO",
+      "cod_sii": 9210
+    },
+    {
+      "cod_territorial": "9114",
+      "cod_postal": 4820000,
+      "name_comuna": "PITRUFQUEN",
+      "ciudad": "ZCO",
+      "cod_sii": 9211
+    },
+    {
+      "cod_territorial": "9107",
+      "cod_postal": 4790000,
+      "name_comuna": "GORBEA",
+      "ciudad": "ZCO",
+      "cod_sii": 9212
+    },
+    {
+      "cod_territorial": "9118",
+      "cod_postal": 4880000,
+      "name_comuna": "TOLTEN",
+      "ciudad": "ZCO",
+      "cod_sii": 9213
+    },
+    {
+      "cod_territorial": "9109",
+      "cod_postal": 4840000,
+      "name_comuna": "LONCOCHE",
+      "ciudad": "ZCO",
+      "cod_sii": 9214
+    },
+    {
+      "cod_territorial": "9120",
+      "cod_postal": 4930000,
+      "name_comuna": "VILLARRICA",
+      "ciudad": "ZCO",
+      "cod_sii": 9215
+    },
+    {
+      "cod_territorial": "9115",
+      "cod_postal": 4920000,
+      "name_comuna": "PUCON",
+      "ciudad": "ZCO",
+      "cod_sii": 9216
+    },
+    {
+      "cod_territorial": "9110",
+      "cod_postal": 4790000,
+      "name_comuna": "MELIPEUCO",
+      "ciudad": "ZCO",
+      "cod_sii": 9217
+    },
+    {
+      "cod_territorial": "9104",
+      "cod_postal": 4790000,
+      "name_comuna": "CURARREHUE",
+      "ciudad": "ZCO",
+      "cod_sii": 9218
+    },
+    {
+      "cod_territorial": "9117",
+      "cod_postal": 4860000,
+      "name_comuna": "TEODORO SCHMIDT",
+      "ciudad": "ZCO",
+      "cod_sii": 9219
+    },
+    {
+      "cod_territorial": "9112",
+      "cod_postal": 4780000,
+      "name_comuna": "PADRE LAS CASAS",
+      "ciudad": "ZCO",
+      "cod_sii": 9220
+    },
+    {
+      "cod_territorial": "9121",
+      "cod_postal": 4860000,
+      "name_comuna": "CHOLCHOL",
+      "ciudad": "ZCO",
+      "cod_sii": 9221
+    },
+    {
+      "cod_territorial": "14101",
+      "cod_postal": 5090000,
+      "name_comuna": "VALDIVIA",
+      "ciudad": "ZAL",
+      "cod_sii": 10101
+    },
+    {
+      "cod_territorial": "14106",
+      "cod_postal": 5130000,
+      "name_comuna": "MARIQUINA",
+      "ciudad": "ZAL",
+      "cod_sii": 10102
+    },
+    {
+      "cod_territorial": "14103",
+      "cod_postal": 5140000,
+      "name_comuna": "LANCO",
+      "ciudad": "ZAL",
+      "cod_sii": 10103
+    },
+    {
+      "cod_territorial": "14104",
+      "cod_postal": 5150000,
+      "name_comuna": "LOS LAGOS",
+      "ciudad": "ZAL",
+      "cod_sii": 10104
+    },
+    {
+      "cod_territorial": "14202",
+      "cod_postal": 5180000,
+      "name_comuna": "FUTRONO",
+      "ciudad": "ZAL",
+      "cod_sii": 10105
+    },
+    {
+      "cod_territorial": "14102",
+      "cod_postal": 5120000,
+      "name_comuna": "CORRAL",
+      "ciudad": "ZAL",
+      "cod_sii": 10106
+    },
+    {
+      "cod_territorial": "14105",
+      "cod_postal": 5110000,
+      "name_comuna": "MAFIL",
+      "ciudad": "ZAL",
+      "cod_sii": 10107
+    },
+    {
+      "cod_territorial": "14108",
+      "cod_postal": 5210000,
+      "name_comuna": "PANGUIPULLI",
+      "ciudad": "ZAL",
+      "cod_sii": 10108
+    },
+    {
+      "cod_territorial": "14201",
+      "cod_postal": 5110000,
+      "name_comuna": "LA UNION",
+      "ciudad": "ZAL",
+      "cod_sii": 10109
+    },
+    {
+      "cod_territorial": "14107",
+      "cod_postal": 5180000,
+      "name_comuna": "PAILLACO",
+      "ciudad": "ZAL",
+      "cod_sii": 10110
+    },
+    {
+      "cod_territorial": "14204",
+      "cod_postal": 5260000,
+      "name_comuna": "RIO BUENO",
+      "ciudad": "ZAL",
+      "cod_sii": 10111
+    },
+    {
+      "cod_territorial": "14203",
+      "cod_postal": 5250000,
+      "name_comuna": "LAGO RANCO",
+      "ciudad": "ZAL",
+      "cod_sii": 10112
+    },
+    {
+      "cod_territorial": "10301",
+      "cod_postal": 5290000,
+      "name_comuna": "OSORNO",
+      "ciudad": "MHC",
+      "cod_sii": 10201
+    },
+    {
+      "cod_territorial": "10307",
+      "cod_postal": 5310000,
+      "name_comuna": "SAN PABLO",
+      "ciudad": "MHC",
+      "cod_sii": 10202
+    },
+    {
+      "cod_territorial": "10302",
+      "cod_postal": 5330000,
+      "name_comuna": "PUERTO OCTAY",
+      "ciudad": "MHC",
+      "cod_sii": 10203
+    },
+    {
+      "cod_territorial": "10304",
+      "cod_postal": 5310000,
+      "name_comuna": "PUYEHUE",
+      "ciudad": "MHC",
+      "cod_sii": 10204
+    },
+    {
+      "cod_territorial": "10305",
+      "cod_postal": 5300000,
+      "name_comuna": "RIO NEGRO",
+      "ciudad": "MHC",
+      "cod_sii": 10205
+    },
+    {
+      "cod_territorial": "10303",
+      "cod_postal": 5320000,
+      "name_comuna": "PURRANQUE",
+      "ciudad": "MHC",
+      "cod_sii": 10206
+    },
+    {
+      "cod_territorial": "10306",
+      "cod_postal": 5300000,
+      "name_comuna": "SAN JUAN DE LA COSTA",
+      "ciudad": "MHC",
+      "cod_sii": 10207
+    },
+    {
+      "cod_territorial": "10101",
+      "cod_postal": 5480000,
+      "name_comuna": "PUERTO MONTT",
+      "ciudad": "MHC",
+      "cod_sii": 10301
+    },
+    {
+      "cod_territorial": "10103",
+      "cod_postal": 5640000,
+      "name_comuna": "COCHAMO",
+      "ciudad": "MHC",
+      "cod_sii": 10302
+    },
+    {
+      "cod_territorial": "10109",
+      "cod_postal": 5550000,
+      "name_comuna": "PUERTO VARAS",
+      "ciudad": "MHC",
+      "cod_sii": 10303
+    },
+    {
+      "cod_territorial": "10104",
+      "cod_postal": 5620000,
+      "name_comuna": "FRESIA",
+      "ciudad": "MHC",
+      "cod_sii": 10304
+    },
+    {
+      "cod_territorial": "10105",
+      "cod_postal": 5610000,
+      "name_comuna": "FRUTILLAR",
+      "ciudad": "MHC",
+      "cod_sii": 10305
+    },
+    {
+      "cod_territorial": "10107",
+      "cod_postal": 5620000,
+      "name_comuna": "LLANQUIHUE",
+      "ciudad": "MHC",
+      "cod_sii": 10306
+    },
+    {
+      "cod_territorial": "10108",
+      "cod_postal": 5660000,
+      "name_comuna": "MAULLIN",
+      "ciudad": "MHC",
+      "cod_sii": 10307
+    },
+    {
+      "cod_territorial": "10106",
+      "cod_postal": 5480000,
+      "name_comuna": "LOS MUERMOS",
+      "ciudad": "MHC",
+      "cod_sii": 10308
+    },
+    {
+      "cod_territorial": "10102",
+      "cod_postal": 5660000,
+      "name_comuna": "CALBUCO",
+      "ciudad": "MHC",
+      "cod_sii": 10309
+    },
+    {
+      "cod_territorial": "10201",
+      "cod_postal": 5700000,
+      "name_comuna": "CASTRO",
+      "ciudad": "MHC",
+      "cod_sii": 10401
+    },
+    {
+      "cod_territorial": "10203",
+      "cod_postal": 5730000,
+      "name_comuna": "CHONCHI",
+      "ciudad": "MHC",
+      "cod_sii": 10402
+    },
+    {
+      "cod_territorial": "10207",
+      "cod_postal": 5720000,
+      "name_comuna": "QUEILEN",
+      "ciudad": "MHC",
+      "cod_sii": 10403
+    },
+    {
+      "cod_territorial": "10208",
+      "cod_postal": 5770000,
+      "name_comuna": "QUELLON",
+      "ciudad": "MHC",
+      "cod_sii": 10404
+    },
+    {
+      "cod_territorial": "10206",
+      "cod_postal": 5730000,
+      "name_comuna": "PUQUELDON",
+      "ciudad": "MHC",
+      "cod_sii": 10405
+    },
+    {
+      "cod_territorial": "10202",
+      "cod_postal": 5710000,
+      "name_comuna": "ANCUD",
+      "ciudad": "MHC",
+      "cod_sii": 10406
+    },
+    {
+      "cod_territorial": "10209",
+      "cod_postal": 5770000,
+      "name_comuna": "QUEMCHI",
+      "ciudad": "MHC",
+      "cod_sii": 10407
+    },
+    {
+      "cod_territorial": "10205",
+      "cod_postal": 5760000,
+      "name_comuna": "DALCAHUE",
+      "ciudad": "MHC",
+      "cod_sii": 10408
+    },
+    {
+      "cod_territorial": "10204",
+      "cod_postal": 5730000,
+      "name_comuna": "CURACO DE VELEZ",
+      "ciudad": "MHC",
+      "cod_sii": 10410
+    },
+    {
+      "cod_territorial": "10210",
+      "cod_postal": 5770000,
+      "name_comuna": "QUINCHAO",
+      "ciudad": "MHC",
+      "cod_sii": 10415
+    },
+    {
+      "cod_territorial": "10401",
+      "cod_postal": 5950000,
+      "name_comuna": "CHAITEN",
+      "ciudad": "MHC",
+      "cod_sii": 10501
+    },
+    {
+      "cod_territorial": "10403",
+      "cod_postal": 5860000,
+      "name_comuna": "HUALAIHUE",
+      "ciudad": "MHC",
+      "cod_sii": 10502
+    },
+    {
+      "cod_territorial": "10402",
+      "cod_postal": 5950000,
+      "name_comuna": "FUTALEUFU",
+      "ciudad": "MHC",
+      "cod_sii": 10503
+    },
+    {
+      "cod_territorial": "10404",
+      "cod_postal": 5950000,
+      "name_comuna": "PALENA",
+      "ciudad": "MHC",
+      "cod_sii": 10504
+    },
+    {
+      "cod_territorial": "11201",
+      "cod_postal": 6000000,
+      "name_comuna": "AYSEN",
+      "ciudad": "BBA",
+      "cod_sii": 11101
+    },
+    {
+      "cod_territorial": "11202",
+      "cod_postal": 6050000,
+      "name_comuna": "CISNES",
+      "ciudad": "BBA",
+      "cod_sii": 11102
+    },
+    {
+      "cod_territorial": "11203",
+      "cod_postal": 6010000,
+      "name_comuna": "GUAITECAS",
+      "ciudad": "BBA",
+      "cod_sii": 11104
+    },
+    {
+      "cod_territorial": "11401",
+      "cod_postal": 6140000,
+      "name_comuna": "CHILE CHICO",
+      "ciudad": "BBA",
+      "cod_sii": 11201
+    },
+    {
+      "cod_territorial": "11402",
+      "cod_postal": 6150000,
+      "name_comuna": "RIO IBANEZ",
+      "ciudad": "BBA",
+      "cod_sii": 11203
+    },
+    {
+      "cod_territorial": "11301",
+      "cod_postal": 6150000,
+      "name_comuna": "COCHRANE",
+      "ciudad": "BBA",
+      "cod_sii": 11301
+    },
+    {
+      "cod_territorial": "11302",
+      "cod_postal": 6150000,
+      "name_comuna": "OHIGGINS",
+      "ciudad": "BBA",
+      "cod_sii": 11302
+    },
+    {
+      "cod_territorial": "11303",
+      "cod_postal": 6150000,
+      "name_comuna": "TORTEL",
+      "ciudad": "BBA",
+      "cod_sii": 11303
+    },
+    {
+      "cod_territorial": "11101",
+      "cod_postal": 5950000,
+      "name_comuna": "COYHAIQUE",
+      "ciudad": "BBA",
+      "cod_sii": 11401
+    },
+    {
+      "cod_territorial": "11102",
+      "cod_postal": 5950000,
+      "name_comuna": "LAGO VERDE",
+      "ciudad": "BBA",
+      "cod_sii": 11402
+    },
+    {
+      "cod_territorial": "12401",
+      "cod_postal": 6200000,
+      "name_comuna": "NATALES",
+      "ciudad": "PNT",
+      "cod_sii": 12101
+    },
+    {
+      "cod_territorial": "12402",
+      "cod_postal": 6170000,
+      "name_comuna": "TORRES DEL PAINE",
+      "ciudad": "PNT",
+      "cod_sii": 12103
+    },
+    {
+      "cod_territorial": "12103",
+      "cod_postal": 6360000,
+      "name_comuna": "RIO VERDE",
+      "ciudad": "PNT",
+      "cod_sii": 12202
+    },
+    {
+      "cod_territorial": "12202",
+      "cod_postal": 6380000,
+      "name_comuna": "RIO VERDE",
+      "ciudad": "PNT",
+      "cod_sii": 12202
+    },
+    {
+      "cod_territorial": "12104",
+      "cod_postal": 6310000,
+      "name_comuna": "SAN GREGORIO",
+      "ciudad": "PNT",
+      "cod_sii": 12204
+    },
+    {
+      "cod_territorial": "12101",
+      "cod_postal": 6200000,
+      "name_comuna": "PUNTA ARENAS",
+      "ciudad": "PNT",
+      "cod_sii": 12205
+    },
+    {
+      "cod_territorial": "12102",
+      "cod_postal": 6310000,
+      "name_comuna": "LAGUNA BLANCA",
+      "ciudad": "PNT",
+      "cod_sii": 12206
+    },
+    {
+      "cod_territorial": "12301",
+      "cod_postal": 6300000,
+      "name_comuna": "PORVENIR",
+      "ciudad": "PNT",
+      "cod_sii": 12301
+    },
+    {
+      "cod_territorial": "12302",
+      "cod_postal": 6350000,
+      "name_comuna": "PRIMAVERA",
+      "ciudad": "PNT",
+      "cod_sii": 12302
+    },
+    {
+      "cod_territorial": "12303",
+      "cod_postal": 6350000,
+      "name_comuna": "TIMAUKEL",
+      "ciudad": "PNT",
+      "cod_sii": 12304
+    },
+    {
+      "cod_territorial": "12201",
+      "cod_postal": 6320000,
+      "name_comuna": "CABO DE HORNOS",
+      "ciudad": "PNT",
+      "cod_sii": 12401
+    },
+    {
+      "cod_territorial": "13101",
+      "cod_postal": 7500000,
+      "name_comuna": "SANTIAGO",
+      "ciudad": "SCL",
+      "cod_sii": 13101
+    },
+    {
+      "cod_territorial": "13127",
+      "cod_postal": 8420000,
+      "name_comuna": "RECOLETA",
+      "ciudad": "SCL",
+      "cod_sii": 13159
+    },
+    {
+      "cod_territorial": "13108",
+      "cod_postal": 8380000,
+      "name_comuna": "INDEPENDENCIA",
+      "ciudad": "SCL",
+      "cod_sii": 13167
+    },
+    {
+      "cod_territorial": "13126",
+      "cod_postal": 8500000,
+      "name_comuna": "QUINTA NORMAL",
+      "ciudad": "SCL",
+      "cod_sii": 14107
+    },
+    {
+      "cod_territorial": "13119",
+      "cod_postal": 9250000,
+      "name_comuna": "MAIPU",
+      "ciudad": "SCL",
+      "cod_sii": 14109
+    },
+    {
+      "cod_territorial": "13124",
+      "cod_postal": 9020000,
+      "name_comuna": "PUDAHUEL",
+      "ciudad": "SCL",
+      "cod_sii": 14111
+    },
+    {
+      "cod_territorial": "13128",
+      "cod_postal": 8640000,
+      "name_comuna": "RENCA",
+      "ciudad": "SCL",
+      "cod_sii": 14113
+    },
+    {
+      "cod_territorial": "13125",
+      "cod_postal": 8700000,
+      "name_comuna": "QUILICURA",
+      "ciudad": "SCL",
+      "cod_sii": 14114
+    },
+    {
+      "cod_territorial": "13104",
+      "cod_postal": 8540000,
+      "name_comuna": "CONCHALI",
+      "ciudad": "SCL",
+      "cod_sii": 14127
+    },
+    {
+      "cod_territorial": "13117",
+      "cod_postal": 8980000,
+      "name_comuna": "LO PRADO",
+      "ciudad": "SCL",
+      "cod_sii": 14155
+    },
+    {
+      "cod_territorial": "13103",
+      "cod_postal": 9000000,
+      "name_comuna": "CERRO NAVIA",
+      "ciudad": "SCL",
+      "cod_sii": 14156
+    },
+    {
+      "cod_territorial": "13106",
+      "cod_postal": 9160000,
+      "name_comuna": "ESTACION CENTRAL",
+      "ciudad": "SCL",
+      "cod_sii": 14157
+    },
+    {
+      "cod_territorial": "13107",
+      "cod_postal": 8580000,
+      "name_comuna": "HUECHURABA",
+      "ciudad": "SCL",
+      "cod_sii": 14158
+    },
+    {
+      "cod_territorial": "13102",
+      "cod_postal": 9000000,
+      "name_comuna": "CERRILLOS",
+      "ciudad": "SCL",
+      "cod_sii": 14166
+    },
+    {
+      "cod_territorial": "13301",
+      "cod_postal": 9340000,
+      "name_comuna": "COLINA",
+      "ciudad": "SCL",
+      "cod_sii": 14201
+    },
+    {
+      "cod_territorial": "13302",
+      "cod_postal": 9380000,
+      "name_comuna": "LAMPA",
+      "ciudad": "SCL",
+      "cod_sii": 14202
+    },
+    {
+      "cod_territorial": "13303",
+      "cod_postal": 9420000,
+      "name_comuna": "TIL-TIL",
+      "ciudad": "SCL",
+      "cod_sii": 14203
+    },
+    {
+      "cod_territorial": "13601",
+      "cod_postal": 9560000,
+      "name_comuna": "TALAGANTE",
+      "ciudad": "SCL",
+      "cod_sii": 14501
+    },
+    {
+      "cod_territorial": "13603",
+      "cod_postal": 9790000,
+      "name_comuna": "ISLA DE MAIPO",
+      "ciudad": "SCL",
+      "cod_sii": 14502
+    },
+    {
+      "cod_territorial": "13602",
+      "cod_postal": 9680000,
+      "name_comuna": "EL MONTE",
+      "ciudad": "SCL",
+      "cod_sii": 14503
+    },
+    {
+      "cod_territorial": "13605",
+      "cod_postal": 9540000,
+      "name_comuna": "PENAFLOR",
+      "ciudad": "SCL",
+      "cod_sii": 14504
+    },
+    {
+      "cod_territorial": "13604",
+      "cod_postal": 9710000,
+      "name_comuna": "PADRE HURTADO",
+      "ciudad": "SCL",
+      "cod_sii": 14505
+    },
+    {
+      "cod_territorial": "13501",
+      "cod_postal": 9580000,
+      "name_comuna": "MELIPILLA",
+      "ciudad": "SCL",
+      "cod_sii": 14601
+    },
+    {
+      "cod_territorial": "13504",
+      "cod_postal": 9660000,
+      "name_comuna": "MARIA PINTO",
+      "ciudad": "SCL",
+      "cod_sii": 14602
+    },
+    {
+      "cod_territorial": "13503",
+      "cod_postal": 9630000,
+      "name_comuna": "CURACAVI",
+      "ciudad": "SCL",
+      "cod_sii": 14603
+    },
+    {
+      "cod_territorial": "13505",
+      "cod_postal": 9690000,
+      "name_comuna": "SAN PEDRO",
+      "ciudad": "SCL",
+      "cod_sii": 14604
+    },
+    {
+      "cod_territorial": "13502",
+      "cod_postal": 9670000,
+      "name_comuna": "ALHUE",
+      "ciudad": "SCL",
+      "cod_sii": 14605
+    },
+    {
+      "cod_territorial": "13123",
+      "cod_postal": 7500000,
+      "name_comuna": "PROVIDENCIA",
+      "ciudad": "SCL",
+      "cod_sii": 15103
+    },
+    {
+      "cod_territorial": "13120",
+      "cod_postal": 7750000,
+      "name_comuna": "NUNOA",
+      "ciudad": "SCL",
+      "cod_sii": 15105
+    },
+    {
+      "cod_territorial": "13114",
+      "cod_postal": 7550000,
+      "name_comuna": "LAS CONDES",
+      "ciudad": "SCL",
+      "cod_sii": 15108
+    },
+    {
+      "cod_territorial": "13110",
+      "cod_postal": 8240000,
+      "name_comuna": "LA FLORIDA",
+      "ciudad": "SCL",
+      "cod_sii": 15128
+    },
+    {
+      "cod_territorial": "13113",
+      "cod_postal": 7850000,
+      "name_comuna": "LA REINA",
+      "ciudad": "SCL",
+      "cod_sii": 15132
+    },
+    {
+      "cod_territorial": "13118",
+      "cod_postal": 7810000,
+      "name_comuna": "MACUL",
+      "ciudad": "SCL",
+      "cod_sii": 15151
+    },
+    {
+      "cod_territorial": "13122",
+      "cod_postal": 7910000,
+      "name_comuna": "PENALOLEN",
+      "ciudad": "SCL",
+      "cod_sii": 15152
+    },
+    {
+      "cod_territorial": "13132",
+      "cod_postal": 7630000,
+      "name_comuna": "VITACURA",
+      "ciudad": "SCL",
+      "cod_sii": 15160
+    },
+    {
+      "cod_territorial": "13115",
+      "cod_postal": 7690000,
+      "name_comuna": "LO BARNECHEA",
+      "ciudad": "SCL",
+      "cod_sii": 15161
+    },
+    {
+      "cod_territorial": "13130",
+      "cod_postal": 8900000,
+      "name_comuna": "SAN MIGUEL",
+      "ciudad": "SCL",
+      "cod_sii": 16106
+    },
+    {
+      "cod_territorial": "13109",
+      "cod_postal": 7970000,
+      "name_comuna": "LA CISTERNA",
+      "ciudad": "SCL",
+      "cod_sii": 16110
+    },
+    {
+      "cod_territorial": "13111",
+      "cod_postal": 8780000,
+      "name_comuna": "LA GRANJA",
+      "ciudad": "SCL",
+      "cod_sii": 16131
+    },
+    {
+      "cod_territorial": "13131",
+      "cod_postal": 8860000,
+      "name_comuna": "SAN RAMON",
+      "ciudad": "SCL",
+      "cod_sii": 16153
+    },
+    {
+      "cod_territorial": "13112",
+      "cod_postal": 8820000,
+      "name_comuna": "LA PINTANA",
+      "ciudad": "SCL",
+      "cod_sii": 16154
+    },
+    {
+      "cod_territorial": "13121",
+      "cod_postal": 8460000,
+      "name_comuna": "PEDRO AGUIRRE CERDA",
+      "ciudad": "SCL",
+      "cod_sii": 16162
+    },
+    {
+      "cod_territorial": "13129",
+      "cod_postal": 8940000,
+      "name_comuna": "SAN JOAQUIN",
+      "ciudad": "SCL",
+      "cod_sii": 16163
+    },
+    {
+      "cod_territorial": "13116",
+      "cod_postal": 8910000,
+      "name_comuna": "LO ESPEJO",
+      "ciudad": "SCL",
+      "cod_sii": 16164
+    },
+    {
+      "cod_territorial": "13105",
+      "cod_postal": 8010000,
+      "name_comuna": "EL BOSQUE",
+      "ciudad": "SCL",
+      "cod_sii": 16165
+    },
+    {
+      "cod_territorial": "13201",
+      "cod_postal": 8150000,
+      "name_comuna": "PUENTE ALTO",
+      "ciudad": "SCL",
+      "cod_sii": 16301
+    },
+    {
+      "cod_territorial": "13202",
+      "cod_postal": 9480000,
+      "name_comuna": "PIRQUE",
+      "ciudad": "SCL",
+      "cod_sii": 16302
+    },
+    {
+      "cod_territorial": "13203",
+      "cod_postal": 9460000,
+      "name_comuna": "SAN JOSE DE MAIPO",
+      "ciudad": "SCL",
+      "cod_sii": 16303
+    },
+    {
+      "cod_territorial": "13401",
+      "cod_postal": 8050000,
+      "name_comuna": "SAN BERNARDO",
+      "ciudad": "SCL",
+      "cod_sii": 16401
+    },
+    {
+      "cod_territorial": "13403",
+      "cod_postal": 9560000,
+      "name_comuna": "CALERA DE TANGO",
+      "ciudad": "SCL",
+      "cod_sii": 16402
+    },
+    {
+      "cod_territorial": "13402",
+      "cod_postal": 9500000,
+      "name_comuna": "BUIN",
+      "ciudad": "SCL",
+      "cod_sii": 16403
+    },
+    {
+      "cod_territorial": "13404",
+      "cod_postal": 9540000,
+      "name_comuna": "PAINE",
+      "ciudad": "SCL",
+      "cod_sii": 16404
+    }
+   ]
