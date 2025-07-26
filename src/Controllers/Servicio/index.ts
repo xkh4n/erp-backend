@@ -24,7 +24,7 @@ const setServicio = async (req: Request, res: Response) : Promise<void>  => {
         const total = Object.keys(req.body).length;
         const promise: Promise<IServicio>[] = [];
         for (let i = 0; i < total; i++) {
-            const {codigo, nombre, descripcion, departamento} = req.body[i];
+            const {codigo, nombre, descripcion, departamento, estado} = req.body[i];
             if (!IsCodGerencia(codigo)) {
                 throw createValidationError('El código debe tener 4 dígitos', codigo);
             }
@@ -33,6 +33,9 @@ const setServicio = async (req: Request, res: Response) : Promise<void>  => {
             }
             if (!IsParagraph(descripcion)) {
                 throw createValidationError('La descripción debe tener entre 3 y 100 caracteres', descripcion);
+            }
+            if (!IsBoolean(estado)) {
+                throw createValidationError('El estado debe ser verdadero o falso', estado);
             }
             const fibdDepartamento = await Departamento.findOne({codigo: departamento});
             if (!fibdDepartamento) {
@@ -118,7 +121,7 @@ const getServicioById = async (req: Request, res: Response) : Promise<void>  => 
     }
 }
 
-const getServicioByDepartamento = async (req: Request, res: Response) : Promise<void>  => {
+const getServicioByDeptoCode = async (req: Request, res: Response) : Promise<void>  => {
     try {
         const {departamento} = req.body;
         if(!IsCodGerencia(departamento)) {
@@ -153,13 +156,13 @@ const getServicioByCodigo = async (req: Request, res: Response) : Promise<void> 
         if(!IsCodGerencia(codigo)) {
             throw createValidationError('El código no es válido', codigo);
         }
-        const departamento = await Departamento.findOne({codigo: codigo});
-        if(!departamento){
+        const servicios = await Servicio.findOne({codigo: codigo});
+        if(!servicios){
             throw createNotFoundError('No existe un Departamento con ese codigo: ', codigo);
         }
         res.status(200).json({
             codigo: 200,
-            data: departamento
+            data: servicios
         })
     } catch (error) {
         console.log(error);
@@ -227,6 +230,7 @@ const updateServicioById = async (req: Request, res: Response) : Promise<void>  
     }
 }
 
+
 const updateServicioByCodigo = async (req: Request, res: Response) : Promise<void>  => {
     try {
         const {codigo, nombre, descripcion, estado, departamento} = req.body;
@@ -275,7 +279,7 @@ export {
     getAllServicios,
     getServicioById,
     getServicioByCodigo,
-    getServicioByDepartamento,
+    getServicioByDeptoCode,
     updateServicioById,
-    updateServicioByCodigo
+    updateServicioByCodigo,
 }

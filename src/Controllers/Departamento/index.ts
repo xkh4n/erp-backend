@@ -16,6 +16,8 @@ import SubGerencia from '../../Models/subgerenciaModel';
 /* DEPENDENCIES */
 import { Request, Response } from "express";
 import { IsCodGerencia, IsNameDepto, IsParagraph, IsBoolean, IsId } from '../../Library/Validations';
+import gerencia from '../../Routes/Gerencias/index';
+import subgerencia from '../../Routes/SubGerencia/index';
 
 const setDepartamento = async (req: Request, res: Response): Promise<void> => {
     try {
@@ -164,7 +166,14 @@ const getDepartamentoByCodigo = async (req: Request, res: Response): Promise<voi
 const getDepartamentoByCodigoSubGerencia = async (req: Request, res: Response): Promise<void> => {
     try {
         const { codigo } = req.body;
-        const departamento = await Departamento.findOne({ codigo: codigo });
+        if(!IsCodGerencia(codigo)){
+            throw createValidationError('El código del departamento debe estar entre 10 y 99', codigo);
+        }
+        const subgerencia = await SubGerencia.findOne({ codigo: codigo });
+        if(!subgerencia){
+            throw createNotFoundError('No existe una sub-gerencia con ese código', codigo);
+        }
+        const departamento = await Departamento.find({ subgerencia: subgerencia._id });
         if(!departamento){
             throw createNotFoundError('No existe un departamento con ese código');
         }

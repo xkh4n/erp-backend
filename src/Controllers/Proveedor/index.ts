@@ -113,6 +113,54 @@ const createProveedor = async (req: Request, res: Response): Promise<void> => {
     }
 }
 
+const getAllProveedores = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const proveedores = await Proveedor.find()
+            .populate('comuna', 'nombre')
+            .populate('pais', 'nombre')
+            .populate('ciudad', 'nombre')
+            .sort({ createdAt: -1 });
+        if (proveedores.length === 0) throw createNotFoundError('No Proveedores found');
+        res.status(200).json({
+            message: 'Proveedores retrieved successfully',
+            data: proveedores
+        });
+    } catch (error) {
+        console.log(error);
+        if (error instanceof CustomError) {
+            res.status(error.code).json(error.toJSON());
+        }
+        else {
+            const serverError = createServerError('Sucedió un error Inesperado');
+            res.status(serverError.code).json(serverError.toJSON());
+        }
+    }
+}
+
+const getProveedorById = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const { id } = req.body;
+        if (!IsId(id)) throw createValidationError('Invalid Proveedor ID format', id);
+        const proveedor = await Proveedor.findById(id).populate('comuna', 'nombre').populate('pais', 'nombre').populate('ciudad', 'nombre');
+        if (!proveedor) throw createNotFoundError('Proveedor not found', id);
+        res.status(200).json({
+            message: 'Proveedor retrieved successfully',
+            data: proveedor
+        });
+    } catch (error) {
+        console.log(error);
+        if (error instanceof CustomError) {
+            res.status(error.code).json(error.toJSON());
+        }
+        else {
+            const serverError = createServerError('Sucedió un error Inesperado');
+            res.status(serverError.code).json(serverError.toJSON());
+        }
+    }
+}
+
 export {
     createProveedor,
+    getAllProveedores,
+    getProveedorById
 }

@@ -11,7 +11,11 @@ import IProceso from "./Proceso";
 import IProducto from "./Producto";
 import IProveedor from "./Proveedor";
 import IContacto from "./Contacto";
-import ITipo from "./Tipos";
+import ICategoria from "./Categorias";
+import IEstadosActivos from "./EstadosActivos";
+import ISubEstadosActivos from "./SubEstadosActivos";
+import { ISolicitud, ISolicitudPopulated } from "./Solicitudes";
+import { IDetalleSolicitud, IDetalleSolicitudPopulated } from "./Detalles";
 
 export type{
     IUser,
@@ -27,5 +31,11 @@ export type{
     IProducto,
     IProveedor,
     IContacto,
-    ITipo
+    ICategoria,
+    ISolicitud,
+    IEstadosActivos,
+    ISubEstadosActivos,
+    ISolicitudPopulated,
+    IDetalleSolicitud,
+    IDetalleSolicitudPopulated
 }

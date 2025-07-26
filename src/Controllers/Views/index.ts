@@ -12,9 +12,12 @@ import SubGerencia from '../../Models/subgerenciaModel';
 import Gerencia from '../../Models/gerenciaModel';
 
 /* ERRORS */
-import { CustomError, createServerError, createValidationError, createConflictError } from '../../Library/Errors';
-import { IsProceso } from '../../Library/Validations';
+import { CustomError, createServerError, createValidationError, createConflictError, createNotFoundError } from '../../Library/Errors';
+import { IsCodVista, IsId, IsNumero } from '../../Library/Validations';
 import { IDepartamento, IGerencia, IServicio, ISubGerencia, IProceso, IVistas } from '../../Interfaces';
+
+/* LIBRARYS */
+import Capitalize from '../../Library/Utils/Capitalize';
 
 const setVistas = async (req: any, res: any) => {
     /*
@@ -145,15 +148,51 @@ const setVistas = async (req: any, res: any) => {
 const crearVistas = async (req: any, res: any) => {
     try {
         /*
-            "gerencia": "6812104e646c4119dca299ab",
-            "subgerencia": "68121065646c4119dca299c7",
-            "departamento": "6812135fbd6d9f1830290512",
-            "servicio": "681bcfccf2d779289ad88b6e",
-            "proceso": "681bd63c8d36cfb08e0b9e79",
-            "pantalla":"Crear Cuenta"
+            {
+                "departamento": "13",
+                "gerencia": "68653939d8a4d80539557175",
+                "pantalla": "CREAR PROVEEDOR",
+                "proceso": "686550b32bbc71331e074933",
+                "servicio": "17",
+                "subgerencia": "68653b262bbc71331e0748b6"
+            }
         */
         const promise: Promise<IVistas>[] = [];
-        const {gerencia, subgerencia, departamento, servicio, proceso, pantalla } = req.body;
+        const {departamento, gerencia, pantalla, proceso, servicio, subgerencia } = req.body;
+
+        //Validacion de campos recibidos
+        if (!departamento || !gerencia || !pantalla || !proceso || !servicio || !subgerencia) {
+            throw createValidationError('Faltan campos requeridos', 'vacío');
+        }
+        if (!IsId(gerencia)) {
+            throw createValidationError('El ID de Gerencia no es válido', gerencia);
+        }
+        if (!IsId(subgerencia)) {
+            throw createValidationError('El ID de SubGerencia no es válido', subgerencia);
+        }
+        if(!IsId(proceso)){
+            throw createValidationError('El ID de Proceso no es válido', proceso);
+        }
+        
+        // Validar y convertir servicio a número
+        if(!servicio || !IsNumero(servicio)){
+            throw createValidationError('El Servicio no es válido o está vacío', servicio);
+        }
+        const servicioNum = parseInt(servicio, 10);
+        if(isNaN(servicioNum) || servicioNum <= 0){
+            throw createValidationError('El Servicio debe ser un número positivo', servicio);
+        }
+        
+        // Validar y convertir departamento a número  
+        if(!departamento || !IsNumero(departamento)){
+            throw createValidationError('El Departamento no es válido o está vacío', departamento);
+        }
+        const departamentoNum = parseInt(departamento, 10);
+        if(isNaN(departamentoNum) || departamentoNum <= 0){
+            throw createValidationError('El Departamento debe ser un número positivo', departamento);
+        }
+
+        //Validación de la Existencia de los datos
         const gerenciaExiste = await Gerencia.findById(gerencia);
         if(!gerenciaExiste){
             throw createValidationError('La Gerencia no existe',gerencia);
@@ -162,46 +201,66 @@ const crearVistas = async (req: any, res: any) => {
         if(!subgerenciaExiste){
             throw createValidationError('La SubGerencia no existe',subgerencia);
         }
-        const departamentoExiste = await Departamento.findById(departamento);
+        const departamentoExiste = await Departamento.findOne({codigo: departamentoNum});
         if(!departamentoExiste){
-            throw createValidationError('El Departamento no existe',departamento);
+            throw createValidationError('El Departamento no existe', departamentoNum.toString());
         }
-        const servicioExiste = await Servicio.findById(servicio);
+        const servicioExiste = await Servicio.findOne({codigo: servicioNum});
         if(!servicioExiste){
-            throw createValidationError('El Servicio no existe',servicio);
+            throw createValidationError('El Servicio no existe', servicioNum.toString());
         }
         const procesoExiste = await Proceso.findById(proceso);
         if(!procesoExiste){
             throw createValidationError('El Proceso no existe',proceso);
         }
-        //proceso + servicio + departamento + subgerencia + gerencia
-        /*
-            proceso: string;
-            label: string;
-            link: string;
-            title: string;
-            vistas?: IVistas[];
-        */
-        const codVista = procesoExiste.codigo + servicioExiste.codigo.toString() + departamentoExiste.codigo.toString() + subgerenciaExiste.codigo.toString() + gerenciaExiste.codigo.toString();
-        const vistaExiste = await Vistas.findOne({codVista});
-        if(vistaExiste){
-            throw createValidationError('La Vista ya existe',codVista);
+
+        //Creacion del código de la vista
+        
+        const existeProceso = await Proceso.findOne({nombre: Capitalize(pantalla)});
+        if (existeProceso) {
+            throw createConflictError('Ya existe un Proceso con ese nombre', Capitalize(pantalla));
         }
+        
+       const newCodigoProceso = procesoExiste.codigo + servicioExiste.codigo.toString() + departamentoExiste.codigo.toString() + subgerenciaExiste.codigo.toString() + gerenciaExiste.codigo.toString();
+       logger.info("El nuevo código de Proceso es: " + newCodigoProceso);
+        if(!IsCodVista(newCodigoProceso)){
+            throw createValidationError('El código del Proceso no es válido', newCodigoProceso);
+        }
+        const vistaExiste = await Vistas.findOne({codVista: newCodigoProceso});
+        if(vistaExiste){
+            throw createConflictError('Ya existe una Vista con ese código', newCodigoProceso);
+        }
+        /*
+            {
+                "proceso": procesoExiste.codigo;
+                "label": procesoExiste.nombre;
+                "link": /newCodigoProceso;
+                "title": procesoExiste.nombre;
+                "codigo": newCodigoProceso;
+                "descripcion": procesoExiste.descripcion;
+                "estado": true;
+            }
+        */
         const vista = new Vistas({
-            proceso: procesoExiste._id,
-            label: pantalla,
-            link: `/${codVista}`,
-            title: pantalla
+            proceso: procesoExiste.codigo,
+            label: Capitalize(procesoExiste.nombre),
+            link: `/${newCodigoProceso}`,
+            title: Capitalize(procesoExiste.nombre),
+            codVista: newCodigoProceso,
+            descripcion: Capitalize(procesoExiste.descripcion),
+            estado: true,
+            vistas: []
         })
         try {
             await vista.save();
             promise.push(Promise.resolve(vista));
         } catch (err) {
             if (err.code === 11000) {
-                throw createConflictError('Ya existe una Servicio con ese código', codVista);
+                throw createConflictError('Ya existe una Vista con ese código', newCodigoProceso);
             }
-            throw createServerError('Sucedió un error Inesperado al guardar el Servicio', codVista);
+            throw createServerError('Sucedió un error Inesperado al guardar la Vista', newCodigoProceso);
         }
+            
         const vistas = await Promise.all(promise);
         res.status(201).json({
             codigo: 201,
@@ -239,8 +298,34 @@ const getVistas = async (req: any, res: any) => {
     }
 }
 
+const deleteVistas = async (req: any, res: any) => {
+    try {
+        const { id } = req.body;
+        if (!IsId(id)) {
+            throw createValidationError('El ID no es válido: ', id);
+        }
+        const vistas = await Vistas.findByIdAndDelete(id);
+        if(!vistas){
+            throw createNotFoundError('No existe una Vista con ese ID', id);
+        }
+        res.status(200).json({
+            codigo: 200,
+            data: vistas
+        });
+    } catch (error) {
+        console.log(error);
+        if (error instanceof CustomError) {
+            res.status(error.code).json(error.toJSON());
+        }else{
+            const serverError = createServerError('Sucedió un error Inesperado');
+            res.status(serverError.code).json(serverError.toJSON());
+        }
+    }
+}
+
 export{
     setVistas,
     crearVistas,
     getVistas,
+    deleteVistas
 }

@@ -38,7 +38,7 @@ const setGerencia = async (req: Request, res: Response): Promise<void> => {
             if (!IsBoolean(estado)){
                 throw createValidationError('El estado no es válido', estado);
             }
-            if (estado === 'true' || estado === '1'){
+            if (estado === 'true' || estado === '1' || estado === true || estado === 1) {
                 state = true;
             }
             const newGerencia = new Gerencia({
@@ -178,7 +178,7 @@ const getGerenciaByState = async (req: Request, res: Response): Promise<void> =>
             throw createValidationError('El estado no es válido', activo);
         }
         let state = false;
-        if (activo === 'true' || activo === '1') {
+        if (activo === 'true' || activo === '1' || activo === true || activo === 1) {
             state = true;
         }
         const gerencia = await Gerencia.find({ estado: state });

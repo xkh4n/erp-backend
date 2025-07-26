@@ -11,11 +11,11 @@ import { IProducto } from '../../Interfaces';
 
 /* MODELS */
 import Producto from '../../Models/productoModel';
-import Tipos from '../../Models/tiposModel';
+import Tipos from '../../Models/categoriasModel';
 
 /* DEPENDENCIES */
 import { Request, Response } from "express";
-import { IsParagraph, IsCodTipo } from '../../Library/Validations';
+import { IsParagraph, IsCodTipo, IsId } from '../../Library/Validations';
 
 const setProducto = async (req: Request, res: Response) : Promise<void> => {
     try {
@@ -131,4 +131,29 @@ const getProductoByCategoria = async (req: Request, res: Response): Promise<void
     }
 }
 
-export { setProducto, getAllProductos, getProductoByCategoria };
+const getPruductoByIdCategoria = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const { id } = req.body;
+        if (!IsId(id)) {
+            throw createValidationError('El ID de la categoría no correspondes', 'Categoría: ' + id);
+        }
+        const productos = await Producto.find({ categoria: id });
+        if (productos.length === 0) {
+            throw createNotFoundError('No existen Productos registrados para esta categoría');
+        }
+        res.status(200).json({
+            codigo: 200,
+            data: productos
+        });
+    } catch (error) {
+        console.log(error);
+        if (error instanceof CustomError) {
+            res.status(error.code).json(error.toJSON());
+        }else{
+            const serverError = createServerError('Sucedió un error Inesperado');
+            res.status(serverError.code).json(serverError.toJSON());
+        }
+    }
+}
+
+export { setProducto, getAllProductos, getProductoByCategoria, getPruductoByIdCategoria };

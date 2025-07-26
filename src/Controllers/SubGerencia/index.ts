@@ -148,6 +148,36 @@ const getSubGerenciaByCodigo = async (req: Request, res: Response) : Promise<voi
     }
 }
 
+
+const getSubGciaByEstado = async (req: Request, res: Response) : Promise<void> => {
+    try {
+        const {estado} = req.body;
+        if(!IsBoolean(estado)){
+            throw createValidationError('El estado no es válido', estado);
+        }
+        let state = false;
+        if (estado === 'true' || estado === '1'){
+            state = true;
+        }
+        const subgerencia = await SubGerencia.find({estado: state});
+        if(!subgerencia){
+            throw createNotFoundError('No existen Subgerencias con ese estado', estado);
+        }
+        res.status(200).json({
+            codigo: 200,
+            data: subgerencia
+        });
+    } catch (error) {
+        console.log(error);
+        if (error instanceof CustomError) {
+            res.status(error.code).json(error.toJSON());
+        }else{
+            const serverError = createServerError('Sucedió un error Inesperado');
+            res.status(serverError.code).json(serverError.toJSON());
+        }
+    }
+}
+
 const getSubGerenciaByIdGerencia = async (req: Request, res: Response) : Promise<void> => {
     try {
         const {gerencia} = req.body;
@@ -305,6 +335,7 @@ export{
     getAllSubGerencia,
     getSubGerenciaById,
     getSubGerenciaByCodigo,
+    getSubGciaByEstado,
     getSubGerenciaByIdGerencia,
     getSubGerenciaByCodigoGerencia,
     updateSubGerenciaById,

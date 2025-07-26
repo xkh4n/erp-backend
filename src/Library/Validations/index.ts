@@ -73,7 +73,7 @@ const IsEmail = (email:string) => {
   // Expresión regular para validar un correo electrónico
   const regex = /^[a-zA-Z0-9](?:[a-zA-Z0-9._-]*[a-zA-Z0-9])?@[a-zA-Z0-9](?:[a-zA-Z0-9.-]*[a-zA-Z0-9])?(?:\.[a-zA-Z]{2,})+$/;
   // Verificar si el valor no es una cadena o no cumple con la expresión regular
-  logger.debug(`Validating phone number: ${regex.test(email)}`);
+  //logger.debug(`Validating Email: ${regex.test(email)}`);
   if (typeof email !== 'string' || !regex.test(email)) {
     console.warn("The input is not a valid E-Mail");
     return false;
@@ -179,7 +179,7 @@ const IsCodGerencia = (number: string) => {
 }
 
 const IsProceso = (proceso: string) => {
-  const regex = /^[a-zA-Z0-9]{8}$/;
+  const regex = /^[a-zA-Z0-9]{5,8}$/;
   if (typeof proceso !== 'string' || !regex.test(proceso)) {
     logger.error("The input is not a valid Cod Process");
     return false;
@@ -249,7 +249,7 @@ const IsCodTipo = (codTipo: string) => {
         return false;
     }
     // Expresión regular para validar el código de tipo
-    const regex = /^[A-Z0-9]{5}$/;
+    const regex = /^[A-Z0-9]{6}$/;
     // Verificar si el valor no cumple con la expresión regular
     if (!regex.test(codTipo)) {
         logger.error(`The input "${codTipo}" is not a valid codTipo`);
@@ -257,6 +257,116 @@ const IsCodTipo = (codTipo: string) => {
     }
     return true;
 }
+
+const IsNumero = (numero: any) => {
+  // Verificar si el valor es null o undefined
+  if (numero === null || numero === undefined) {
+    logger.error("The input is null or undefined");
+    return false;
+  }
+  
+  // Convertir a string si es número
+  const numeroStr = typeof numero === 'number' ? numero.toString() : numero;
+  
+  // Verificar si no es una cadena después de la conversión
+  if (typeof numeroStr !== 'string') {
+    logger.error("The input cannot be converted to string");
+    return false;
+  }
+  
+  // Expresión regular para validar números enteros positivos
+  const regex = /^[0-9]+$/;
+  
+  // Verificar si el valor no cumple con la expresión regular
+  if (!regex.test(numeroStr)) {
+    logger.error(`The input "${numeroStr}" is not a valid number`);
+    return false;
+  }
+  
+  // Verificar que sea un número válido y no sea NaN
+  const parsedNumber = parseInt(numeroStr, 10);
+  if (isNaN(parsedNumber)) {
+    logger.error(`The input "${numeroStr}" cannot be parsed as a number`);
+    return false;
+  }
+  
+  return true;
+};
+
+const IsCodVista = (codVista: string) => {
+  // Verificar si el valor no es una cadena
+  if (typeof codVista !== 'string') {
+    logger.error("The input is not a string");
+    return false;
+  }
+  // Expresión regular para validar el código de vista: PROC seguido de dígitos
+  // PROC + hasta 12 dígitos (ejemplo: PROC00115131214)
+  const regex = /^PROC\d{4,12}$/;
+  // Verificar si el valor no cumple con la expresión regular
+  if (!regex.test(codVista)) {
+    logger.error(`The input "${codVista}" is not a valid codVista. Expected format: PROC + 4-12 digits`);
+    return false;
+  }
+  
+  return true;
+};
+
+const IsCodigoSolicitud = (codigo: string | number) => {
+  // Convertir a string si es número
+  const codigoStr = typeof codigo === 'number' ? codigo.toString() : codigo;
+  
+  // Verificar si el valor no es una cadena después de la conversión
+  if (typeof codigoStr !== 'string') {
+    logger.error("The input cannot be converted to string");
+    return false;
+  }
+  
+  // Verificar que tenga exactamente 17 dígitos
+  const regex = /^\d{17}$/;
+  if (!regex.test(codigoStr)) {
+    logger.error(`The input "${codigoStr}" is not a valid codigoSolicitud. Expected format: 17 digits (YYYYMMDDHHMMSSMMM)`);
+    return false;
+  }
+  
+  // Convertir a BigInt para evitar pérdida de precisión con números grandes
+  let codigoNum: bigint;
+  try {
+    codigoNum = BigInt(codigoStr);
+  } catch (error) {
+    logger.error(`The input "${codigoStr}" cannot be converted to a valid BigInt: ${error}`);
+    return false;
+  }
+  
+  // Validar que esté en el rango válido usando BigInt
+  // 01/01/2000 00:00:00.000 = 20000101000000000
+  // 31/12/3000 23:59:59.999 = 30001231235959999
+  const minValue = BigInt("20000101000000000");
+  const maxValue = BigInt("30001231235959999");
+  
+  if (codigoNum < minValue || codigoNum > maxValue) {
+    logger.error(`Invalid codigoSolicitud: ${codigoNum}. Must be between ${minValue} (01/01/2000 00:00:00.000) and ${maxValue} (31/12/3000 23:59:59.999)`);
+    return false;
+  }
+  
+  return true;
+};
+
+const IsObjectId = (id: string) => {
+  // Verificar si el valor no es una cadena
+  if (typeof id !== 'string') {
+    logger.error("The input is not a string");
+    return false;
+  }
+  
+  // Verificar que tenga exactamente 24 caracteres hexadecimales (formato de ObjectId de MongoDB)
+  const regex = /^[a-fA-F0-9]{24}$/;
+  if (!regex.test(id)) {
+    logger.error(`The input "${id}" is not a valid ObjectId. Expected format: 24 hexadecimal characters`);
+    return false;
+  }
+  
+  return true;
+};
 
 export{
     IsUsername,
@@ -278,4 +388,8 @@ export{
     IsNameDepto,
     IsRut,
     IsCodTipo,
+    IsNumero,
+    IsCodVista,
+    IsCodigoSolicitud,
+    IsObjectId
 }

@@ -35,7 +35,10 @@ import {
     comuna,
     proveedor,
     health,
-    categoria
+    categoria,
+    estadoActivo,
+    SubEstadosActivosRouter as subEstadoActivo,
+    solicitud
 } from './Routes/index';
 
 /* CORS CONFIGURE */
@@ -58,8 +61,9 @@ app.use(base_path, comuna);
 app.use(base_path, proveedor);
 app.use(base_path, health);
 app.use(base_path, categoria);
-
-
+app.use(base_path, estadoActivo);
+app.use(base_path, subEstadoActivo);
+app.use(base_path, solicitud);
 
 /* STATICS FOLDERS */
 app.use(express.static("uploads"));
