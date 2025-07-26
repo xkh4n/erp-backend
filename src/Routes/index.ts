@@ -18,6 +18,7 @@ import SubEstadosActivosRouter from './SubEstadoActivos';
 import solicitud from './Solicitud';
 
 
+
 export{
     login,
     registro,

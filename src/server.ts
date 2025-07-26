@@ -41,6 +41,7 @@ import {
     solicitud
 } from './Routes/index';
 
+
 /* CORS CONFIGURE */
 app.use(cors());
 
@@ -64,6 +65,7 @@ app.use(base_path, categoria);
 app.use(base_path, estadoActivo);
 app.use(base_path, subEstadoActivo);
 app.use(base_path, solicitud);
+
 
 /* STATICS FOLDERS */
 app.use(express.static("uploads"));
