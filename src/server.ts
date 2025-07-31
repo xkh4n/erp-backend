@@ -38,7 +38,9 @@ import {
     categoria,
     estadoActivo,
     SubEstadosActivosRouter as subEstadoActivo,
-    solicitud
+    solicitud,
+    kardex,
+    inventory,
 } from './Routes/index';
 
 /* CORS CONFIGURE */
@@ -64,6 +66,8 @@ app.use(base_path, categoria);
 app.use(base_path, estadoActivo);
 app.use(base_path, subEstadoActivo);
 app.use(base_path, solicitud);
+app.use(base_path, kardex);
+app.use(base_path, inventory);
 
 /* STATICS FOLDERS */
 app.use(express.static("uploads"));
