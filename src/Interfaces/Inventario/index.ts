@@ -14,7 +14,7 @@ export interface IInventory {
     modelo: string;
     serialNumber: string;
     status: mongoose.Schema.Types.ObjectId;
-    gerencia: mongoose.Schema.Types.ObjectId;
+    gerencia?: mongoose.Schema.Types.ObjectId;
     // Campos de recepción
     nroSolicitud?: string;
     proveedor?: mongoose.Schema.Types.ObjectId;

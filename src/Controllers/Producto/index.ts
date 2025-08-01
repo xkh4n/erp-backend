@@ -237,7 +237,6 @@ const recibirProducto = async (req: Request, res: Response): Promise<void> => {
             tipoDocumento,
             numeroDocumento
         );
-        logger.info(`Paso 8: Inventario creado exitosamente - Código: ${inventarioCreado.inventoryCode}`);
         // 2. Agregar entrada al Kardex
         const ultimoMovimientoKardex = await KardexModel.findOne({ product: productoId })
             .sort({ date: -1, fechaCreacion: -1 })
@@ -282,7 +281,6 @@ const recibirProducto = async (req: Request, res: Response): Promise<void> => {
             kardexExistente.observaciones = `Recepción directa - Solicitud: ${nroSolicitud} - Serie: ${numeroSerie.toUpperCase()}`;
             
             await kardexExistente.save();
-            logger.warn(`Paso 9: Kardex actualizado - Producto: ${productoId} - Nueva cantidad: ${kardexExistente.quantity} - Balance: ${nuevoBalance}`);
         } else {
             // Si no existe, crear nuevo registro
             const entradaKardex = new KardexModel({
@@ -298,7 +296,6 @@ const recibirProducto = async (req: Request, res: Response): Promise<void> => {
             });
             
             await entradaKardex.save();
-            logger.warn(`Paso 9: Nuevo Kardex creado - Producto: ${productoId} - Cantidad: ${total} - Balance: ${nuevoBalance}`);
         }
         const recepcionGuardada = {
             inventario: inventarioCreado,
