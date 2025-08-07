@@ -17,7 +17,7 @@ import Comuna from '../../Models/comunasModel';
 import { Request, Response } from "express";
 
 /* VALIDATIONS */
-import {  IsIata, IsName, IsId, IsPostal, IsTerritorial, IsSii } from '../../Library/Validations';
+import {  IsIata, IsName, IsId, IsPostal, IsTerritorial, IsSii, IsNameDepto } from '../../Library/Validations';
 
 const setStates = async (req: Request, res: Response) => {
     try {
@@ -247,7 +247,179 @@ const getComunaByName = async (req: Request, res: Response) => {
     }
 }
 
+const updateByPostal = async (req: Request, res: Response) => {
+    try {
+        const { cod_postal, cod_territorial, cod_sii, name_comuna, ciudad } = req.body;
+        if(!IsPostal(cod_postal)){
+            throw createConflictError('El código postal no es válido', cod_postal);
+        }
+        if(!IsTerritorial(cod_territorial)){
+            throw createConflictError('El código territorial no es válido', cod_territorial);
+        }
+        if(!IsSii(cod_sii)){
+            throw createConflictError('El código SII no es válido', cod_sii);
+        }
+        if(!IsNameDepto(name_comuna)){
+            throw createConflictError('El nombre de la comuna no es válido', name_comuna);
+        }
+        if(!IsId(ciudad)){
+            throw createConflictError('El ID de la ciudad no es válido', ciudad);
+        }
+        const updatedComuna = await Comuna.findOneAndUpdate(
+            { cod_postal },
+            { cod_territorial, cod_sii, name_comuna, ciudad },
+            { new: true, runValidators: true }
+        );
+        if (!updatedComuna) {
+            throw createNotFoundError('Comuna no encontrada', cod_postal);
+        }
+        res.status(200).json({
+            codigo: 200,
+            data: updatedComuna
+        });
+    } catch (error) {
+        logger.error(error);
+        if (error instanceof CustomError) {
+            res.status(error.code).json(error.toJSON());
+        }
+        else {
+            const serverError = createServerError('Sucedió un error Inesperado');
+            res.status(serverError.code).json(serverError.toJSON());
+        }
+    }
+}
 
+const updateByTerritorial = async (req: Request, res: Response) => {
+    try {
+        const { cod_territorial, cod_postal, cod_sii, name_comuna, ciudad } = req.body;
+        if(!IsTerritorial(cod_territorial)){
+            throw createConflictError('El código territorial no es válido', cod_territorial);
+        }
+        if(!IsPostal(cod_postal)){
+            throw createConflictError('El código postal no es válido', cod_postal);
+        }
+        if(!IsSii(cod_sii)){
+            throw createConflictError('El código SII no es válido', cod_sii);
+        }
+        if(!IsNameDepto(name_comuna)){
+            throw createConflictError('El nombre de la comuna no es válido', name_comuna);
+        }
+        if(!IsId(ciudad)){
+            throw createConflictError('El ID de la ciudad no es válido', ciudad);
+        }
+        const updatedComuna = await Comuna.findOneAndUpdate(
+            { cod_territorial },
+            { cod_postal, cod_sii, name_comuna, ciudad },
+            { new: true, runValidators: true }
+        );
+        if (!updatedComuna) {
+            throw createNotFoundError('Comuna no encontrada', cod_territorial);
+        }
+        res.status(200).json({
+            codigo: 200,
+            data: updatedComuna
+        });
+    } catch (error) {
+        logger.error(error);
+        if (error instanceof CustomError) {
+            res.status(error.code).json(error.toJSON());
+        }
+        else {
+            const serverError = createServerError('Sucedió un error Inesperado');
+            res.status(serverError.code).json(serverError.toJSON());
+        }
+    }
+}
+
+const updateById = async (req: Request, res: Response) => {
+    try {
+        const { id, cod_territorial, cod_postal, cod_sii, name_comuna, ciudad } = req.body;
+        if(!IsId(id)){
+            throw createConflictError('El ID de la comuna no es válido', id);
+        }
+        if(!IsTerritorial(cod_territorial)){
+            throw createConflictError('El código territorial no es válido', cod_territorial);
+        }
+        if(!IsPostal(cod_postal)){
+            throw createConflictError('El código postal no es válido', cod_postal);
+        }
+        if(!IsSii(cod_sii)){
+            throw createConflictError('El código SII no es válido', cod_sii);
+        }
+        if(!IsNameDepto(name_comuna)){
+            throw createConflictError('El nombre de la comuna no es válido', name_comuna);
+        }
+        if(!IsId(ciudad)){
+            throw createConflictError('El ID de la ciudad no es válido', ciudad);
+        }
+        const updatedComuna = await Comuna.findByIdAndUpdate(
+            id,
+            { cod_territorial, cod_postal, cod_sii, name_comuna, ciudad },
+            { new: true, runValidators: true }
+        );
+        if (!updatedComuna) {
+            throw createNotFoundError('Comuna no encontrada', id);
+        }
+        res.status(200).json({
+            codigo: 200,
+            data: updatedComuna
+        });
+    }
+    catch (error) {
+        logger.error(error);
+        if (error instanceof CustomError) {
+            res.status(error.code).json(error.toJSON());
+        }
+        else {
+            const serverError = createServerError('Sucedió un error Inesperado');
+            res.status(serverError.code).json(serverError.toJSON());
+        }
+    }
+}
+
+
+const updateByName = async (req: Request, res: Response) => {
+    try {
+        const { name_comuna, cod_territorial, cod_postal, cod_sii, ciudad } = req.body;
+        if(!IsNameDepto(name_comuna)){
+            throw createConflictError('El nombre de la comuna no es válido', name_comuna);
+        }
+        if(!IsTerritorial(cod_territorial)){
+            throw createConflictError('El código territorial no es válido', cod_territorial);
+        }
+        if(!IsPostal(cod_postal)){
+            throw createConflictError('El código postal no es válido', cod_postal);
+        }
+        if(!IsSii(cod_sii)){
+            throw createConflictError('El código SII no es válido', cod_sii);
+        }
+        if(!IsId(ciudad)){
+            throw createConflictError('El ID de la ciudad no es válido', ciudad);
+        }
+        const updatedComuna = await Comuna.findOneAndUpdate(
+            { name_comuna },
+            { cod_territorial, cod_postal, cod_sii, ciudad },
+            { new: true, runValidators: true }
+        );
+        if (!updatedComuna) {
+            throw createNotFoundError('Comuna no encontrada', name_comuna);
+        }
+        res.status(200).json({
+            codigo: 200,
+            data: updatedComuna
+        });
+    }
+    catch (error) {
+        logger.error(error);
+        if (error instanceof CustomError) {
+            res.status(error.code).json(error.toJSON());
+        }
+        else {
+            const serverError = createServerError('Sucedió un error Inesperado');
+            res.status(serverError.code).json(serverError.toJSON());
+        }
+    }
+}
 export {
     setStates,
     getAllComunas,
@@ -255,5 +427,9 @@ export {
     getComunaByTerritorial,
     getComunaBySii,
     getComunaByPostal,
-    getComunaByName
+    getComunaByName,
+    updateByPostal,
+    updateByTerritorial,
+    updateById,
+    updateByName
 }
