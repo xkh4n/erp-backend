@@ -11,6 +11,10 @@ const productoSchema = new mongoose.Schema<IProducto>({
         type: String,
         required: true,
     },
+    marca: {
+        type: String,
+        required: false,
+    },
     descripcion: {
         type: String,
         required: true,

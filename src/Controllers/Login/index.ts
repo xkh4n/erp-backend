@@ -19,6 +19,7 @@ import { comparePassword } from '../../Library/Encrypt';
 const Login = async (req: Request, res: Response) => {
     try {
         const { email, password } = req.body;
+        logger.warn(`Intentando iniciar sesión con el email: ${email}`);
         if(!IsEmail(email)){
             throw createAuthorizationError('El email no es válido');
         }
@@ -33,7 +34,7 @@ const Login = async (req: Request, res: Response) => {
             }
         });
         if (!UserExist) {
-            throw createNotFoundError('El usuario no existe');
+            throw createNotFoundError('Error en Inicio de Sesión','Las Credenciales del usuario no son válidas');
         }
         if (!UserExist.isActive) {
             throw createAuthorizationError('El usuario no está activo');
