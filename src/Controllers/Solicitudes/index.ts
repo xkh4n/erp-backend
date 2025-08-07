@@ -7,21 +7,24 @@ logger.level = 'all';
 import {CustomError, createServerError, createValidationError, createNotFoundError, createConflictError} from "../../Library/Errors/index";
 
 /* INTERFACES */
-import { ISolicitud, ISolicitudPopulated } from "../../Interfaces/Solicitudes/index";
-import { IDetalleSolicitud, IDetalleSolicitudPopulated } from "../../Interfaces/Detalles/index";
+import { ISolicitud } from "../../Interfaces/Solicitudes/index";
+import { IDetalleSolicitud } from "../../Interfaces/Detalles/index";
 
 /* MODELS */
 import SolicitudModel from "../../Models/solicitudModel";
 import DetalleSolicitudModel from "../../Models/detalleSolicitudModel";
 import RecepcionProductoModel from "../../Models/recepcionProductoModel";
+import KardexModel from "../../Models/kardexModel";
+
+/* CONTROLLERS */
+import { crearInventarioDesdeRecepcion } from "../Inventario/index";
 
 /* LIBRARIES */
 import { getChileDateTime } from '../../Library/Utils/ManageDate';
-
+import { IsEmail, IsId, IsName, IsPhone, IsUsername, IsParagraph, IsCodigoSolicitud, IsObjectId, IsNumero } from '../../Library/Validations';
 
 /** END-POINT */
 import { Request, Response } from 'express';
-import { IsEmail, IsId, IsName, IsPhone, IsUsername, IsCodigoSolicitud, IsObjectId } from '../../Library/Validations';
 
 /**
  * @description Controller to create a new Solicitud
@@ -136,7 +139,7 @@ const createSolicitud = async (req: Request, res: Response): Promise<void> => {
                 garantia: null
             });
             try {
-                newDetalleSolicitud.save();
+                await newDetalleSolicitud.save();
                 promiseDetalle.push(Promise.resolve(newDetalleSolicitud));
             } catch (error) {
                 if(error.code === 11000) {
@@ -570,10 +573,13 @@ const getSolicitudPending = async (req: Request, res: Response): Promise<void> =
 
 const getSolicitydAproved = async (req: Request, res: Response): Promise<void> => {
     try {
-        const solicitudes = await SolicitudModel.find({ estado: 'aprobado' })
-            .populate('gerencia')
+        // Incluir solicitudes aprobadas y en proceso (recepciones parciales)
+        const solicitudes = await SolicitudModel.find({ 
+            estado: { $in: ['aprobado', 'en_proceso'] } 
+        }).populate('gerencia');
+        
         if (solicitudes.length === 0) {
-            throw createNotFoundError('No hay solicitudes aprobadas', []);
+            throw createNotFoundError('No hay solicitudes aprobadas o en proceso', []);
         }
         res.status(200).json({
             codigo: 200,
@@ -610,7 +616,7 @@ const getDetalleBySolicitudIdForRecepcion = async (req: Request, res: Response):
         const detalleTransformado = await Promise.all(detalle.map(async (item: any) => {
             // Contar recepciones para este producto específico
             const recepcionesProducto = recepciones.filter(r => r.producto._id.toString() === item.producto._id.toString());
-            const cantidadRecibida = recepcionesProducto.length;
+            const cantidadRecibida = item.cantidadEntregada || 0;
             const cantidadPendiente = (item.cantidadAprobada || 0) - cantidadRecibida;
             
             return {
@@ -643,162 +649,36 @@ const getDetalleBySolicitudIdForRecepcion = async (req: Request, res: Response):
     }
 }
 
-/**
- * @description Controller to process product reception
- * @param req - Request object
- * @param res - Response object
- */
-const procesarRecepcionProducto = async (req: Request, res: Response): Promise<void> => {
+const getGerenciaByNroSolicitud = async (req: Request, res: Response): Promise<any> => {
     try {
-        const { solicitudId, producto, numeroSerie, esSolicitudCompleta } = req.body;
-        
-        if (!solicitudId || !producto || !numeroSerie) {
-            throw createValidationError('Faltan datos obligatorios para la recepción (solicitudId, producto, numeroSerie)', []);
+        const { nroSolicitud } = req.body;
+        // Validar que el número de solicitud no esté vacío
+        if (!nroSolicitud) {
+            throw createValidationError('El número de solicitud es obligatorio', nroSolicitud);
         }
 
-        if (!IsObjectId(solicitudId)) {
-            throw createValidationError('El ID de la solicitud no es válido', solicitudId);
+        // Buscar la solicitud por número
+        const solicitud = await SolicitudModel.findOne({ nroSolicitud: nroSolicitud })
+
+        if (!solicitud) {
+            throw createNotFoundError('Solicitud no encontrada', nroSolicitud);
         }
-
-        if (!IsObjectId(producto)) {
-            throw createValidationError('El ID del producto no es válido', producto);
-        }
-
-        // Buscar el detalle de la solicitud específico
-        const detalleToUpdate = await DetalleSolicitudModel.findOne({
-            solicitudId: solicitudId,
-            producto: producto
-        });
-
-        if (!detalleToUpdate) {
-            throw createNotFoundError('No se encontró el detalle de la solicitud especificado');
-        }
-
-        // Verificar que el número de serie no esté ya en uso
-        const existingWithSerie = await RecepcionProductoModel.findOne({
-            numeroSerie: numeroSerie.toUpperCase()
-        });
-        if (existingWithSerie) {
-            throw createConflictError('El número de serie ya está registrado en otro producto');
-        }
-
-        // Contar cuántas recepciones ya existen para este producto
-        const recepcionesExistentes = await RecepcionProductoModel.countDocuments({
-            solicitudId: solicitudId,
-            producto: producto
-        });
-
-        // Verificar que no se exceda la cantidad aprobada
-        if (recepcionesExistentes >= (detalleToUpdate.cantidadAprobada || 0)) {
-            throw createValidationError('Ya se han recibido todas las unidades aprobadas para este producto');
-        }
-
-        // Generar código de inventario autoincremental
-        const ultimaRecepcion = await RecepcionProductoModel.findOne({})
-            .sort({ codigoInventario: -1 })
-            .select('codigoInventario')
-            .lean();
-        
-        let nuevoCodigo: number;
-        
-        if (ultimaRecepcion && ultimaRecepcion.codigoInventario) {
-            // Incrementar desde el último código
-            nuevoCodigo = ultimaRecepcion.codigoInventario + 1;
-        } else {
-            // Primer código si no existe ninguno
-            nuevoCodigo = 100000000;
-        }
-        
-        // Verificar que no exceda el máximo
-        if (nuevoCodigo > 999999999) {
-            throw createValidationError('Se ha alcanzado el límite máximo de códigos de inventario');
-        }
-
-        // Crear nueva recepción con código de inventario generado
-        const nuevaRecepcion = new RecepcionProductoModel({
-            solicitudId: solicitudId,
-            detalleSolicitudId: detalleToUpdate._id,
-            nroSolicitud: detalleToUpdate.nroSolicitud,
-            producto: producto,
-            numeroSerie: numeroSerie.toUpperCase(),
-            codigoInventario: nuevoCodigo, // Asignar el código generado
-            fechaRecepcion: getChileDateTime(),
-            fechaCreacion: getChileDateTime(),
-            fechaModificacion: getChileDateTime()
-        });
-
-        const recepcionGuardada = await nuevaRecepcion.save();
-
-        // Actualizar la cantidad entregada en el detalle de solicitud
-        const nuevaCantidadEntregada = recepcionesExistentes + 1;
-        const actualizacionDetalle: any = {
-            cantidadEntregada: nuevaCantidadEntregada,
-            fechaModificacion: getChileDateTime()
-        };
-
-        // Si se ha entregado todo lo aprobado, cambiar el estado
-        if (nuevaCantidadEntregada >= (detalleToUpdate.cantidadAprobada || 0)) {
-            actualizacionDetalle.estado = 'entregado';
-            actualizacionDetalle.fechaEntrega = getChileDateTime();
-        }
-
-        await DetalleSolicitudModel.findByIdAndUpdate(
-            detalleToUpdate._id,
-            actualizacionDetalle,
-            { new: true, runValidators: true }
-        );
-
-        // Verificar si todos los productos de la solicitud han sido completamente recibidos
-        // basándose en la información del frontend
-        if (esSolicitudCompleta === true) {
-            await SolicitudModel.findByIdAndUpdate(
-                solicitudId,
-                {
-                    estado: 'recibido',
-                    fechaModificacion: getChileDateTime()
-                },
-                { new: true, runValidators: true }
-            );
-            logger.info(`Solicitud ${detalleToUpdate.nroSolicitud} completamente recibida - Estado actualizado a 'recibido'`);
-        }
-
-        logger.info(`Producto recibido exitosamente: ${producto} - Serie: ${numeroSerie} - Código inventario: ${recepcionGuardada.codigoInventario}`);
-
         res.status(200).json({
             codigo: 200,
-            mensaje: 'Producto recibido exitosamente',
-            data: {
-                _id: recepcionGuardada._id,
-                numeroSerie: recepcionGuardada.numeroSerie,
-                codigoInventario: recepcionGuardada.codigoInventario,
-                fechaRecepcion: recepcionGuardada.fechaRecepcion,
-                cantidadEntregada: nuevaCantidadEntregada,
-                cantidadPendiente: (detalleToUpdate.cantidadAprobada || 0) - nuevaCantidadEntregada,
-                solicitudCompleta: esSolicitudCompleta === true
-            }
+            data: solicitud.gerencia,
+            mensaje: 'Gerencia obtenida exitosamente'
         });
-
     } catch (error) {
-        if (error instanceof CustomError) {
-            logger.error(`Error en procesarRecepcionProducto: ${error.message}`);
-            res.status(error.code).json(error.toJSON());
-        } else {
-            logger.error(`Error inesperado en procesarRecepcionProducto: ${error}`);
-            res.status(500).json({
-                codigo: 500,
-                mensaje: 'Error interno del servidor',
-                detalle: 'Error inesperado al procesar la recepción del producto'
-            });
-        }
+        console.error(error);
+        throw error; // Re-lanzar el error para manejarlo en el controlador
     }
-};
+}
 
 export {
     createSolicitud,
     getSoliciudOnly,
     getAllSolicitudes,
     getDetalleBySolicitudIdForRecepcion,
-    procesarRecepcionProducto,
     getSolicitydAproved,
     getSolicitudPending,
     getDetalleBySolicitud,
@@ -806,5 +686,6 @@ export {
     aprobarProducto,
     aprobarSolicitud,
     rechazarProducto,
-    rechazarSolicitud
+    rechazarSolicitud,
+    getGerenciaByNroSolicitud
 };

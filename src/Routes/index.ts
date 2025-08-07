@@ -16,6 +16,8 @@ import categoria from './Categoria';
 import estadoActivo from './EstadoActivos';
 import SubEstadosActivosRouter from './SubEstadoActivos';
 import solicitud from './Solicitud';
+import kardex from './Kardex';
+import inventory from './Inventario';
 
 
 
@@ -37,5 +39,7 @@ export{
     categoria,
     estadoActivo,
     SubEstadosActivosRouter,
-    solicitud
+    solicitud,
+    kardex,
+    inventory,
 }
