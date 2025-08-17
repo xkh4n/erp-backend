@@ -1,38 +1,23 @@
 import mongoose from "mongoose";
 import { IUser } from "../Interfaces";
-import { Schema } from "mongoose";
+import { getChileDateTime } from "../Library/Utils/ManageDate";
 
-const userSchema = new Schema<IUser>({
-    name: {
-        type: String,
-        required: true,
+const userSchema = new mongoose.Schema<IUser>({
+    username: {type: String,required: true},
+    password: {type: String,required: true},
+    role: {type: mongoose.Schema.Types.ObjectId, ref: "Roles", required: true},
+    personId: {type: mongoose.Schema.Types.ObjectId, ref: "Persons", required: true},
+    isActive: {type: Boolean,default: false},
+    createdAt: {type: Date,default: getChileDateTime},
+    updatedAt: {type: Date,default: getChileDateTime}
+}, {
+    timestamps: { 
+        createdAt: 'fechaCreacion', 
+        updatedAt: 'fechaModificacion',
+        currentTime: getChileDateTime
     },
-    email: {
-        type: String,
-        required: true,
-        unique: true,
-    },
-    password: {
-        type: String,
-        required: true,
-    },
-    role: {
-        type: String,
-        default: 'guest',
-    },
-    isActive: {
-        type: Boolean,
-        default: false,
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now,
-    },
-    updatedAt: {
-        type: Date,
-        default: Date.now,
-    }
-}, { timestamps: true });
+    versionKey: false
+});
 
 
 const User = mongoose.model<IUser>('User', userSchema);

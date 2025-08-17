@@ -17,6 +17,9 @@ import ISubEstadosActivos from "./SubEstadosActivos";
 import { ISolicitud, ISolicitudPopulated } from "./Solicitudes";
 import { IDetalleSolicitud, IDetalleSolicitudPopulated } from "./Detalles";
 import IAsignacion from "./Asignaciones";
+import IPersons from "./Persons";
+import IPermissions from "./Permissions";
+import IRoles from "./Roles";
 
 export type{
     IUser,
@@ -39,5 +42,8 @@ export type{
     ISolicitudPopulated,
     IDetalleSolicitud,
     IDetalleSolicitudPopulated,
-    IAsignacion
+    IAsignacion,
+    IPersons,
+    IPermissions,
+    IRoles
 }

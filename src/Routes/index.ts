@@ -18,6 +18,10 @@ import SubEstadosActivosRouter from './SubEstadoActivos';
 import solicitud from './Solicitud';
 import kardex from './Kardex';
 import inventory from './Inventario';
+import persons from './Persons';
+import users from './Users';
+import permisos from './Permissions';
+import role from './Role';
 
 
 export{
@@ -41,4 +45,8 @@ export{
     solicitud,
     kardex,
     inventory,
+    persons,
+    users,
+    permisos,
+    role
 }

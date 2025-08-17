@@ -19,7 +19,6 @@ import { Request, Response } from "express";
 import { IsCodGerencia, IsId, IsNameDepto, IsParagraph, IsBoolean } from '../../Library/Validations';
 
 const setServicio = async (req: Request, res: Response) : Promise<void>  => {
-    console.log("Hola desde Servicio Controller");
     try {
         const total = Object.keys(req.body).length;
         const promise: Promise<IServicio>[] = [];
@@ -195,15 +194,15 @@ const updateServicioById = async (req: Request, res: Response) : Promise<void>  
         if (!IsParagraph(descripcion)) {
             throw createValidationError('La descripción no es válida', descripcion);
         }
-        if (!IsId(departamento)) {
+        if (!IsCodGerencia(departamento)) {
             throw createValidationError('El código no es válido', departamento);
+        }
+        const depto = await Departamento.findOne({codigo: departamento});
+        if(!depto){
+            throw createNotFoundError('No existe un Departamento con ese codigo: ', departamento);
         }
         if (!IsBoolean(estado)){
             throw createValidationError('El estado no es válido', estado);
-        }
-        const depto = await Departamento.findOne({_id: departamento});
-        if(!depto){
-            throw createNotFoundError('No existe un Departamento con ese codigo: ', departamento);
         }
         const newServicio = await Servicio.findByIdAndUpdate(id, {
             codigo: codigo,

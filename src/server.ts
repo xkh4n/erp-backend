@@ -16,9 +16,6 @@ import cors from 'cors';
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-/* PORTS */
-const PORT = process.env.API_PORT || 3030;
-
 /* ROUTES */
 import {
     login,
@@ -41,6 +38,9 @@ import {
     solicitud,
     kardex,
     inventory,
+    permisos,
+    role,
+    persons
 } from './Routes/index';
 
 /* CORS CONFIGURE */
@@ -68,6 +68,9 @@ app.use(base_path, subEstadoActivo);
 app.use(base_path, solicitud);
 app.use(base_path, kardex);
 app.use(base_path, inventory);
+app.use(base_path, permisos);
+app.use(base_path, role);
+app.use(base_path, persons);
 
 /* STATICS FOLDERS */
 app.use(express.static("uploads"));
