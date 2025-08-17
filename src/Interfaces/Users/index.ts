@@ -1,9 +1,10 @@
+import mongoose from "mongoose";
 export default interface IUser {
-    name: string;
-    email: string;
+    username: string;
     password: string;
-    role: string;
+    role: mongoose.Schema.Types.ObjectId;
     isActive: boolean;
+    personId?: mongoose.Schema.Types.ObjectId;
     createdAt: Date;
     updatedAt: Date;
 }

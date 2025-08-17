@@ -40,10 +40,9 @@ const NewUser = async (req: Request, res: Response) => {
                 throw createServerError('Sucedió un error Inesperado');
             }
             const newUser: IUser = {
-                name: name,
-                email: email.toLowerCase().trim(),
+                username: name,
                 password: passwordHash,
-                role: "guest",
+                role: null, // Assuming role is set later or is optional
                 isActive: false,
                 createdAt: new Date(),
                 updatedAt: new Date()

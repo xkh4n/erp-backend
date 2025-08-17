@@ -3,7 +3,7 @@ import { Router } from 'express';
 const subgerencia = Router();
 
 /* CONTROLLER */
-import { setSubGerencia, getAllSubGerencia, getSubGerenciaById, getSubGerenciaByCodigo, getSubGciaByEstado, getSubGerenciaByIdGerencia, getSubGerenciaByCodigoGerencia, updateSubGerenciaById, updateSubGerenciaByCodigo } from '../../Controllers/SubGerencia';
+import { setSubGerencia, getAllSubGerencia, updateStateById, getSubGerenciaById, getSubGerenciaByCodigo, getSubGciaByEstado, getSubGerenciaByIdGerencia, getSubGerenciaByCodigoGerencia, updateSubGerenciaById, updateSubGerenciaByCodigo } from '../../Controllers/SubGerencia';
 
 
 subgerencia.put('/subgerencia/nueva', setSubGerencia);
@@ -15,5 +15,6 @@ subgerencia.post('/subgerencia/porcodigogerencia', getSubGerenciaByCodigoGerenci
 subgerencia.patch('/subgerencia/actualizarporid', updateSubGerenciaById);
 subgerencia.patch('/subgerencia/actualizarporcodigo', updateSubGerenciaByCodigo);
 subgerencia.post('/subgerencia/estado', getSubGciaByEstado);
+subgerencia.patch('/subgerencia/actualizarestado', updateStateById);
 
 export default subgerencia;
