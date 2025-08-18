@@ -472,6 +472,34 @@ export const validateRole = [
   handleValidationErrors
 ];
 
+// Validación para obtener rol por ID
+export const validateRoleById = [
+  body('id')
+    .trim()
+    .notEmpty().withMessage('El ID del rol es obligatorio')
+    .custom((value) => {
+      if (!IsObjectId(value)) {
+        throw new Error('El ID del rol debe ser un ObjectId válido');
+      }
+      return true;
+    }),
+  
+  handleValidationErrors
+];
+
+export const validateRoleName = [
+  body('name')
+    .trim()
+    .notEmpty().withMessage('El nombre del rol es obligatorio')
+    .custom((value) => {
+      if (!IsName(value)) {
+        throw new Error('El nombre del rol contiene caracteres no válidos');
+      }
+      return true;
+    })
+    .customSanitizer(value => sanitizeHtml(value))
+];
+
 // Validación para creación de persona con usuario
 export const validateCreatePerson = [
   body('dni')

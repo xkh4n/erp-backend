@@ -5,6 +5,12 @@ logger.level = 'all';
 
 /* EXPRESS */
 import express from 'express';
+import expressSession from 'express-session';
+import MongoStore from 'connect-mongo';
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
+import mongoSanitize from 'express-mongo-sanitize';
+import { mongoSanitize as customMongoSanitize } from './Library/Security/mongoSanitize';
 
 /* SERVER */
 const app = express();
@@ -12,11 +18,116 @@ const app = express();
 /* CORS */
 import cors from 'cors';
 
-/* ENCODED */
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+/* SECURITY MIDDLEWARES */
+import { securityHeaders } from './Library/Security/middleware';
 
-/* ROUTES */
+/* SECURITY CONFIGURATION */
+// Helmet para headers de seguridad
+app.use(helmet({
+    contentSecurityPolicy: {
+        directives: {
+            defaultSrc: ["'self'"],
+            styleSrc: ["'self'", "'unsafe-inline'"],
+            scriptSrc: ["'self'"],
+            imgSrc: ["'self'", "data:", "https:"],
+            connectSrc: ["'self'"],
+            fontSrc: ["'self'"],
+            objectSrc: ["'none'"],
+            mediaSrc: ["'self'"],
+            frameSrc: ["'none'"],
+        },
+    },
+    crossOriginEmbedderPolicy: false,
+    hsts: {
+        maxAge: 31536000,
+        includeSubDomains: true,
+        preload: true
+    }
+}));
+
+// CORS Configuration
+const corsOptions = {
+    origin: process.env.CORS_ORIGIN || 'http://localhost:3010',
+    credentials: true,
+    optionsSuccessStatus: 200,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS', 'UPDATE'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
+};
+app.use(cors(corsOptions));
+
+// Rate limiting global usando express-rate-limit
+const globalLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutos
+    max: 100, // 100 requests por ventana
+    message: {
+        codigo: 429,
+        mensaje: 'Demasiadas solicitudes desde esta IP. Intente nuevamente más tarde.',
+        data: null
+    },
+    standardHeaders: true,
+    legacyHeaders: false,
+});
+
+app.use('/api', globalLimiter);
+
+// Rate limiting específico para autenticación
+const authLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 5, // 5 attempts per window
+    message: {
+        codigo: 429,
+        mensaje: 'Demasiados intentos de login. Intente nuevamente en 15 minutos.',
+        data: null
+    },
+    standardHeaders: true,
+    legacyHeaders: false,
+});
+
+// Aplicar rate limiting a rutas de autenticación específicas - Comentado temporalmente
+// app.use('/api/1.0/login', authLimiter);
+// app.use('/api/1.0/refresh', authLimiter);
+
+// Sanitización contra inyecciones NoSQL - Middleware personalizado compatible con Express v5
+app.use(customMongoSanitize({
+    replaceWith: '_',
+    allowDots: false,
+    onSanitize: ({ req, key }) => {
+        console.warn(`[SECURITY] Sanitized MongoDB injection attempt: ${key} from IP: ${req.ip}`);
+    }
+}));
+
+// Session Configuration - Se configurará después de establecer la conexión DB
+// Ver index.ts para la configuración de sesiones
+
+/* ENCODED */
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+
+// Headers de seguridad adicionales
+app.use(securityHeaders);
+
+// Función para configurar sesiones después de la conexión DB
+export const configureSession = (mongoUrl: string) => {
+    app.use(expressSession({
+        secret: process.env.SESSION_SECRET!,
+        name: process.env.SESSION_NAME || 'sid',
+        resave: false,
+        saveUninitialized: false,
+        store: MongoStore.create({
+            mongoUrl: mongoUrl,
+            touchAfter: 24 * 3600, // lazy session update
+            ttl: parseInt(process.env.SESSION_TTL_HOURS!) * 60 * 60 // TTL en segundos
+        }),
+        cookie: {
+            secure: process.env.NODE_ENV === 'production', // HTTPS en producción
+            httpOnly: true,
+            maxAge: parseInt(process.env.SESSION_TTL_HOURS!) * 60 * 60 * 1000, // TTL en ms
+            sameSite: 'strict'
+        }
+    }));
+};
+
+/* ROUTE CONFIGURATION */
 import {
     login,
     registro,
@@ -40,11 +151,10 @@ import {
     inventory,
     permisos,
     role,
-    persons
+    persons,
+    users,
+    passwordRoutes
 } from './Routes/index';
-
-/* CORS CONFIGURE */
-app.use(cors());
 
 /* ROUTE CONFIGURATION */
 const base_path = '/api/' + process.env.API_VER + '/';
@@ -70,7 +180,17 @@ app.use(base_path, kardex);
 app.use(base_path, inventory);
 app.use(base_path, permisos);
 app.use(base_path, role);
-app.use(base_path, persons);
+app.use(base_path, users);
+app.use(base_path, passwordRoutes);
+
+/* HEALTH CHECK */
+app.get('/health', (req, res) => {
+    res.status(200).json({
+        status: 'OK',
+        timestamp: new Date().toISOString(),
+        uptime: process.uptime()
+    });
+});
 
 /* STATICS FOLDERS */
 app.use(express.static("uploads"));

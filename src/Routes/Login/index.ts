@@ -6,9 +6,15 @@ import { Router } from 'express';
 const login = Router();
 
 /* CONTROLLER */
-import { Login } from '../../Controllers/Login/index';
+import { Login, RefreshToken, Logout, LogoutAll } from '../../Controllers/Login/index';
 
-login.post('/login', Login);
+/* MIDDLEWARES */
+import { requireAuth, optionalAuth } from '../../Middlewares/Auth';
+import { validateZod, loginSchema, refreshTokenSchema } from '../../Library/Validations/zod';
 
+login.post('/login', validateZod(loginSchema), Login);
+login.post('/refresh', validateZod(refreshTokenSchema), RefreshToken);
+login.post('/logout', optionalAuth, Logout);
+login.post('/logout-all', requireAuth, LogoutAll);
 
 export default login;

@@ -20,6 +20,9 @@ import IAsignacion from "./Asignaciones";
 import IPersons from "./Persons";
 import IPermissions from "./Permissions";
 import IRoles from "./Roles";
+import IPasswordHistory from "./PasswordHistory";
+import IRefreshToken from "./RefreshToken";
+import ISession from "./Session";
 
 export type{
     IUser,
@@ -45,5 +48,8 @@ export type{
     IAsignacion,
     IPersons,
     IPermissions,
-    IRoles
+    IRoles,
+    IPasswordHistory,
+    IRefreshToken,
+    ISession
 }

@@ -22,6 +22,7 @@ import persons from './Persons';
 import users from './Users';
 import permisos from './Permissions';
 import role from './Role';
+import passwordRoutes from './Password';
 
 
 export{
@@ -48,5 +49,6 @@ export{
     persons,
     users,
     permisos,
-    role
+    role,
+    passwordRoutes
 }

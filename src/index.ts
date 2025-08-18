@@ -8,7 +8,8 @@ const logger = log4js.getLogger('Index File:');
 logger.level = 'all';
 
 /* API */
-import app from './server';
+import app, { configureSession } from './server';
+import { CleanupScheduler } from './Library/Utils/cleanup';
 var SERVER = null;
 
 /* PORT */
@@ -49,6 +50,14 @@ switch (process.env.NODE_ENV) {
           //logger.warn(`Connecting to ${SERVER}...`);
           await mongo.connect(URI);
           logger.warn(`Connection to ${SERVER} it's Ok`);
+          
+          // Configurar sesiones después de la conexión DB
+          configureSession(URI);
+          logger.info('Sesiones configuradas correctamente');
+          
+          // Iniciar tareas de limpieza automática
+          CleanupScheduler.start();
+          
           await app.listen(PORT, () => {
               logger.debug(`Server of ${SERVER} is Running in: http://${SERVER}:${PORT}/api/${process.env.API_VER}/`);
           });
