@@ -23,6 +23,7 @@ import IRoles from "./Roles";
 import IPasswordHistory from "./PasswordHistory";
 import IRefreshToken from "./RefreshToken";
 import ISession from "./Session";
+import ICentroCostos from "./CCostos";
 
 export type{
     IUser,
@@ -51,5 +52,6 @@ export type{
     IRoles,
     IPasswordHistory,
     IRefreshToken,
-    ISession
+    ISession,
+    ICentroCostos
 }

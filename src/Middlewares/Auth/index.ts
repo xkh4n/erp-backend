@@ -1,9 +1,14 @@
 import { Request, Response, NextFunction } from 'express';
-import { JWTService } from '../../Library/Auth/jwt';
+import { decodedToken } from '../../Library/Auth/JSWebToken';
 import User from '../../Models/userModel';
 import Roles from '../../Models/rolesModel';
 import { createAuthorizationError, createNotFoundError } from '../../Library/Errors';
 import { ISession } from '../../Interfaces';
+
+/* LOGGER */
+import log4js from 'log4js';
+const logger = log4js.getLogger('Auth Middleware:');
+logger.level = 'all';
 
 // Extender Request para incluir user
 declare global {
@@ -36,7 +41,14 @@ export const requireAuth = async (req: Request, res: Response, next: NextFunctio
         const token = authHeader.split(' ')[1];
         
         try {
-            const payload = JWTService.verifyAccessToken(token);
+            const payload = decodedToken(token) as any;
+            
+            // Verificar que el token es de tipo access
+            if (payload.token_type !== 'access') {
+                const error = createAuthorizationError('Tipo de token inválido');
+                res.status(error.code).json(error.toJSON());
+                return;
+            }
             
             // Verificar que el usuario existe y está activo
             const user = await User.findById(payload.userId).select('isActive username');
@@ -127,8 +139,14 @@ export const requirePermission = (resource: string, action: string) => {
         }
 
         const requiredPermission = `${resource}:${action}`;
+        const resourcePermission = resource; // También buscar solo el recurso
         
-        if (!req.user.permissions.includes(requiredPermission)) {
+        // Verificar si tiene el permiso completo (resource:action) o solo el recurso
+        const hasPermission = req.user.permissions.includes(requiredPermission) ||
+                            req.user.permissions.includes(resourcePermission);
+        
+        if (!hasPermission) {
+            logger.warn(`Usuario ${req.user.username} intentó acceder sin permiso: ${requiredPermission}. Permisos disponibles: ${req.user.permissions.join(', ')}`);
             const error = createAuthorizationError(`Permiso requerido: ${requiredPermission}`);
             res.status(error.code).json(error.toJSON());
             return;
@@ -226,17 +244,20 @@ export const optionalAuth = async (req: Request, res: Response, next: NextFuncti
             const token = authHeader.split(' ')[1];
             
             try {
-                const payload = JWTService.verifyAccessToken(token);
+                const payload = decodedToken(token) as any;
                 
-                const user = await User.findById(payload.userId).select('isActive username');
-                if (user && user.isActive) {
-                    req.user = {
-                        id: payload.userId,
-                        username: payload.username,
-                        role: payload.role,
-                        permissions: payload.permissions,
-                        sessionId: payload.sessionId
-                    };
+                // Verificar que el token es de tipo access
+                if (payload.token_type === 'access') {
+                    const user = await User.findById(payload.userId).select('isActive username');
+                    if (user && user.isActive) {
+                        req.user = {
+                            id: payload.userId,
+                            username: payload.username,
+                            role: payload.role,
+                            permissions: payload.permissions,
+                            sessionId: payload.sessionId
+                        };
+                    }
                 }
             } catch (tokenError) {
                 // Token inválido, pero no fallar - continuar sin auth

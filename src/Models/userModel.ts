@@ -65,7 +65,6 @@ userSchema.methods.resetLoginAttempts = function() {
 
 // Índices
 userSchema.index({ username: 1 }, { unique: true });
-userSchema.index({ 'personId': 1 });
 userSchema.index({ 'role': 1 });
 userSchema.index({ isActive: 1 });
 

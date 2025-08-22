@@ -9,7 +9,6 @@ import expressSession from 'express-session';
 import MongoStore from 'connect-mongo';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
-import mongoSanitize from 'express-mongo-sanitize';
 import { mongoSanitize as customMongoSanitize } from './Library/Security/mongoSanitize';
 
 /* SERVER */
@@ -152,8 +151,10 @@ import {
     permisos,
     role,
     persons,
-    users,
-    passwordRoutes
+    usuarios,
+    passwordRoutes,
+    centroCostos,
+    asigna
 } from './Routes/index';
 
 /* ROUTE CONFIGURATION */
@@ -180,8 +181,11 @@ app.use(base_path, kardex);
 app.use(base_path, inventory);
 app.use(base_path, permisos);
 app.use(base_path, role);
-app.use(base_path, users);
+app.use(base_path, usuarios);
+app.use(base_path, persons);
 app.use(base_path, passwordRoutes);
+app.use(base_path, centroCostos);
+app.use(base_path, asigna);
 
 /* HEALTH CHECK */
 app.get('/health', (req, res) => {

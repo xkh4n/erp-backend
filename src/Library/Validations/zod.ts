@@ -94,6 +94,105 @@ export const permissionCreateSchema = z.object({
         .default(true)
 });
 
+// Schemas para Centro de Costo
+export const centroCostoCreateSchema = z.object({
+    codigo: z.union([
+        z.string()
+            .min(1, 'El código es requerido')
+            .max(20, 'El código no puede exceder 20 caracteres'),
+        z.number()
+            .int('El código debe ser un número entero')
+            .positive('El código debe ser un número positivo')
+    ]).transform(val => val.toString().toUpperCase()),
+    
+    nombre: z.string()
+        .min(3, 'El nombre debe tener al menos 3 caracteres')
+        .max(100, 'El nombre no puede exceder 100 caracteres')
+        .trim(),
+    
+    descripcion: z.string()
+        .min(10, 'La descripción debe tener al menos 10 caracteres')
+        .max(500, 'La descripción no puede exceder 500 caracteres')
+        .trim()
+});
+
+export const centroCostoUpdateSchema = z.object({
+    codigo: z.union([
+        z.string()
+            .min(1, 'El código es requerido')
+            .max(20, 'El código no puede exceder 20 caracteres'),
+        z.number()
+            .int('El código debe ser un número entero')
+            .positive('El código debe ser un número positivo')
+    ]).transform(val => val.toString().toUpperCase())
+        .optional(),
+    
+    nombre: z.string()
+        .min(3, 'El nombre debe tener al menos 3 caracteres')
+        .max(100, 'El nombre no puede exceder 100 caracteres')
+        .trim()
+        .optional(),
+    
+    descripcion: z.string()
+        .min(10, 'La descripción debe tener al menos 10 caracteres')
+        .max(500, 'La descripción no puede exceder 500 caracteres')
+        .trim()
+        .optional()
+}).refine(data => Object.keys(data).length > 0, {
+    message: "Debe proporcionar al menos un campo para actualizar"
+});
+
+// Schema para validar arrays de centros de costo (para creación masiva)
+export const centroCostoArraySchema = z.array(centroCostoCreateSchema)
+    .min(1, 'Debe proporcionar al menos un centro de costo')
+    .max(100, 'No se pueden crear más de 100 centros de costo a la vez');
+
+// Schemas para Personas y Usuarios
+export const createPersonAndUserSchema = z.object({
+    // Campos requeridos de Persona
+    dni: z.string()
+        .min(1, 'El DNI es requerido')
+        .max(12, 'El DNI no puede exceder 12 caracteres')
+        .regex(/^[\d\-kK]+$/, 'El DNI debe tener formato válido (números, guiones y K)')
+        .trim(),
+    
+    name: z.string()
+        .min(2, 'El nombre debe tener al menos 2 caracteres')
+        .max(100, 'El nombre no puede exceder 100 caracteres')
+        .trim(),
+    
+    email01: z.string()
+        .email('Debe ser un email válido')
+        .min(1, 'El email principal es requerido')
+        .max(100, 'El email no puede exceder 100 caracteres')
+        .trim()
+        .toLowerCase(),
+    
+    state: z.string()
+        .regex(/^[0-9a-fA-F]{24}$/, 'ID de estado inválido')
+        .nullable()
+        .optional(),
+    
+    country: z.string()
+        .regex(/^[0-9a-fA-F]{24}$/, 'ID de país inválido')
+        .nullable()
+        .optional(),
+
+    // Campos requeridos de Usuario
+    username: z.string()
+        .min(3, 'El nombre de usuario debe tener al menos 3 caracteres')
+        .max(50, 'El nombre de usuario no puede exceder 50 caracteres')
+        .regex(/^[a-zA-ZñÑ0-9_.\s-]+$/, 'El nombre de usuario solo puede contener letras, números, guiones bajos, puntos, espacios y guiones')
+        .trim(),
+    
+    password: z.string()
+        .min(8, 'La contraseña debe tener al menos 8 caracteres')
+        .max(128, 'La contraseña no puede exceder 128 caracteres'),
+    
+    role: z.string()
+        .regex(/^[0-9a-fA-F]{24}$/, 'ID de rol inválido')
+});
+
 export const objectIdSchema = z.object({
     id: z.string()
         .regex(/^[0-9a-fA-F]{24}$/, 'ID inválido')

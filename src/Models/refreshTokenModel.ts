@@ -55,7 +55,7 @@ const refreshTokenSchema = new mongoose.Schema<IRefreshToken>({
 // Índices compuestos
 refreshTokenSchema.index({ userId: 1, isRevoked: 1 });
 refreshTokenSchema.index({ tokenFamily: 1, isRevoked: 1 });
-refreshTokenSchema.index({ expiresAt: 1 }, { expireAfterSeconds: 0 }); // TTL automático
+
 
 const RefreshToken = mongoose.model<IRefreshToken>("RefreshToken", refreshTokenSchema);
 export default RefreshToken;

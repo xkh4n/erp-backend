@@ -13,6 +13,6 @@ export default interface IPersons {
     state?: mongoose.Types.ObjectId;
     country?: mongoose.Types.ObjectId;
     postalCode?: string;
-    fechaCreacion: Date;
-    fechaModificacion: Date;
+    fechaCreacion?: Date;
+    fechaModificacion?: Date;
 }

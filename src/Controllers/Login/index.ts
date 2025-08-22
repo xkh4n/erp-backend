@@ -14,6 +14,7 @@ import Roles from "../../Models/rolesModel";
 import { IUser, ISession } from "../../Interfaces/index";
 
 /* AUTH SERVICES */
+import { createAccessToken, createRefreshToken, decodedRefreshToken } from '../../Library/Auth/JSWebToken';
 import { JWTService } from "../../Library/Auth/jwt";
 
 import { Request, Response } from "express";
@@ -23,17 +24,16 @@ import { comparePassword } from '../../Library/Encrypt';
 const Login = async (req: Request, res: Response) => {
     try {
         const { username, password } = req.body;
-        const userAgent = req.get('User-Agent');
-        const ipAddress = req.ip || req.connection.remoteAddress;
-        
-        logger.warn(`Intentando iniciar sesión con el username: ${username} desde IP: ${ipAddress}`);
-        
         if(!IsUsername(username)){
             throw createAuthorizationError('El username no es válido');
         }
         if(!IsPassword(password)){
-            throw createAuthorizationError('La contraseña no es válida'); 
+            throw createAuthorizationError('La contraseña no es válida');
         }
+        const userAgent = req.get('User-Agent');
+        const ipAddress = req.ip || req.connection.remoteAddress;
+        
+        logger.warn(`Intentando iniciar sesión con el username: ${username} desde IP: ${ipAddress}`);
         
         const UserExist = await User.findOne({ username: username })
             .populate({
@@ -79,28 +79,28 @@ const Login = async (req: Request, res: Response) => {
         
         // Preparar payload para JWT
         const role = UserExist.role as any;
-        const permissions = role.permissions.map((p: any) => `${p.resource}:${p.action}`);
-        
-        const tokenPayload = {
-            userId: UserExist._id.toString(),
-            username: UserExist.username,
-            role: role.name,
-            permissions
-        };
-        
-        // Generar tokens
-        const tokens = await JWTService.generateTokenPair(tokenPayload, userAgent, ipAddress);
+        const permissions = role.permissions.map((p: any) => {
+            // Si el permiso tiene resource y action, usar el formato completo
+            if (p.resource && p.action) {
+                return `${p.resource}:${p.action}`;
+            }
+            // Si solo tiene name, usar solo el name
+            return p.name;
+        });
         
         // También crear sesión si el cliente lo prefiere
+        let sessionId: string = '';
         if (req.session) {
             const session = req.session as ISession;
             session.userId = UserExist._id.toString();
             session.username = UserExist.username;
             session.role = role.name;
             session.permissions = permissions;
+            sessionId = req.session.id || '';
+            logger.debug(`Sesión creada con ID: ${sessionId}`);
+        } else {
+            logger.warn('No hay objeto de sesión disponible - continuando sin sesión');
         }
-        
-        logger.info(`Login exitoso para usuario: ${username}`);
         
         res.status(200).json({
             message: "Login successful",
@@ -112,9 +112,8 @@ const Login = async (req: Request, res: Response) => {
                     isActive: UserExist.isActive
                 },
                 tokens: {
-                    accessToken: tokens.accessToken,
-                    refreshToken: tokens.refreshToken,
-                    expiresIn: tokens.expiresIn
+                    accessToken: createAccessToken(UserExist._id.toString(), UserExist.username, role.name, permissions, sessionId),
+                    refreshToken: createRefreshToken(UserExist._id.toString(), UserExist.username, role.name, permissions, sessionId)
                 }
             }
         });
@@ -135,23 +134,41 @@ const RefreshToken = async (req: Request, res: Response) => {
         const userAgent = req.get('User-Agent');
         const ipAddress = req.ip || req.connection.remoteAddress;
         
+        logger.info(`Intentando renovar refresh token desde IP: ${ipAddress}`);
+        logger.debug(`Refresh token recibido: ${refreshToken?.substring(0, 20)}...`);
+        
         if (!refreshToken) {
             throw createAuthorizationError('Refresh token requerido');
         }
+
+        // Decodificar y validar el refresh token
+        const decodedToken = decodedRefreshToken(refreshToken);
         
-        const tokens = await JWTService.rotateRefreshToken(refreshToken, userAgent, ipAddress);
-        
-        if (!tokens) {
-            throw createAuthorizationError('Refresh token inválido o expirado');
+        if (!decodedToken || typeof decodedToken === 'string') {
+            throw createAuthorizationError('Refresh token inválido');
         }
-        
+
+        // Extraer información del token decodificado
+        const { userId, username, role, permissions, sessionId } = decodedToken as any;
+
+        // Verificar que el token sea de tipo refresh
+        if (decodedToken.token_type !== 'refresh') {
+            throw createAuthorizationError('Token inválido: se esperaba refresh token');
+        }
+
+        // Generar nuevos tokens
+        const newAccessToken = createAccessToken(userId, username, role, permissions, sessionId);
+        const newRefreshToken = createRefreshToken(userId, username, role, permissions, sessionId);
+
+        logger.info(`Token renovado exitosamente para usuario: ${username}`);
+
         res.status(200).json({
             message: "Token renovado exitosamente",
             data: {
                 tokens: {
-                    accessToken: tokens.accessToken,
-                    refreshToken: tokens.refreshToken,
-                    expiresIn: tokens.expiresIn
+                    accessToken: newAccessToken,
+                    refreshToken: newRefreshToken,
+                    expiresIn: "3h"
                 }
             }
         });

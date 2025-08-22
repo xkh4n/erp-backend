@@ -664,4 +664,39 @@ export const validateCreatePerson = [
   handleValidationErrors
 ];
 
+// Validaciones para Asignación
+export const validateAsignacion = [
+  body('dni')
+    .trim()
+    .notEmpty().withMessage('El DNI es obligatorio')
+    .custom((value) => {
+      if (!IsRut(value)) {
+        throw new Error('El DNI debe ser un RUT válido');
+      }
+      return true;
+    }),
+  
+  body('serie')
+    .trim()
+    .notEmpty().withMessage('La serie es obligatoria')
+    .custom((value) => {
+      if (!IsParagraph(value)) {
+        throw new Error('La serie contiene caracteres no válidos');
+      }
+      return true;
+    })
+    .customSanitizer(value => sanitizeHtml(value)),
+  
+  body('centrocosto')
+    .notEmpty().withMessage('El centro de costo es obligatorio')
+    .custom((value) => {
+      if (!IsNumero(value)) {
+        throw new Error('El centro de costo debe ser un número válido');
+      }
+      return true;
+    }),
+  
+  handleValidationErrors
+];
+
 export { validateAndSanitize };

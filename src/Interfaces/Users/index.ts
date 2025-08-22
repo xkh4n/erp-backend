@@ -1,21 +1,26 @@
 import mongoose from "mongoose";
+type ObjectId = mongoose.Types.ObjectId;
 export default interface IUser {
     username: string;
     password: string;
-    role: mongoose.Schema.Types.ObjectId;
+    role: ObjectId; // ✅ Cambiado
     isActive: boolean;
-    personId?: mongoose.Schema.Types.ObjectId;
+    personId?: string | ObjectId; // ✅ Hecho opcional
+
     // Campos de seguridad
     loginAttempts?: number;
     lockedUntil?: Date;
     lastLogin?: Date;
     lastLoginIP?: string;
     passwordChangedAt?: Date;
+
     // Timestamps
-    createdAt: Date;
-    updatedAt: Date;
+    createdAt?: Date;
+    updatedAt?: Date;
+
     // Métodos virtuales
     isLocked?: boolean;
+
     // Métodos de instancia
     incLoginAttempts?: () => Promise<any>;
     resetLoginAttempts?: () => Promise<any>;

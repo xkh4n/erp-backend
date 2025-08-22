@@ -2,7 +2,15 @@ import jwt from 'jsonwebtoken';
 import crypto from 'crypto';
 import { ulid } from 'ulid';
 import RefreshToken from '../../Models/refreshTokenModel';
-import { hashPassword } from '../Encrypt';
+import { hashPassword, comparePassword } from '../Encrypt';
+
+/**
+ * Hash determinístico para refresh tokens (usando SHA256)
+ * A diferencia de bcrypt, esto genera el mismo hash para el mismo input
+ */
+const hashRefreshToken = (token: string): string => {
+    return crypto.createHash('sha256').update(token).digest('hex');
+};
 
 export interface TokenPayload {
     userId: string;
@@ -25,7 +33,7 @@ export interface TokenPair {
 export class JWTService {
     private static ACCESS_SECRET = process.env.JWT_ACCESS_SECRET!;
     private static REFRESH_SECRET = process.env.JWT_REFRESH_SECRET!;
-    private static ACCESS_TTL = parseInt(process.env.JWT_ACCESS_TTL!) || 900; // 15 min
+    private static ACCESS_TTL = parseInt(process.env.JWT_ACCESS_TTL!) || 7200; // 2 hours
     private static REFRESH_TTL = parseInt(process.env.JWT_REFRESH_TTL!) || 604800; // 7 days
     private static ISSUER = process.env.JWT_ISS || 'https://localhost:3010/auth';
     private static AUDIENCE = process.env.JWT_AUD || 'https://localhost:3010';
@@ -44,7 +52,7 @@ export class JWTService {
         // Guardar refresh token hasheado en BD
         await this.storeRefreshToken({
             userId: payload.userId,
-            tokenHash: hashPassword(refreshToken),
+            tokenHash: hashRefreshToken(refreshToken),
             tokenFamily: refreshTokenData.family,
             userAgent,
             ipAddress
@@ -101,9 +109,9 @@ export class JWTService {
      */
     static async rotateRefreshToken(oldToken: string, userAgent?: string, ipAddress?: string): Promise<TokenPair | null> {
         try {
-            // Buscar token en BD
+            // Buscar token en BD usando hash determinístico
             const tokenDoc = await RefreshToken.findOne({
-                tokenHash: hashPassword(oldToken),
+                tokenHash: hashRefreshToken(oldToken),
                 isRevoked: false,
                 expiresAt: { $gt: new Date() }
             }).populate({
@@ -118,6 +126,7 @@ export class JWTService {
 
             if (!tokenDoc) {
                 // Si no encontramos el token, podría ser reutilización - revocar toda la familia
+                console.log('Token no encontrado, revocando familia...');
                 await this.revokeTokenFamily(oldToken);
                 throw new Error('Refresh token inválido');
             }
@@ -174,9 +183,9 @@ export class JWTService {
      */
     static async revokeTokenFamily(suspiciousToken: string): Promise<void> {
         try {
-            // Buscar cualquier token (incluso revocado) que coincida
+            // Buscar cualquier token (incluso revocado) que coincida usando hash determinístico
             const tokenDoc = await RefreshToken.findOne({
-                tokenHash: hashPassword(suspiciousToken)
+                tokenHash: hashRefreshToken(suspiciousToken)
             });
 
             if (tokenDoc) {
