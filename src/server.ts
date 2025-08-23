@@ -14,6 +14,9 @@ import { mongoSanitize as customMongoSanitize } from './Library/Security/mongoSa
 /* SERVER */
 const app = express();
 
+// Configurar trust proxy para reverso proxy (HAProxy/NGINX)
+app.set('trust proxy', 1);
+
 /* CORS */
 import cors from 'cors';
 

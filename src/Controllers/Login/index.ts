@@ -8,6 +8,7 @@ import {CustomError, createServerError, createNotFoundError, createAuthorization
 
 /* MODELS */
 import User  from "../../Models/userModel";
+import Persons from '../../Models/personsModel';
 import Roles from "../../Models/rolesModel";
 
 /* INTERFACES */
@@ -69,7 +70,7 @@ const Login = async (req: Request, res: Response) => {
             await UserExist.incLoginAttempts();
             throw createAuthorizationError('La contraseña no es válida');
         }
-        
+        const persona = await Persons.findById(UserExist.personId);
         // Login exitoso - resetear intentos y actualizar último login
         await UserExist.resetLoginAttempts();
         await UserExist.updateOne({
@@ -108,6 +109,7 @@ const Login = async (req: Request, res: Response) => {
                 user: {
                     id: UserExist._id,
                     username: UserExist.username,
+                    nombre: persona?.name || '',
                     role: role.name,
                     isActive: UserExist.isActive
                 },

@@ -2,6 +2,11 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
+// Deshabilitar validación SSL en desarrollo/testing
+if (process.env.NODE_ENV !== 'production') {
+    process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+}
+
 /* LOGGER */
 import log4js from 'log4js';
 const logger = log4js.getLogger('Index File:');

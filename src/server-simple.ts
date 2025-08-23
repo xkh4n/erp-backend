@@ -1,3 +1,8 @@
+// Deshabilitar validación SSL en desarrollo/testing
+if (process.env.NODE_ENV !== 'production') {
+    process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+}
+
 /* LOGGER */
 import log4js from 'log4js';
 const logger = log4js.getLogger('Server File:');
@@ -9,6 +14,9 @@ import cors from 'cors';
 
 /* SERVER */
 const app = express();
+
+// Configurar trust proxy para reverso proxy (HAProxy/NGINX)
+app.set('trust proxy', 1);
 
 /* BASIC MIDDLEWARES */
 app.use(express.json({ limit: '10mb' }));
@@ -49,7 +57,7 @@ import {
     permisos,
     role,
     persons,
-    users,
+    usuarios as users,
     passwordRoutes
 } from './Routes/index';
 
