@@ -81,12 +81,11 @@ const setTipo = async (req: Request, res: Response) : Promise<void> => {
 const getTipos = async (req: Request, res: Response) : Promise<void> => {
     try {
         const tipos = await Tipo.find();
-        if (!tipos || tipos.length === 0) {
-            throw createNotFoundError('No se encontraron tipos', 'Tipos');
-        }
+        // Devolver array vacío si no hay tipos, no un error
         res.status(200).json({
             codigo: 200,
-            data: tipos
+            data: tipos || [], // Asegurar que siempre sea un array
+            message: tipos.length === 0 ? 'No hay categorías disponibles' : 'Categorías obtenidas exitosamente'
         });
     } catch (error) {
         console.log(error);
@@ -127,7 +126,8 @@ const getTipoById = async (req: Request, res: Response) : Promise<void> => {
 
 const getLastTipo = async (req: Request, res: Response) : Promise<void> => {
     try {
-        const lastTipo = await Tipo.findOne().sort({ createdAt: -1 }).limit(1);
+        // Ordenar por código en orden descendente para obtener el código más alto
+        const lastTipo = await Tipo.findOne().sort({ codigo: -1 }).limit(1);
         if (!lastTipo) {
             throw createNotFoundError('No se encontraron tipos', 'Tipos');
         }

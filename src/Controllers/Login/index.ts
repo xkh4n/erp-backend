@@ -98,9 +98,10 @@ const Login = async (req: Request, res: Response) => {
             session.role = role.name;
             session.permissions = permissions;
             sessionId = req.session.id || '';
-            logger.debug(`Sesión creada con ID: ${sessionId}`);
+            logger.info(`✅ Sesión creada exitosamente con ID: ${sessionId} para usuario: ${username}`);
         } else {
-            logger.warn('No hay objeto de sesión disponible - continuando sin sesión');
+            logger.warn('⚠️  No hay objeto de sesión disponible - continuando sin sesión');
+            logger.debug('Verificar que las variables SESSION_SECRET y SESSION_TTL_HOURS estén configuradas');
         }
         
         res.status(200).json({
@@ -114,8 +115,8 @@ const Login = async (req: Request, res: Response) => {
                     isActive: UserExist.isActive
                 },
                 tokens: {
-                    accessToken: createAccessToken(UserExist._id.toString(), UserExist.username, role.name, permissions, sessionId),
-                    refreshToken: createRefreshToken(UserExist._id.toString(), UserExist.username, role.name, permissions, sessionId)
+                    accessToken: createAccessToken(UserExist._id.toString(), UserExist.username, persona?.name || '', role.name, permissions, sessionId),
+                    refreshToken: createRefreshToken(UserExist._id.toString(), UserExist.username, persona?.name || '', role.name, permissions, sessionId)
                 }
             }
         });
@@ -151,7 +152,7 @@ const RefreshToken = async (req: Request, res: Response) => {
         }
 
         // Extraer información del token decodificado
-        const { userId, username, role, permissions, sessionId } = decodedToken as any;
+        const { userId, username, nombre, role, permissions, sessionId } = decodedToken as any;
 
         // Verificar que el token sea de tipo refresh
         if (decodedToken.token_type !== 'refresh') {
@@ -159,8 +160,8 @@ const RefreshToken = async (req: Request, res: Response) => {
         }
 
         // Generar nuevos tokens
-        const newAccessToken = createAccessToken(userId, username, role, permissions, sessionId);
-        const newRefreshToken = createRefreshToken(userId, username, role, permissions, sessionId);
+        const newAccessToken = createAccessToken(userId, username, nombre || '', role, permissions, sessionId);
+        const newRefreshToken = createRefreshToken(userId, username, nombre || '', role, permissions, sessionId);
 
         logger.info(`Token renovado exitosamente para usuario: ${username}`);
 

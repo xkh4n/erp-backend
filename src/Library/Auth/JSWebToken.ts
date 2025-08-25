@@ -13,12 +13,13 @@ import jwt from 'jsonwebtoken';
 import { getChileDateTime } from '../Utils/ManageDate';
 
 
-const createAccessToken = (userId: string, username: string, role: string, permissions: string[], sessionId?: string): string => {
+const createAccessToken = (userId: string, username: string, nombre: string, role: string, permissions: string[], sessionId?: string): string => {
     const now = Math.floor(Date.now() / 1000); // Timestamp actual en segundos
     const payload = {
         token_type: 'access',
         userId,
         username,
+        nombre,
         role,
         permissions,
         sessionId,
@@ -29,12 +30,13 @@ const createAccessToken = (userId: string, username: string, role: string, permi
     return jwt.sign(payload, process.env.JWT_ACCESS_SECRET!);
 }
 
-const createRefreshToken = (userId: string, username: string, role: string, permissions: string[], sessionId?: string): string => {
+const createRefreshToken = (userId: string, username: string, nombre: string, role: string, permissions: string[], sessionId?: string): string => {
     const now = Math.floor(Date.now() / 1000); // Timestamp actual en segundos
     const payload = {
         token_type: 'refresh',
         userId,
         username,
+        nombre,
         role,
         permissions,
         sessionId,

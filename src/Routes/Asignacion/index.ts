@@ -2,10 +2,10 @@ import {Router} from "express";
 
 /* CONTROLLER */
 import { asignarActivo } from "../../Controllers/Asignacion";
-import { validateAsignacion } from "../../Middlewares/Validations";
+import { requireAuth } from "../../Middlewares/Auth";
 const asigna = Router();
 
-asigna.post('/asignacion/asignar', validateAsignacion, asignarActivo);
+asigna.post('/asignacion/asignar', requireAuth, asignarActivo);
 
 
 export default asigna;

@@ -15,6 +15,7 @@ const hashRefreshToken = (token: string): string => {
 export interface TokenPayload {
     userId: string;
     username: string;
+    nombre?: string;
     role: string;
     permissions: string[];
     sessionId?: string;

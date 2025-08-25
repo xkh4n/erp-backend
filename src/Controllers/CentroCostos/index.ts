@@ -69,7 +69,9 @@ const newCentroCosto = async (req: Request, res: Response) => {
 
 const getCentroCostos = async (req: Request, res: Response) => {
     try {
-        const { page = 1, limit = 10, search, sortBy = 'nombre', sortOrder = 'asc' } = req.query;
+        // Leer parámetros desde query (GET) o body (POST)
+        const params = { ...req.query, ...req.body };
+        const { page = 1, limit = 10, search, sortBy = 'nombre', sortOrder = 'asc' } = params;
         
         // Construir filtro de búsqueda
         let filter = {};
@@ -89,7 +91,7 @@ const getCentroCostos = async (req: Request, res: Response) => {
         
         // Calcular paginación
         const pageNum = Math.max(1, parseInt(page as string));
-        const limitNum = Math.max(1, Math.min(100, parseInt(limit as string)));
+        const limitNum = Math.max(1, Math.min(10000, parseInt(limit as string))); // Aumentar límite máximo
         const skip = (pageNum - 1) * limitNum;
         
         // Ejecutar consultas

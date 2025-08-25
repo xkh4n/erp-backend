@@ -110,23 +110,48 @@ app.use(securityHeaders);
 
 // Función para configurar sesiones después de la conexión DB
 export const configureSession = (mongoUrl: string) => {
-    app.use(expressSession({
-        secret: process.env.SESSION_SECRET!,
-        name: process.env.SESSION_NAME || 'sid',
-        resave: false,
-        saveUninitialized: false,
-        store: MongoStore.create({
-            mongoUrl: mongoUrl,
-            touchAfter: 24 * 3600, // lazy session update
-            ttl: parseInt(process.env.SESSION_TTL_HOURS!) * 60 * 60 // TTL en segundos
-        }),
-        cookie: {
-            secure: process.env.NODE_ENV === 'production', // HTTPS en producción
-            httpOnly: true,
-            maxAge: parseInt(process.env.SESSION_TTL_HOURS!) * 60 * 60 * 1000, // TTL en ms
-            sameSite: 'strict'
+    try {
+        // Validar variables de entorno requeridas
+        const sessionSecret = process.env.SESSION_SECRET;
+        const sessionTTL = process.env.SESSION_TTL_HOURS;
+        
+        if (!sessionSecret) {
+            logger.error('SESSION_SECRET no está configurado en las variables de entorno');
+            throw new Error('SESSION_SECRET is required');
         }
-    }));
+        
+        if (!sessionTTL || isNaN(parseInt(sessionTTL))) {
+            logger.warn('SESSION_TTL_HOURS no está configurado o es inválido, usando valor por defecto: 8 horas');
+        }
+        
+        const ttlHours = parseInt(sessionTTL || '8');
+        
+        logger.info(`Configurando sesiones con TTL de ${ttlHours} horas`);
+        
+        app.use(expressSession({
+            secret: sessionSecret,
+            name: process.env.SESSION_NAME || 'sid',
+            resave: false,
+            saveUninitialized: false,
+            store: MongoStore.create({
+                mongoUrl: mongoUrl,
+                touchAfter: 24 * 3600, // lazy session update
+                ttl: ttlHours * 60 * 60 // TTL en segundos
+            }),
+            cookie: {
+                secure: process.env.NODE_ENV === 'production', // HTTPS en producción
+                httpOnly: true,
+                maxAge: ttlHours * 60 * 60 * 1000, // TTL en ms
+                sameSite: 'strict'
+            }
+        }));
+        
+        logger.info('Middleware de sesiones configurado correctamente');
+        
+    } catch (error) {
+        logger.error('Error al configurar sesiones:', error);
+        logger.warn('Continuando sin sesiones - solo se usarán JWT tokens');
+    }
 };
 
 /* ROUTE CONFIGURATION */

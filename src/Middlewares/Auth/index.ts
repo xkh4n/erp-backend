@@ -17,6 +17,7 @@ declare global {
             user?: {
                 id: string;
                 username: string;
+                nombre?: string;
                 role: string;
                 permissions: string[];
                 sessionId?: string;
@@ -62,6 +63,7 @@ export const requireAuth = async (req: Request, res: Response, next: NextFunctio
             req.user = {
                 id: payload.userId,
                 username: payload.username,
+                nombre: payload.nombre,
                 role: payload.role,
                 permissions: payload.permissions,
                 sessionId: payload.sessionId

@@ -12,12 +12,13 @@ import { IInventory } from '../../Interfaces/Inventario';
 /* MODELS */
 import Inventario from '../../Models/inventarioModel';
 import Gerencia from '../../Models/gerenciaModel';
+import CentroCosto from '../../Models/centrocostosModel';
 import SubEstadosActivos from '../../Models/subEstadosActivosModel';
 import Producto from '../../Models/productoModel';
 
 /* LIBRARIES */
 import { getChileDateTime } from '../../Library/Utils/ManageDate';
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 import { IsId, IsParagraph } from '../../Library/Validations';
 
 /**
@@ -30,7 +31,7 @@ const agregarInventario = async (req: Request, res: Response): Promise<void> => 
     const { 
         productoId, 
         numeroSerie, 
-        gerencia, 
+        centroCosto, 
         modelo, 
         precio,
         nroSolicitud,
@@ -42,7 +43,7 @@ const agregarInventario = async (req: Request, res: Response): Promise<void> => 
     const inventarioGuardado = await guardarInventario(
         productoId, 
         numeroSerie, 
-        gerencia, 
+        centroCosto, 
         modelo, 
         precio,
         nroSolicitud,
@@ -73,7 +74,7 @@ const agregarInventario = async (req: Request, res: Response): Promise<void> => 
 const crearInventarioDesdeRecepcion = async (
     productoId: string, 
     numeroSerie: string, 
-    gerencia: string, 
+    centroCosto: string, 
     modelo: string, 
     precio: number,
     nroSolicitud?: string,
@@ -85,7 +86,7 @@ const crearInventarioDesdeRecepcion = async (
     const inventarioGuardado = await guardarInventario(
         productoId, 
         numeroSerie, 
-        gerencia, 
+        centroCosto, 
         modelo, 
         precio,
         nroSolicitud,
@@ -99,7 +100,7 @@ const crearInventarioDesdeRecepcion = async (
 const guardarInventario = async (
     productoId: string, 
     numeroSerie: string, 
-    gerencia: string, 
+    centroCosto: string, 
     modelo: string, 
     precio: number,
     nroSolicitud?: string,
@@ -114,8 +115,8 @@ const guardarInventario = async (
     if (!IsParagraph(numeroSerie)) {
         throw createValidationError('El número de serie debe tener entre 3 y 50 caracteres', 'Serie: ' + numeroSerie);
     }
-    if (!IsId(gerencia)) {
-        throw createValidationError('El ID de la gerencia es inválido', 'Gerencia: ' + gerencia);
+    if (!IsId(centroCosto)) {
+        throw createValidationError('El ID del centro de costo es inválido', 'Centro de Costo: ' + centroCosto);
     }
     if(!IsParagraph(modelo)) {
         throw createValidationError('El modelo debe tener entre 3 y 50 caracteres', 'Modelo: ' + modelo);
@@ -124,9 +125,9 @@ const guardarInventario = async (
     if (!subEstados) {
         throw createNotFoundError('No existe un estado activo con el código "DISPONIBLE"');
     }
-    const gerencias = await Gerencia.findById(gerencia);
-    if (!gerencias) {
-        throw createNotFoundError('No existe una gerencia con ese ID', 'Gerencia: ' + gerencia);
+    const centrosCosto = await CentroCosto.findById(centroCosto);
+    if (!centrosCosto) {
+        throw createNotFoundError('No existe un centro de costo con ese ID', 'Centro de Costo: ' + centroCosto);
     }
     const productos = await Producto.findById(productoId);
     if (!productos) {
@@ -159,7 +160,7 @@ const guardarInventario = async (
         modelo: modelo,
         serialNumber: numeroSerie.toUpperCase(),
         status: subEstados._id,
-        gerencia: gerencias._id,
+        centroCosto: centrosCosto._id,
         // Campos de recepción
         nroSolicitud: nroSolicitud,
         proveedor: proveedorId,
@@ -200,6 +201,7 @@ const guardarInventario = async (
     }
     return inventarioGuardado;
 }
+
 
 export {
     agregarInventario,
