@@ -55,7 +55,22 @@ const NewUser = async (req: Request, res: Response) => {
                 } 
             }));
         }
-        const userSave = await Promise.all(promise).then().catch((error: any) => {
+        const passwordHash = hashPassword(password);
+        if(!passwordHash){
+            throw createServerError('Sucedió un error Inesperado');
+        }
+        const newUser: IUser = {
+            name: name,
+            email: email,
+            password: passwordHash,
+            role: "guest",
+            isActive: false,
+            createdAt: new Date(),
+            updatedAt: new Date()
+        };
+        
+        const user = new User(newUser);
+        const userSave = await user.save().then().catch((error: any) => {
             if (error.code === 11000) {
                 throw createAuthorizationError('El email ya está registrado');
             } else {
