@@ -85,9 +85,9 @@ const authLimiter = rateLimit({
     legacyHeaders: false,
 });
 
-// Aplicar rate limiting a rutas de autenticación específicas - Comentado temporalmente
-// app.use('/api/1.0/login', authLimiter);
-// app.use('/api/1.0/refresh', authLimiter);
+// Aplicar rate limiting a rutas de autenticación específicas
+app.use('/api/1.0/login', authLimiter);
+app.use('/api/1.0/refresh', authLimiter);
 
 // Sanitización contra inyecciones NoSQL - Middleware personalizado compatible con Express v5
 app.use(customMongoSanitize({
