@@ -14,6 +14,7 @@ import {
 } from '../../Middlewares/Validations';
 
 /* ROUTES */
+/*
 gerencia.put('/gerencia/nueva', validateGerencia, setGerencia);
 gerencia.post('/gerencia/todas', getAllGerencia);
 gerencia.post('/gerencia/getbyid', validateObjectIdInBody, getGerenciaById);
@@ -24,6 +25,17 @@ gerencia.patch('/gerencia/updatebyid', validateObjectIdInBody, updateGerenciaByI
 gerencia.patch('/gerencia/updatebycodigo', validateGerenciaCodigo, updateGerenciaByCodigo);
 gerencia.patch('/gerencia/updatebyname', validateGerenciaName, updateGerenciaByName);
 gerencia.patch('/gerencia/estado', validateObjectIdInBody, updateStateGerenciaById);
+*/
 
+gerencia.put('/gerencia/nueva', setGerencia);
+gerencia.post('/gerencia/todas', getAllGerencia);
+gerencia.post('/gerencia/getbyid', getGerenciaById);
+gerencia.post('/gerencia/getbyname', getGerenciaByName);
+gerencia.post('/gerencia/getbycodigo', getGerenciaByCodigo);
+gerencia.post('/gerencia/getbystate', getGerenciaByState);
+gerencia.patch('/gerencia/updatebyid', updateGerenciaById);
+gerencia.patch('/gerencia/updatebycodigo', updateGerenciaByCodigo);
+gerencia.patch('/gerencia/updatebyname', updateGerenciaByName);
+gerencia.patch('/gerencia/estado', updateStateGerenciaById);
 
 export default gerencia;

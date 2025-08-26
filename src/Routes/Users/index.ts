@@ -8,8 +8,14 @@ import { requireAuth, requirePermission } from '../../Middlewares/Auth';
 
 const usuarios = Router();
 
+/*
 usuarios.post('/users/all', requireAuth, requirePermission('admin','read'), getAllUsers);
 usuarios.post('/users/byid', requireAuth, requirePermission('admin','read'), getUserById);
 usuarios.post('/users/byusername', requireAuth, requirePermission('admin','read'), getUserByUsername);
+*/
+
+usuarios.post('/users/all', getAllUsers);
+usuarios.post('/users/byid', getUserById);
+usuarios.post('/users/byusername', getUserByUsername);
 
 export default usuarios;

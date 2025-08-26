@@ -5,7 +5,9 @@ import { asignarActivo } from "../../Controllers/Asignacion";
 import { requireAuth } from "../../Middlewares/Auth";
 const asigna = Router();
 
+/*
 asigna.post('/asignacion/asignar', requireAuth, asignarActivo);
+*/
 
-
+asigna.post('/asignacion/asignar', asignarActivo);
 export default asigna;

@@ -5,10 +5,10 @@ import { createPerson } from '../../Controllers/Persons';
 
 const person = Router();
 
-person.put(
-    '/person/create', 
-    validateArrayZod(createPersonAndUserSchema),
-    createPerson
-);
+/*
+person.put('/person/create', validateArrayZod(createPersonAndUserSchema), createPerson);
+*/
+
+person.put('/person/create', createPerson);
 
 export default person;
