@@ -6,7 +6,7 @@ export interface ISolicitud extends Document {
     solicitante: string;
     cargoSolicitante: string;
     beneficiario: string;
-    gerencia: Types.ObjectId; // ObjectId reference
+    centroCosto: Types.ObjectId; // ObjectId reference al centro de costo
     emailSolicitante: string;
     telefonoSolicitante: string;
     telefonoBeneficiario: string;
@@ -16,21 +16,14 @@ export interface ISolicitud extends Document {
     fechaCreacion: Date;
     fechaModificacion: Date;
     fechaAprobacion?: Date;
-    fechaRechazo?: Date;
-    fechaEntrega?: Date;
-    fechaVencimiento?: Date;
-    usuarioCreador?: string; // User ID of the creator
     usuarioAprobador?: string;
-    usuarioRechazador?: string;
     motivoRechazo?: string;
-    usuarioModificador?: string; // User ID of the last modifier
     prioridad: 'baja' | 'media' | 'alta' | 'urgente';
     fechaRequerida?: Date;
-    centroCosto?: string;
 }
 
-export interface ISolicitudPopulated extends Omit<ISolicitud, 'gerencia'> {
-    gerencia: {
+export interface ISolicitudPopulated extends Omit<ISolicitud, 'centroCosto'> {
+    centroCosto: {
         _id: string;
         codigo: string;
         nombre: string;
@@ -47,5 +40,5 @@ export interface ISolicitudFilter {
     usuarioAprobador?: string;
     prioridad?: 'baja' | 'media' | 'alta' | 'urgente';
     fechaRequerida?: Date;
-    centroCosto?: string;
+    centroCosto?: Types.ObjectId;
 }

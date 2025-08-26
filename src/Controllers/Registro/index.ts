@@ -39,15 +39,12 @@ const NewUser = async (req: Request, res: Response) => {
             if(!passwordHash){
                 throw createServerError('Sucedió un error Inesperado');
             }
-            const newUser: IUser = {
-                name: name,
-                email: email.toLowerCase().trim(),
+            const newUser = new User({
+                username: name,
                 password: passwordHash,
-                role: "guest",
-                isActive: false,
-                createdAt: new Date(),
-                updatedAt: new Date()
-            };
+                role: null, // Assuming role is set later or is optional
+                isActive: false
+            });
             const userExists = await User.findOne({ email: email });
             if (userExists) {
                 throw createAuthorizationError('El email ya está registrado');

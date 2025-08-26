@@ -21,7 +21,7 @@ import { crearInventarioDesdeRecepcion } from "../Inventario/index";
 
 /* LIBRARIES */
 import { getChileDateTime } from '../../Library/Utils/ManageDate';
-import { IsEmail, IsId, IsName, IsPhone, IsUsername, IsParagraph, IsCodigoSolicitud, IsObjectId, IsNumero } from '../../Library/Validations';
+import { IsEmail, IsName, IsPhone, IsUsername, IsParagraph, IsCodigoSolicitud, IsObjectId, IsNumero } from '../../Library/Validations';
 
 /** END-POINT */
 import { Request, Response } from 'express';
@@ -42,7 +42,7 @@ const createSolicitud = async (req: Request, res: Response): Promise<void> => {
         const promiseDetalle: Promise<IDetalleSolicitud>[] = [];
         let state = false;
         //logger.info(`Creando nueva Solicitud con los datos: ${JSON.stringify(req.body)}`);
-        const { nroSolicitud, solicitante, cargoSolicitante, beneficiario, gerencia, emailSolicitante, telefonoSolicitante, telefonoBeneficiario, cuentaBeneficiario, observaciones, detalleSolicitud } = req.body;
+        const { nroSolicitud, solicitante, cargoSolicitante, beneficiario, ccosto, emailSolicitante, telefonoSolicitante, telefonoBeneficiario, cuentaBeneficiario, observaciones, detalleSolicitud } = req.body;
         /*
          {
             "nroSolicitud":"20250707081922951",
@@ -57,7 +57,7 @@ const createSolicitud = async (req: Request, res: Response): Promise<void> => {
             "observaciones":"ELEMENTOS PARA IMPLEMENTAR CAMBIO DE MODELO DE CAJAS A AUTOSERVICIO EN TIENDA SANTA ROSA.",
             "detalleSolicitud"
         */
-        if (!nroSolicitud || !solicitante || !cargoSolicitante || !beneficiario || !gerencia || !emailSolicitante || !telefonoSolicitante || !telefonoBeneficiario || !cuentaBeneficiario || !observaciones) {
+        if (!nroSolicitud || !solicitante || !cargoSolicitante || !beneficiario || !ccosto || !emailSolicitante || !telefonoSolicitante || !telefonoBeneficiario || !cuentaBeneficiario || !observaciones) {
             throw createValidationError('Faltan datos obligatorios', []);
         }
         if(!IsName(solicitante) || !IsName(cargoSolicitante) || !IsName(beneficiario)){
@@ -75,8 +75,8 @@ const createSolicitud = async (req: Request, res: Response): Promise<void> => {
         if(!IsUsername(cuentaBeneficiario)){
             throw createValidationError('La cuenta del beneficiario no es válida', cuentaBeneficiario);
         }
-        if(!IsObjectId(gerencia)){
-            throw createValidationError('El ID de la gerencia no es válido', gerencia);
+        if(!IsObjectId(ccosto)){
+            throw createValidationError('El ID del centro de costo no es válido', ccosto);
         }
         if(!IsCodigoSolicitud(nroSolicitud)){
             throw createValidationError('El número de solicitud no es válido', nroSolicitud);
@@ -89,7 +89,7 @@ const createSolicitud = async (req: Request, res: Response): Promise<void> => {
             solicitante: solicitante,
             cargoSolicitante: cargoSolicitante,
             beneficiario: beneficiario,
-            gerencia: gerencia,
+            centroCosto: ccosto,
             emailSolicitante: emailSolicitante,
             telefonoSolicitante: telefonoSolicitante,
             telefonoBeneficiario:telefonoBeneficiario,
@@ -188,7 +188,8 @@ const createSolicitud = async (req: Request, res: Response): Promise<void> => {
 const getAllSolicitudes = async (req: Request, res: Response): Promise<void> => {
     try {
         const solicitudes = await SolicitudModel.find()
-            .populate('gerencia')
+            .populate('centroCosto')
+            .sort({ fechaCreacion: -1 }); // Ordenar por fecha de creación descendente
         if (solicitudes.length === 0) {
             throw createNotFoundError('No se encontraron solicitudes', []);
         }
@@ -213,7 +214,7 @@ const getSoliciudOnly = async (req: Request, res: Response): Promise<void> => {
         if (!IsObjectId(id)) {
             throw createValidationError('El ID de la solicitud no es válido', id);
         }
-        const solicitud = await SolicitudModel.findById(id).populate('gerencia').populate('usuarioCreador').populate('usuarioModificador').populate('usuarioAprobador').populate('usuarioRechazador');
+        const solicitud = await SolicitudModel.findById(id).populate('centroCosto');
         if (!solicitud) {
             throw createNotFoundError('Solicitud no encontrada', id);
         }
@@ -434,7 +435,6 @@ const rechazarProducto = async (req: Request, res: Response): Promise<void> => {
             // Si todos los productos están rechazados, rechazar la solicitud completa
             if (totalProductos === productosRechazados) {
                 solicitud.estado = 'rechazado';
-                solicitud.fechaRechazo = getChileDateTime();
                 solicitud.fechaModificacion = getChileDateTime();
                 await solicitud.save();
             }
@@ -489,7 +489,6 @@ const rechazarSolicitud = async (req: Request, res: Response): Promise<void> => 
         
         // Actualizar la solicitud principal
         solicitud.estado = 'rechazado';
-        solicitud.fechaRechazo = getChileDateTime();
         solicitud.fechaModificacion = getChileDateTime();
         
         // Si se proporciona motivo de rechazo, agregarlo a las observaciones
@@ -526,11 +525,7 @@ const getSolicitudByEstado = async (req: Request, res: Response): Promise<void> 
             throw createValidationError('El estado de la solicitud es obligatorio', []);
         }
         const solicitudes = await SolicitudModel.find({ estado: estado })
-            .populate('gerencia')
-            .populate('usuarioCreador')
-            .populate('usuarioModificador')
-            .populate('usuarioAprobador')
-            .populate('usuarioRechazador');
+            .populate('centroCosto');
         if (solicitudes.length === 0) {
             throw createNotFoundError(`No se encontraron solicitudes con el estado ${estado}`, []);
         }
@@ -552,7 +547,7 @@ const getSolicitudByEstado = async (req: Request, res: Response): Promise<void> 
 const getSolicitudPending = async (req: Request, res: Response): Promise<void> => {
     try {
         const solicitudes = await SolicitudModel.find({ estado: 'pendiente' })
-            .populate('gerencia')
+            .populate('centroCosto')
         if (solicitudes.length === 0) {
             throw createNotFoundError('No hay solicitudes pendientes', []);
         }
@@ -576,7 +571,7 @@ const getSolicitydAproved = async (req: Request, res: Response): Promise<void> =
         // Incluir solicitudes aprobadas y en proceso (recepciones parciales)
         const solicitudes = await SolicitudModel.find({ 
             estado: { $in: ['aprobado', 'en_proceso'] } 
-        }).populate('gerencia');
+        }).populate('centroCosto');
         
         if (solicitudes.length === 0) {
             throw createNotFoundError('No hay solicitudes aprobadas o en proceso', []);
@@ -649,7 +644,7 @@ const getDetalleBySolicitudIdForRecepcion = async (req: Request, res: Response):
     }
 }
 
-const getGerenciaByNroSolicitud = async (req: Request, res: Response): Promise<any> => {
+const getCentroCostoByNroSolicitud = async (req: Request, res: Response): Promise<any> => {
     try {
         const { nroSolicitud } = req.body;
         // Validar que el número de solicitud no esté vacío
@@ -665,8 +660,8 @@ const getGerenciaByNroSolicitud = async (req: Request, res: Response): Promise<a
         }
         res.status(200).json({
             codigo: 200,
-            data: solicitud.gerencia,
-            mensaje: 'Gerencia obtenida exitosamente'
+            data: solicitud.centroCosto,
+            mensaje: 'Centro de costo obtenido exitosamente'
         });
     } catch (error) {
         console.error(error);
@@ -687,5 +682,5 @@ export {
     aprobarSolicitud,
     rechazarProducto,
     rechazarSolicitud,
-    getGerenciaByNroSolicitud
+    getCentroCostoByNroSolicitud
 };

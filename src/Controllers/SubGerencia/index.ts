@@ -156,7 +156,7 @@ const getSubGciaByEstado = async (req: Request, res: Response) : Promise<void> =
             throw createValidationError('El estado no es válido', estado);
         }
         let state = false;
-        if (estado === 'true' || estado === '1'){
+        if (estado === 'true' || estado === '1' || estado === true || estado === 1){
             state = true;
         }
         const subgerencia = await SubGerencia.find({estado: state});
@@ -330,6 +330,41 @@ const updateSubGerenciaByCodigo = async (req: Request, res: Response) : Promise<
         }
     }
 }
+
+const updateStateById = async (req: Request, res: Response) : Promise<void> => {
+    try {
+        const { id, estado } = req.body;
+        if(!IsId(id)){
+            throw createValidationError('El id no es válido', id);
+        }
+        if (!IsBoolean(estado)){
+            throw createValidationError('El estado no es válido', estado);
+        }
+        let state = false;
+        if (estado === 'true' || estado === '1' || estado === true || estado === 1){
+            state = true;
+        }
+        const subgerencia = await SubGerencia.findByIdAndUpdate(id, {
+            estado: state
+        })
+        if (!subgerencia) {
+            throw createNotFoundError('No se encontró la Subgerencia');
+        }
+        res.status(200).json({
+            codigo: 200,
+            data: subgerencia
+        })
+    } catch (error) {
+        console.log(error);
+        if (error instanceof CustomError) {
+            res.status(error.code).json(error.toJSON());
+        }else{
+            const serverError = createServerError('Sucedió un error Inesperado');
+            res.status(serverError.code).json(serverError.toJSON());
+        }
+    }
+}
+
 export{
     setSubGerencia,
     getAllSubGerencia,
@@ -339,5 +374,6 @@ export{
     getSubGerenciaByIdGerencia,
     getSubGerenciaByCodigoGerencia,
     updateSubGerenciaById,
-    updateSubGerenciaByCodigo
+    updateSubGerenciaByCodigo,
+    updateStateById
 }

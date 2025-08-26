@@ -30,9 +30,9 @@ const inventarioSchema = new mongoose.Schema<IInventory>({
         ref: 'SubEstadosActivos',
         required: true
     },
-    gerencia: {
+    centroCosto: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Gerencia',
+        ref: 'CentroCosto',
         required: true,
         index: true
     },

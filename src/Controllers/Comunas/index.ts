@@ -335,6 +335,7 @@ const updateById = async (req: Request, res: Response) => {
     try {
         const { id, cod_territorial, cod_postal, cod_sii, name_comuna, ciudad } = req.body;
         if(!IsId(id)){
+            logger.warn('El ID de la comuna no es válido', id);
             throw createConflictError('El ID de la comuna no es válido', id);
         }
         if(!IsTerritorial(cod_territorial)){
@@ -349,12 +350,13 @@ const updateById = async (req: Request, res: Response) => {
         if(!IsNameDepto(name_comuna)){
             throw createConflictError('El nombre de la comuna no es válido', name_comuna);
         }
-        if(!IsId(ciudad)){
-            throw createConflictError('El ID de la ciudad no es válido', ciudad);
+        const city = await Ciudad.findOne({iata_codes: ciudad});
+        if(!city) {
+            throw createNotFoundError('Ciudad no encontrada', ciudad);
         }
         const updatedComuna = await Comuna.findByIdAndUpdate(
             id,
-            { cod_territorial, cod_postal, cod_sii, name_comuna, ciudad },
+            { cod_territorial, cod_postal, cod_sii, name_comuna, ciudad: city._id },
             { new: true, runValidators: true }
         );
         if (!updatedComuna) {
