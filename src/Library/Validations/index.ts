@@ -13,7 +13,7 @@ const IsUsername = (username: string) => {
     }
     // Eliminar espacios en blanco al inicio y al final
     username = username.trim();
-    const regex = /^[a-z]{1,20}$/;
+    const regex = /^[a-z_.0-9]{1,20}$/;
     // Verificar si el valor no cumple con la expresión regular
     if (!regex.test(username)) {
       logger.error(`The input "${username}" is not a valid username`);

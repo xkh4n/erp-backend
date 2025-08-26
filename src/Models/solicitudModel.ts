@@ -27,9 +27,9 @@ const solicitudSchema = new mongoose.Schema<ISolicitud>({
         trim: true,
         uppercase: true
     },
-    gerencia: {
+    centroCosto: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Gerencia',
+        ref: 'CentroCostos',
         required: true,
         index: true
     },
@@ -102,11 +102,6 @@ const solicitudSchema = new mongoose.Schema<ISolicitud>({
     fechaRequerida: {
         type: Date,
         index: true
-    },
-    centroCosto: {
-        type: String,
-        trim: true,
-        uppercase: true
     }
 }, {
     timestamps: { 
@@ -121,7 +116,7 @@ const solicitudSchema = new mongoose.Schema<ISolicitud>({
 
 // Índices compuestos para optimizar consultas
 solicitudSchema.index({ nroSolicitud: 1, estado: 1 });
-solicitudSchema.index({ gerencia: 1, estado: 1 });
+solicitudSchema.index({ centroCosto: 1, estado: 1 });
 solicitudSchema.index({ fechaCreacion: -1, estado: 1 });
 solicitudSchema.index({ solicitante: 1, fechaCreacion: -1 });
 

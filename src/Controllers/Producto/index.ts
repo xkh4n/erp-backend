@@ -179,7 +179,7 @@ const recibirProducto = async (req: Request, res: Response): Promise<void> => {
         cantidad, 
         numeroSerie, 
         nroSolicitud, 
-        gerencia, 
+        centroCosto, 
         valor, 
         modelo, 
         marca,
@@ -191,14 +191,14 @@ const recibirProducto = async (req: Request, res: Response): Promise<void> => {
         // Validar datos de entrada
         const precio = Number(valor) || 0;
         const total = Number(cantidad) || 0;
-        if (!productoId || !numeroSerie || !nroSolicitud || !gerencia || !modelo || !marca || !proveedorId || !tipoDocumento || !numeroDocumento) {
-            throw createValidationError('Faltan datos obligatorios para la recepción (productoId, cantidad, numeroSerie, nroSolicitud, gerencia, valor, modelo, marca, proveedorId, tipoDocumento, numeroDocumento)', []);
+        if (!productoId || !numeroSerie || !nroSolicitud || !centroCosto || !modelo || !marca || !proveedorId || !tipoDocumento || !numeroDocumento) {
+            throw createValidationError('Faltan datos obligatorios para la recepción (productoId, cantidad, numeroSerie, nroSolicitud, centroCosto, valor, modelo, marca, proveedorId, tipoDocumento, numeroDocumento)', []);
         }
         if (!IsId(productoId)) {
             throw createValidationError('El ID del producto no es válido', productoId);
         }
-        if (!IsId(gerencia)) {
-            throw createValidationError('El ID de la gerencia no es válido', gerencia);
+        if (!IsId(centroCosto)) {
+            throw createValidationError('El ID del centro de costo no es válido', centroCosto);
         }
         if (!IsId(proveedorId)) {
             throw createValidationError('El ID del proveedor no es válido', proveedorId);
@@ -229,7 +229,7 @@ const recibirProducto = async (req: Request, res: Response): Promise<void> => {
         const inventarioCreado = await crearInventarioDesdeRecepcion(
             productoId, 
             numeroSerie, 
-            gerencia, 
+            centroCosto, 
             modelo, 
             precio,
             nroSolicitud,

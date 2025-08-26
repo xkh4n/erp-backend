@@ -472,6 +472,34 @@ export const validateRole = [
   handleValidationErrors
 ];
 
+// Validación para obtener rol por ID
+export const validateRoleById = [
+  body('id')
+    .trim()
+    .notEmpty().withMessage('El ID del rol es obligatorio')
+    .custom((value) => {
+      if (!IsObjectId(value)) {
+        throw new Error('El ID del rol debe ser un ObjectId válido');
+      }
+      return true;
+    }),
+  
+  handleValidationErrors
+];
+
+export const validateRoleName = [
+  body('name')
+    .trim()
+    .notEmpty().withMessage('El nombre del rol es obligatorio')
+    .custom((value) => {
+      if (!IsName(value)) {
+        throw new Error('El nombre del rol contiene caracteres no válidos');
+      }
+      return true;
+    })
+    .customSanitizer(value => sanitizeHtml(value))
+];
+
 // Validación para creación de persona con usuario
 export const validateCreatePerson = [
   body('dni')
@@ -629,6 +657,41 @@ export const validateCreatePerson = [
     .custom((value) => {
       if (!IsObjectId(value)) {
         throw new Error('ID de rol no válido');
+      }
+      return true;
+    }),
+  
+  handleValidationErrors
+];
+
+// Validaciones para Asignación
+export const validateAsignacion = [
+  body('dni')
+    .trim()
+    .notEmpty().withMessage('El DNI es obligatorio')
+    .custom((value) => {
+      if (!IsRut(value)) {
+        throw new Error('El DNI debe ser un RUT válido');
+      }
+      return true;
+    }),
+  
+  body('serie')
+    .trim()
+    .notEmpty().withMessage('La serie es obligatoria')
+    .custom((value) => {
+      if (!IsParagraph(value)) {
+        throw new Error('La serie contiene caracteres no válidos');
+      }
+      return true;
+    })
+    .customSanitizer(value => sanitizeHtml(value)),
+  
+  body('centrocosto')
+    .notEmpty().withMessage('El centro de costo es obligatorio')
+    .custom((value) => {
+      if (!IsNumero(value)) {
+        throw new Error('El centro de costo debe ser un número válido');
       }
       return true;
     }),

@@ -4,7 +4,7 @@ const logger = log4js.getLogger('Roles Controllers:');
 logger.level = 'all';
 
 /** PERSONALIZED ERRORS */
-import {CustomError, createServerError, createValidationError } from "../../Library/Errors/index";
+import {CustomError, createServerError, createValidationError, createNotFoundError } from "../../Library/Errors/index";
 
 /* INTERFACES */
 import { IRoles } from '../../Interfaces';
@@ -16,6 +16,7 @@ import Permissions from '../../Models/permissionsModel';
 /* DEPENDENCIES */
 import { Request, Response } from 'express';
 import { getChileDateTime } from '../../Library/Utils/ManageDate';
+import { IsBoolean } from '../../Library/Validations';
 
 const createRole = async (req: Request, res: Response): Promise<void> => {
     try {
@@ -82,6 +83,109 @@ const createRole = async (req: Request, res: Response): Promise<void> => {
     }
 };
 
+const getAllRoles = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const roles = await Roles.find().populate('permissions', 'name');
+        res.status(200).json({
+            codigo: 200,
+            message: 'Roles obtenidos con éxito',
+            data: roles
+        });
+    } catch (error) {
+        console.log(error);
+        if (error instanceof CustomError) {
+            res.status(error.code).json(error.toJSON());
+        } else {
+            const serverError = createServerError('Sucedió un error inesperado al obtener los Roles');
+            res.status(serverError.code).json(serverError.toJSON());
+        }
+    }
+};
+
+const getRoleById = async (req: Request, res: Response): Promise<void> => {
+    const { id } = req.body;
+    try {
+        const role = await Roles.findById(id).populate('permissions', 'name');
+        if (!role) {
+            const notFoundError = createNotFoundError('Rol no encontrado');
+            res.status(notFoundError.code).json(notFoundError.toJSON());
+            return;
+        }
+        res.status(200).json({
+            codigo: 200,
+            message: 'Rol obtenido con éxito',
+            data: role
+        });
+    } catch (error) {
+        console.log(error);
+        if (error instanceof CustomError) {
+            res.status(error.code).json(error.toJSON());
+        } else {
+            const serverError = createServerError('Sucedió un error inesperado al obtener el Rol');
+            res.status(serverError.code).json(serverError.toJSON());
+        }
+    }
+};
+
+const getRoleByRole = async (req: Request, res: Response): Promise<void> => {
+    const { name } = req.body;
+    try {
+        const role = await Roles.findOne({ name: name }).populate('permissions', 'name');
+        if (!role) {
+            const notFoundError = createNotFoundError('Rol no encontrado');
+            res.status(notFoundError.code).json(notFoundError.toJSON());
+            return;
+        }
+        res.status(200).json({
+            codigo: 200,
+            message: 'Rol obtenido con éxito',
+            data: role
+        });
+    } catch (error) {
+        console.log(error);
+        if (error instanceof CustomError) {
+            res.status(error.code).json(error.toJSON());
+        } else {
+            const serverError = createServerError('Sucedió un error inesperado al obtener el Rol');
+            res.status(serverError.code).json(serverError.toJSON());
+        }
+    }
+};
+
+const updateRoleStatus = async (req: Request, res: Response): Promise<void> => {
+    const { id, isActive } = req.body;
+    try {
+        const role = await Roles.findById(id);
+        if (!role) {
+            const notFoundError = createNotFoundError('Rol no encontrado');
+            res.status(notFoundError.code).json(notFoundError.toJSON());
+            return;
+        }
+        if(!IsBoolean(isActive)){
+            throw createValidationError("El estado activo debe ser un valor booleano");
+        }
+        role.isActive = isActive;
+        await role.save();
+        res.status(200).json({
+            codigo: 200,
+            message: 'Estado del rol actualizado con éxito',
+            data: role
+        });
+    } catch (error) {
+        console.log(error);
+        if (error instanceof CustomError) {
+            res.status(error.code).json(error.toJSON());
+        } else {
+            const serverError = createServerError('Sucedió un error inesperado al actualizar el estado del Rol');
+            res.status(serverError.code).json(serverError.toJSON());
+        }
+    }
+};
+
 export {
     createRole,
+    getAllRoles,
+    getRoleById,
+    getRoleByRole,
+    updateRoleStatus
 }

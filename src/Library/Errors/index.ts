@@ -11,6 +11,7 @@ export enum ErrorType {
   DATABASE = 'DATABASE_ERROR',
   SERVER = 'SERVER_ERROR',
   CONFLICT = 'CONFLICT_ERROR',
+  BAD_REQUEST = 'BAD_REQUEST_ERROR',
 }
 
 export interface ErrorResponse {
@@ -70,4 +71,8 @@ export const createServerError = (message: string, details?: any) => {
 
 export const createConflictError = (message: string, details?: any) => {
   return new CustomError(ErrorType.CONFLICT, message, 409, details);
+};
+
+export const createBadRequestError = (message: string, details?: any) => {
+  return new CustomError(ErrorType.BAD_REQUEST, message, 400, details);
 };

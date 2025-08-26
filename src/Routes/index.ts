@@ -19,9 +19,12 @@ import solicitud from './Solicitud';
 import kardex from './Kardex';
 import inventory from './Inventario';
 import persons from './Persons';
-import users from './Users';
 import permisos from './Permissions';
 import role from './Role';
+import passwordRoutes from './Password';
+import centroCostos from './CentroCostos';
+import usuarios from './Users';
+import asigna from './Asignacion';
 
 
 
@@ -47,7 +50,10 @@ export{
     kardex,
     inventory,
     persons,
-    users,
     permisos,
-    role
+    role,
+    passwordRoutes,
+    centroCostos,
+    usuarios,
+    asigna
 }

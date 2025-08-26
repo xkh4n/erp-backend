@@ -1,10 +1,11 @@
 import mongoose from "mongoose";
 export default interface IAsignacion {
-  nombre: string;
-  descripcion: string;
+  userId: mongoose.Schema.Types.ObjectId;
+  serie: string;
   fechaCreacion: Date;
+  fechaModificacion: Date;
   fechaVencimiento: Date;
   estado: mongoose.Schema.Types.ObjectId;
-  usuarioId: string;
+  ccosto: mongoose.Schema.Types.ObjectId;
   inventoryid: mongoose.Schema.Types.ObjectId;
 }
