@@ -6,52 +6,30 @@ const centroCostosRouter = Router();
 import { newCentroCosto, getCentroCostos, getCentroCostoById, updateCentroCosto, deleteCentroCosto } from '../../Controllers/CentroCostos/index';
 
 /* MIDDLEWARES */
-import { requireAuth, requirePermission } from '../../Middlewares/Auth';
+import { conditionalAuth, conditionalPermission, conditionalValidation } from '../../Library/Security/conditionalAuth';
 import { 
-    validateZod, 
-    validateArrayZod,
     centroCostoCreateSchema, 
     centroCostoUpdateSchema,
     centroCostoArraySchema,
     objectIdSchema 
 } from '../../Library/Validations/zod';
 
-/*
 // Crear centro de costo individual
-centroCostosRouter.put('/ccosto/nuevo', requireAuth, requirePermission('data', 'create'), validateZod(centroCostoCreateSchema), newCentroCosto);
+centroCostosRouter.put('/ccosto/nuevo', conditionalValidation(centroCostoCreateSchema), newCentroCosto);
 
 // Crear múltiples centros de costo
-centroCostosRouter.put('/ccosto/bulk', requireAuth, requirePermission('data', 'create'), validateZod(centroCostoArraySchema), newCentroCosto);
+centroCostosRouter.put('/ccosto/bulk', conditionalValidation(centroCostoArraySchema), newCentroCosto);
 
 // Obtener todos los centros de costo
-centroCostosRouter.post('/ccosto/getall', requireAuth, requirePermission('data', 'read'), getCentroCostos);
+centroCostosRouter.post('/ccosto/getall', conditionalAuth, conditionalPermission('data', 'read'), getCentroCostos);
 
 // Obtener centro de costo por ID
-centroCostosRouter.post('/ccosto/byid', requireAuth, requirePermission('data', 'read'), validateZod(objectIdSchema), getCentroCostoById);
+centroCostosRouter.post('/ccosto/byid', conditionalAuth, conditionalPermission('data', 'read'), conditionalValidation(objectIdSchema), getCentroCostoById);
 
 // Actualizar centro de costo
-centroCostosRouter.put('/ccosto/updatebyid', requireAuth, requirePermission('data', 'update'), validateZod(objectIdSchema), validateZod(centroCostoUpdateSchema), updateCentroCosto);
+centroCostosRouter.put('/ccosto/updatebyid', conditionalAuth, conditionalPermission('data', 'update'), conditionalValidation(objectIdSchema), conditionalValidation(centroCostoUpdateSchema), updateCentroCosto);
 
 // Eliminar centro de costo
-centroCostosRouter.delete('/ccosto/deletebyid', requireAuth, requirePermission('data', 'delete'), validateZod(objectIdSchema), deleteCentroCosto);
-*/
-
-// Crear centro de costo individual
-centroCostosRouter.put('/ccosto/nuevo', newCentroCosto);
-
-// Crear múltiples centros de costo
-centroCostosRouter.put('/ccosto/bulk', newCentroCosto);
-
-// Obtener todos los centros de costo
-centroCostosRouter.post('/ccosto/getall', getCentroCostos);
-
-// Obtener centro de costo por ID
-centroCostosRouter.post('/ccosto/byid', getCentroCostoById);
-
-// Actualizar centro de costo
-centroCostosRouter.put('/ccosto/updatebyid', updateCentroCosto);
-
-// Eliminar centro de costo
-centroCostosRouter.delete('/ccosto/deletebyid', deleteCentroCosto);
+centroCostosRouter.delete('/ccosto/deletebyid', conditionalAuth, conditionalPermission('data', 'delete'), conditionalValidation(objectIdSchema), deleteCentroCosto);
 
 export default centroCostosRouter;

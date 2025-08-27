@@ -17,7 +17,6 @@ import Roles from '../../Models/rolesModel';
 /* DEPENDENCIES */
 import { Request, Response } from "express";
 import { hashPassword } from '../../Library/Encrypt';
-import { createHash } from 'crypto';
 
 /* VALIDATIONS */
 import {  IsEmail, IsId, IsName, IsPassword, IsRut, IsUsername } from '../../Library/Validations';
@@ -48,39 +47,6 @@ const calcularDuracion = (inicio: Date, fin: Date): string => {
         return `${minutos}m ${segundos}s`;
     }
 };
-
-/* HYBRID PASSWORD HASHING FUNCTION */
-const hashPasswordHybrid = async (password: string): Promise<string> => {
-    const isDevelopment = process.env.NODE_ENV === 'development';
-    
-    if (isDevelopment) {
-        // SHA256 para desarrollo - RÁPIDO (~0.1ms por hash)
-        const salt = 'dev_salt_2025'; // Salt fijo para desarrollo
-        const hash = createHash('sha256')
-            .update(password + salt)
-            .digest('hex');
-        logger.debug(`🔓 Usando SHA256 para desarrollo (rápido)`);
-        return `sha256_${hash}`;
-    } else {
-        // Argon2 para producción - SEGURO
-        try {
-            const argon2 = require('argon2');
-            const hash = await argon2.hash(password, {
-                type: argon2.argon2id,
-                memoryCost: 2 ** 16, // 64 MB (más rápido que default)
-                timeCost: 2,         // 2 iterations (más rápido que default)
-                parallelism: 1       // 1 thread
-            });
-            logger.debug(`🔒 Usando Argon2 para producción (seguro)`);
-            return hash;
-        } catch (error) {
-            logger.warn(`⚠️ Argon2 no disponible, fallback a bcrypt:`, error.message);
-            // Fallback a bcrypt si argon2 no está disponible
-            return hashPassword(password);
-        }
-    }
-};
-
 
 const createPerson = async (req: Request, res: Response): Promise<void> => {
     try {
@@ -245,8 +211,8 @@ const createPerson = async (req: Request, res: Response): Promise<void> => {
             }
 
             // Crear usuario con la referencia correcta a la persona guardada
-            // HASH HÍBRIDO: SHA256 para desarrollo, Argon2 para producción
-            const hashPass = await hashPasswordHybrid(password);
+            // HASH DE CONTRASEÑA
+            const hashPass = hashPassword(password);
             
             const newIUser = new User({
                 username: username.toLowerCase(),
@@ -293,7 +259,7 @@ const createPerson = async (req: Request, res: Response): Promise<void> => {
                 usuariosGuardados: usuarioSave.length,
                 tiempoTotal: calcularDuracion(timerTotal, new Date()),
                 entorno: process.env.NODE_ENV,
-                hashMethod: process.env.NODE_ENV === 'development' ? 'SHA256' : 'Argon2'
+                hashMethod: `bcrypt (${process.env.NODE_ENV === 'development' ? '8' : '12'} rounds)`
             }
         });
 

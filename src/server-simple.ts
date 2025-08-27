@@ -35,7 +35,6 @@ app.use(cors(corsOptions));
 /* ROUTES */
 import {
     login,
-    registro,
     paises,
     ciudad,
     gerencia,
@@ -66,7 +65,6 @@ const base_path = '/api/' + process.env.API_VER + '/';
 
 // Rutas básicas
 app.use(base_path, login);
-app.use(base_path, registro);
 app.use(base_path, health);
 
 // Rutas de gestión

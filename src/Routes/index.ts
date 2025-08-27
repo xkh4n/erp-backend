@@ -1,5 +1,4 @@
 import login from './Login';
-import registro from './Registro';
 import paises from './Paises';
 import ciudad from './Ciudades';
 import gerencia from './Gerencias';
@@ -29,7 +28,6 @@ import asigna from './Asignacion';
 
 export{
     login,
-    registro,
     paises,
     ciudad,
     gerencia,
