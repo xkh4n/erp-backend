@@ -85,9 +85,9 @@ const authLimiter = rateLimit({
     legacyHeaders: false,
 });
 
-// Aplicar rate limiting a rutas de autenticación específicas
-app.use('/api/1.0/login', authLimiter);
-app.use('/api/1.0/refresh', authLimiter);
+// Aplicar rate limiting a rutas de autenticación específicas - Comentado temporalmente
+// app.use('/api/1.0/login', authLimiter);
+// app.use('/api/1.0/refresh', authLimiter);
 
 // Sanitización contra inyecciones NoSQL - Middleware personalizado compatible con Express v5
 app.use(customMongoSanitize({
@@ -157,7 +157,6 @@ export const configureSession = (mongoUrl: string) => {
 /* ROUTE CONFIGURATION */
 import {
     login,
-    registro,
     paises,
     ciudad,
     gerencia,
@@ -188,7 +187,6 @@ import {
 /* ROUTE CONFIGURATION */
 const base_path = '/api/' + process.env.API_VER + '/';
 app.use(base_path, login);
-app.use(base_path, registro);
 app.use(base_path, paises);
 app.use(base_path, ciudad);
 app.use(base_path, gerencia);

@@ -1,14 +1,11 @@
 import { Router } from 'express';
-import { requireAuth, requirePermission } from '../../Middlewares/Auth';
-import { validateArrayZod, createPersonAndUserSchema } from '../../Library/Validations/zod';
+import { conditionalValidation } from '../../Library/Security/conditionalAuth';
+import { createPersonAndUserSchema } from '../../Library/Validations/zod';
 import { createPerson } from '../../Controllers/Persons';
 
 const person = Router();
 
-/*
-person.put('/person/create', validateArrayZod(createPersonAndUserSchema), createPerson);
-*/
-
+// Temporalmente sin middleware para inicialización
 person.put('/person/create', createPerson);
 
 export default person;

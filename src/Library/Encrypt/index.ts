@@ -1,8 +1,8 @@
 import bcrypt from 'bcryptjs';
 
-
 const hashPassword = (password: string): string => {
-    const saltRounds = 10;
+    // Optimizar rounds según ambiente: desarrollo más rápido, producción más seguro
+    const saltRounds = process.env.NODE_ENV === 'development' ? 8 : 12;
     const salt = bcrypt.genSaltSync(saltRounds);
     return bcrypt.hashSync(password, salt);
 }
