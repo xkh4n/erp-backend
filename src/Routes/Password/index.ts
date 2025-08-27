@@ -6,15 +6,10 @@ const passwordRoutes = Router();
 import { ChangePassword, ResetPassword } from '../../Controllers/Password/index';
 
 /* MIDDLEWARES */
-import { requireAuth } from '../../Middlewares/Auth';
-import { validateZod, changePasswordSchema, objectIdSchema } from '../../Library/Validations/zod';
+import { conditionalAuth, conditionalValidation } from '../../Library/Security/conditionalAuth';
+import { changePasswordSchema, objectIdSchema } from '../../Library/Validations/zod';
 
-/*
-passwordRoutes.post('/change-password', requireAuth, validateZod(changePasswordSchema), ChangePassword);
-passwordRoutes.post('/reset-password', requireAuth, validateZod(objectIdSchema), ResetPassword);
-*/
-
-passwordRoutes.post('/change-password', ChangePassword);
-passwordRoutes.post('/reset-password', ResetPassword);
+passwordRoutes.post('/change-password', conditionalAuth, conditionalValidation(changePasswordSchema), ChangePassword);
+passwordRoutes.post('/reset-password', conditionalAuth, conditionalValidation(objectIdSchema), ResetPassword);
 
 export default passwordRoutes;

@@ -9,20 +9,13 @@ const login = Router();
 import { Login, RefreshToken, Logout, LogoutAll } from '../../Controllers/Login/index';
 
 /* MIDDLEWARES */
-import { requireAuth, optionalAuth } from '../../Middlewares/Auth';
-import { validateZod, loginSchema, refreshTokenSchema } from '../../Library/Validations/zod';
+import { conditionalAuth, conditionalOptionalAuth, conditionalValidation } from '../../Library/Security/conditionalAuth';
+import { loginSchema, refreshTokenSchema } from '../../Library/Validations/zod';
 
-/*
-login.post('/login', Login);
-login.post('/refresh', RefreshToken);
-login.post('/logout', Logout);
-login.post('/logout-all', LogoutAll);
-*/
-
-login.post('/login', validateZod(loginSchema), Login);
-login.post('/refresh', validateZod(refreshTokenSchema), RefreshToken);
-login.post('/logout', optionalAuth, Logout);
-login.post('/logout-all', requireAuth, LogoutAll);
+login.post('/login', conditionalValidation(loginSchema), Login);
+login.post('/refresh', conditionalValidation(refreshTokenSchema), RefreshToken);
+login.post('/logout', conditionalOptionalAuth, Logout);
+login.post('/logout-all', conditionalAuth, LogoutAll);
 
 
 export default login;
