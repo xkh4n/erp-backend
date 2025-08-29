@@ -66,7 +66,6 @@ switch (process.env.NODE_ENV) {
               retryWrites: true,               // Reintentar escrituras en caso de fallo
               retryReads: true                 // Reintentar lecturas en caso de fallo
           };
-          logger.warn(`Connecting to ${SERVER} with URI: ${URI} ...`);
           await mongo.connect(URI, connectionOptions);
           logger.warn(`Connection to ${SERVER} it's Ok`);
           logger.info(`Pool de conexiones configurado: maxPool=${connectionOptions.maxPoolSize}, minPool=${connectionOptions.minPoolSize}`);
