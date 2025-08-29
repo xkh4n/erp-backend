@@ -36,7 +36,7 @@ mongo.set('bufferCommands', false);  // Deshabilitar buffering de comandos
 switch (process.env.NODE_ENV) {
     case 'production':
       PORT = 3030; //PUERTO DE LA API PARA PRODUCCION
-      URI = `mongodb://prd_${process.env.DB_USER}:${process.env.DB_PASS}p@${process.env.DB_HOST}-PRD:${process.env.DB_PORT}/prd_${process.env.DB_NAME}?${process.env.DB_AUTH}`;
+      URI = `mongodb://prd_${process.env.DB_USER}:${process.env.DB_PASS}p@${process.env.DB_HOST}-PRD:${process.env.DB_PORT}/prd_${process.env.DB_NAME}?${process.env.DB_AUTH}&replicaSet=rs0`;
       SERVER = 'PRODUCTION';
       break;
     case 'development':
@@ -46,7 +46,7 @@ switch (process.env.NODE_ENV) {
       break;
     case 'testing':
       PORT = 3050; //PUERTO DE LA API PARA TESTING
-      URI = `mongodb://tst_${process.env.DB_USER}:${process.env.DB_PASS}t@${process.env.DB_HOST}-TST:${process.env.DB_PORT}/tst_${process.env.DB_NAME}?${process.env.DB_AUTH}`;
+      URI = `mongodb://tst_${process.env.DB_USER}:${process.env.DB_PASS}t@${process.env.DB_HOST}-TST:${process.env.DB_PORT}/tst_${process.env.DB_NAME}?${process.env.DB_AUTH}&replicaSet=rs0`;
   
       SERVER = 'TESTING';
       break;
@@ -66,6 +66,7 @@ switch (process.env.NODE_ENV) {
               retryWrites: true,               // Reintentar escrituras en caso de fallo
               retryReads: true                 // Reintentar lecturas en caso de fallo
           };
+          logger.warn(`Connecting to ${SERVER} with URI: ${URI} ...`);
           await mongo.connect(URI, connectionOptions);
           logger.warn(`Connection to ${SERVER} it's Ok`);
           logger.info(`Pool de conexiones configurado: maxPool=${connectionOptions.maxPoolSize}, minPool=${connectionOptions.minPoolSize}`);
