@@ -9,7 +9,9 @@ lerna-debug.log*
 .env
 .env.*
 Dockerfile.*
-
+Dockerfile.dev
+Dockerfile.Test
+Dockerfile.prd
 node_modules
 dist
 dist-ssr
