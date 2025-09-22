@@ -71,7 +71,7 @@ const getCentroCostos = async (req: Request, res: Response) => {
     try {
         // Leer parámetros desde query (GET) o body (POST)
         const params = { ...req.query, ...req.body };
-        const { page = 1, limit = 10, search, sortBy = 'nombre', sortOrder = 'asc' } = params;
+        const { page = 1, limit = 100, search, sortBy = 'nombre', sortOrder = 'asc' } = params;
         
         // Construir filtro de búsqueda
         let filter = {};

@@ -12,14 +12,16 @@ import { IInventory } from '../../Interfaces/Inventario';
 /* MODELS */
 import Inventario from '../../Models/inventarioModel';
 import Gerencia from '../../Models/gerenciaModel';
-import CentroCosto from '../../Models/centrocostosModel';
+import CentroCostos from '../../Models/centrocostosModel';
 import SubEstadosActivos from '../../Models/subEstadosActivosModel';
 import Producto from '../../Models/productoModel';
+import Tipos from '../../Models/categoriasModel';
 
 /* LIBRARIES */
 import { getChileDateTime } from '../../Library/Utils/ManageDate';
 import { Request, Response, NextFunction } from "express";
 import { IsId, IsParagraph } from '../../Library/Validations';
+import mongoose from 'mongoose';
 
 /**
  * @description Crea un nuevo inventario
@@ -125,7 +127,7 @@ const guardarInventario = async (
     if (!subEstados) {
         throw createNotFoundError('No existe un estado activo con el código "DISPONIBLE"');
     }
-    const centrosCosto = await CentroCosto.findById(centroCosto);
+    const centrosCosto = await CentroCostos.findById(centroCosto);
     if (!centrosCosto) {
         throw createNotFoundError('No existe un centro de costo con ese ID', 'Centro de Costo: ' + centroCosto);
     }
@@ -202,8 +204,351 @@ const guardarInventario = async (
     return inventarioGuardado;
 }
 
+/**
+ * @description Filtra el inventario por uno o más campos opcionales: producto, serie, centro de costo, proveedor, usuario o todos
+ * @route POST /api/inventario/filtrar
+ * @body { productoId?, numeroSerie?, centroCosto?, proveedorId?, usuarioId? }
+ */
+const filtrarInventaro = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+        const {
+            productoId,
+            numeroSerie,
+            centroCosto,
+            proveedorId,
+            usuarioId,
+            categoriaId,
+            todos
+        } = req.body;
+        logger.warn('Datos recibidos:', req.body);
+        logger.warn('categoriaId:', categoriaId, 'todos:', todos);
+        
+        let inventarioFiltrado;
+
+        // Si necesitamos filtrar por categoría, usamos agregación
+        if (!todos && categoriaId) {
+            logger.warn('Entrando en filtro por categoría');
+            logger.warn('categoriaId recibido:', categoriaId);
+            
+            // Validar que la categoría existe
+            const categoria = await Tipos.findById(categoriaId);
+            if (!categoria) {
+                throw createNotFoundError('No existe una categoría con ese ID', 'Categoría: ' + categoriaId);
+            }
+            
+            logger.warn('Categoría encontrada:', categoria.nombre);
+
+            // Versión simplificada para debug - primero obtener productos de la categoría
+            const productosDeCategoria = await Producto.find({ categoria: categoria._id });
+            logger.warn('Productos de la categoría encontrados:', productosDeCategoria.length);
+            
+            if (productosDeCategoria.length === 0) {
+                // No hay productos de esta categoría
+                inventarioFiltrado = [];
+            } else {
+                // Filtrar inventario por estos productos
+                const productosIds = productosDeCategoria.map(p => p._id);
+                const filtro: any = { producto: { $in: productosIds } };
+                
+                // Agregar otros filtros si existen
+                if (productoId) filtro.producto = productoId;
+                if (numeroSerie) filtro.serialNumber = { $regex: numeroSerie, $options: 'i' };
+                if (proveedorId) filtro.proveedor = proveedorId;
+                if (usuarioId) filtro.assignedUser = usuarioId;
+                
+                // Agregar filtro de centro de costo si se especifica
+                if (centroCosto) {
+                    const ccosto = await CentroCostos.findById(centroCosto);
+                    if (!ccosto) {
+                        throw createNotFoundError('No existe un centro de costo con ese ID', 'Centro de Costo: ' + centroCosto);
+                    }
+                    filtro.location = ccosto.codigo.toString();
+                }
+                
+                logger.warn('Filtro aplicado:', filtro);
+                
+                inventarioFiltrado = await Inventario.find(filtro)
+                    .populate('producto')
+                    .populate('proveedor')
+                    .populate('status')
+                    .populate('centroCosto')
+                    .populate('assignedUser');
+            }
+
+        } else {
+            logger.warn('Usando filtrado normal o todos=true');
+            // Filtrado normal sin categoría
+            let filtro: any = {};
+            if (!todos) {
+                if (productoId) filtro.producto = productoId;
+                if (numeroSerie) filtro.serialNumber = { $regex: numeroSerie, $options: 'i' };
+                if (centroCosto) {
+                    const ccosto = await CentroCostos.findById(centroCosto);
+                    if (!ccosto) {
+                        throw createNotFoundError('No existe un centro de costo con ese ID', 'Centro de Costo: ' + centroCosto);
+                    }
+                    filtro.location = ccosto.codigo.toString();
+                }
+                if (proveedorId) filtro.proveedor = proveedorId;
+                if (usuarioId) filtro.assignedUser = usuarioId;
+            }
+
+            // Buscar y poblar referencias relevantes
+            inventarioFiltrado = await Inventario.find(filtro)
+                .populate('producto')
+                .populate('proveedor')
+                .populate('status')
+                .populate('centroCosto')
+                .populate('assignedUser');
+        }
+
+        res.status(200).json({
+            success: true,
+            data: inventarioFiltrado,
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
+/**
+ * @description Obtiene estadísticas del inventario para el dashboard
+ * @route GET /api/1.0/inventario/estadisticas
+ * @access Private
+ */
+const obtenerEstadisticasInventario = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+        logger.info('Obteniendo estadísticas del inventario para dashboard');
+
+        // Agregación para obtener conteo por categorías
+        const estadisticasPorCategoria = await Inventario.aggregate([
+            // Lookup con productos para obtener categoría
+            {
+                $lookup: {
+                    from: 'productos',
+                    localField: 'producto',
+                    foreignField: '_id',
+                    as: 'productoInfo'
+                }
+            },
+            // Descomponer productos
+            {
+                $unwind: '$productoInfo'
+            },
+            // Lookup con categorías para obtener información completa
+            {
+                $lookup: {
+                    from: 'tipos', // Tabla de categorías
+                    localField: 'productoInfo.categoria',
+                    foreignField: '_id',
+                    as: 'categoriaInfo'
+                }
+            },
+            // Descomponer categorías
+            {
+                $unwind: '$categoriaInfo'
+            },
+            // Agrupar por categoría y contar
+            {
+                $group: {
+                    _id: '$categoriaInfo._id',
+                    categoria: { $first: '$categoriaInfo.nombre' },
+                    codigo: { $first: '$categoriaInfo.codigo' },
+                    cantidad: { $sum: 1 },
+                    valorTotal: { $sum: { $ifNull: ['$value', 0] } }
+                }
+            },
+            // Ordenar por cantidad descendente
+            {
+                $sort: { cantidad: -1 }
+            }
+        ]);
+
+        // Estadísticas por estado
+        const estadisticasPorEstado = await Inventario.aggregate([
+            {
+                $lookup: {
+                    from: 'subestadosactivos',
+                    localField: 'status',
+                    foreignField: '_id',
+                    as: 'estadoInfo'
+                }
+            },
+            {
+                $unwind: '$estadoInfo'
+            },
+            {
+                $group: {
+                    _id: '$estadoInfo._id',
+                    estado: { $first: '$estadoInfo.nombre' },
+                    cantidad: { $sum: 1 }
+                }
+            },
+            {
+                $sort: { cantidad: -1 }
+            }
+        ]);
+
+        // Estadísticas por centro de costo (ubicación actual)
+        const estadisticasPorUbicacion = await Inventario.aggregate([
+            {
+                $group: {
+                    _id: '$location',
+                    cantidad: { $sum: 1 },
+                    valorTotal: { $sum: { $ifNull: ['$value', 0] } }
+                }
+            },
+            {
+                $sort: { cantidad: -1 }
+            },
+            {
+                $limit: 10 // Top 10 ubicaciones
+            }
+        ]);
+
+        // Estadísticas generales
+        const totalInventario = await Inventario.countDocuments();
+        const valorTotalInventario = await Inventario.aggregate([
+            {
+                $group: {
+                    _id: null,
+                    valorTotal: { $sum: { $ifNull: ['$value', 0] } }
+                }
+            }
+        ]);
+
+        res.status(200).json({
+            success: true,
+            data: {
+                resumen: {
+                    totalItems: totalInventario,
+                    valorTotal: valorTotalInventario[0]?.valorTotal || 0
+                },
+                porCategoria: estadisticasPorCategoria,
+                porEstado: estadisticasPorEstado,
+                porUbicacion: estadisticasPorUbicacion
+            }
+        });
+
+    } catch (error) {
+        logger.error('Error al obtener estadísticas del inventario:', error);
+        next(error);
+    }
+};
+
+/**
+ * @description Obtiene estadísticas del inventario agrupadas por ubicación
+ * @param {Request} req - Request object
+ * @param {Response} res - Response object
+ */
+const obtenerEstadisticasPorUbicacion = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+        // Estadísticas por ubicación (usando el campo location que contiene el código del centro de costo)
+        const estadisticasPorUbicacion = await Inventario.aggregate([
+            {
+                $match: {
+                    isActive: true,
+                    isDeleted: false,
+                    location: { $exists: true, $nin: [null, ""] }
+                }
+            },
+            {
+                $lookup: {
+                    from: 'centrocostos',
+                    localField: 'location',
+                    foreignField: 'codigo',
+                    as: 'centroCostoInfo'
+                }
+            },
+            {
+                $unwind: {
+                    path: '$centroCostoInfo',
+                    preserveNullAndEmptyArrays: true
+                }
+            },
+            {
+                $group: {
+                    _id: '$location',
+                    codigo: { $first: '$location' },
+                    ubicacion: { $first: { $ifNull: ['$centroCostoInfo.nombre', '$location'] } },
+                    cantidad: { $sum: 1 },
+                    valorTotal: { $sum: { $ifNull: ['$value', 0] } }
+                }
+            },
+            {
+                $project: {
+                    _id: 0,
+                    codigo: 1,
+                    ubicacion: 1,
+                    cantidad: 1,
+                    valorTotal: 1
+                }
+            },
+            {
+                $sort: { cantidad: -1 }
+            }
+        ]);
+
+        // Estadísticas por centro de costo (como alternativa/complemento)
+        const estadisticasPorCentroCosto = await Inventario.aggregate([
+            {
+                $match: {
+                    isActive: true,
+                    isDeleted: false
+                }
+            },
+            {
+                $lookup: {
+                    from: 'centrocostos',
+                    localField: 'centroCosto',
+                    foreignField: '_id',
+                    as: 'centroCostoInfo'
+                }
+            },
+            {
+                $unwind: '$centroCostoInfo'
+            },
+            {
+                $group: {
+                    _id: '$centroCosto',
+                    codigo: { $first: '$centroCostoInfo.codigo' },
+                    ubicacion: { $first: '$centroCostoInfo.nombre' },
+                    cantidad: { $sum: 1 },
+                    valorTotal: { $sum: { $ifNull: ['$value', 0] } }
+                }
+            },
+            {
+                $project: {
+                    _id: 0,
+                    codigo: 1,
+                    ubicacion: 1,
+                    cantidad: 1,
+                    valorTotal: 1
+                }
+            },
+            {
+                $sort: { cantidad: -1 }
+            }
+        ]);
+
+        res.status(200).json({
+            success: true,
+            data: {
+                porUbicacion: estadisticasPorUbicacion,
+                porCentroCosto: estadisticasPorCentroCosto
+            }
+        });
+
+    } catch (error) {
+        logger.error('Error al obtener estadísticas por ubicación:', error);
+        next(error);
+    }
+};
 
 export {
     agregarInventario,
     crearInventarioDesdeRecepcion,
+    filtrarInventaro,
+    obtenerEstadisticasInventario,
+    obtenerEstadisticasPorUbicacion,
 }
