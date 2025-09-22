@@ -32,7 +32,7 @@ const inventarioSchema = new mongoose.Schema<IInventory>({
     },
     centroCosto: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'CentroCosto',
+        ref: 'CentroCostos',
         required: true,
         index: true
     },

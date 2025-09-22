@@ -143,6 +143,9 @@ const getPermissionById = async (req: Request, res: Response): Promise<void> => 
     }
 };
 
+// Importar nuevo controlador
+export { getValidPermissions } from './getValidPermissions';
+
 export {
     createPermission,
     getPermissionsId,
