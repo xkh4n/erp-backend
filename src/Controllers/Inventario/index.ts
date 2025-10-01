@@ -207,7 +207,7 @@ const guardarInventario = async (
 /**
  * @description Filtra el inventario por uno o más campos opcionales: producto, serie, centro de costo, proveedor, usuario o todos
  * @route POST /api/inventario/filtrar
- * @body { productoId?, numeroSerie?, centroCosto?, proveedorId?, usuarioId? }
+ * @body { productoId?, numeroSerie?, centroCosto?, proveedorId?, usuarioId?, page?, limit? }
  */
 const filtrarInventaro = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
@@ -218,8 +218,15 @@ const filtrarInventaro = async (req: Request, res: Response, next: NextFunction)
             proveedorId,
             usuarioId,
             categoriaId,
-            todos
+            todos,
+            page,
+            limit
         } = req.body;
+        
+        // Parámetros de paginación
+        const currentPage = parseInt(page) || 1;
+        const itemsPerPage = parseInt(limit) || 10;
+        const skip = (currentPage - 1) * itemsPerPage;
         logger.warn('Datos recibidos:', req.body);
         logger.warn('categoriaId:', categoriaId, 'todos:', todos);
         
@@ -244,7 +251,14 @@ const filtrarInventaro = async (req: Request, res: Response, next: NextFunction)
             
             if (productosDeCategoria.length === 0) {
                 // No hay productos de esta categoría
-                inventarioFiltrado = [];
+                inventarioFiltrado = {
+                    data: [],
+                    total: 0,
+                    totalPages: 0,
+                    currentPage,
+                    hasNext: false,
+                    hasPrev: false
+                };
             } else {
                 // Filtrar inventario por estos productos
                 const productosIds = productosDeCategoria.map(p => p._id);
@@ -267,12 +281,28 @@ const filtrarInventaro = async (req: Request, res: Response, next: NextFunction)
                 
                 logger.warn('Filtro aplicado:', filtro);
                 
-                inventarioFiltrado = await Inventario.find(filtro)
+                // Contar total de registros
+                const total = await Inventario.countDocuments(filtro);
+                const totalPages = Math.ceil(total / itemsPerPage);
+                
+                // Obtener registros paginados
+                const data = await Inventario.find(filtro)
                     .populate('producto')
                     .populate('proveedor')
                     .populate('status')
                     .populate('centroCosto')
-                    .populate('assignedUser');
+                    .populate('assignedUser')
+                    .skip(skip)
+                    .limit(itemsPerPage);
+                
+                inventarioFiltrado = {
+                    data,
+                    total,
+                    totalPages,
+                    currentPage,
+                    hasNext: currentPage < totalPages,
+                    hasPrev: currentPage > 1
+                };
             }
 
         } else {
@@ -293,18 +323,41 @@ const filtrarInventaro = async (req: Request, res: Response, next: NextFunction)
                 if (usuarioId) filtro.assignedUser = usuarioId;
             }
 
-            // Buscar y poblar referencias relevantes
-            inventarioFiltrado = await Inventario.find(filtro)
+            // Contar total de registros
+            const total = await Inventario.countDocuments(filtro);
+            const totalPages = Math.ceil(total / itemsPerPage);
+            
+            // Buscar y poblar referencias relevantes con paginación
+            const data = await Inventario.find(filtro)
                 .populate('producto')
                 .populate('proveedor')
                 .populate('status')
                 .populate('centroCosto')
-                .populate('assignedUser');
+                .populate('assignedUser')
+                .skip(skip)
+                .limit(itemsPerPage);
+            
+            inventarioFiltrado = {
+                data,
+                total,
+                totalPages,
+                currentPage,
+                hasNext: currentPage < totalPages,
+                hasPrev: currentPage > 1
+            };
         }
 
         res.status(200).json({
             success: true,
-            data: inventarioFiltrado,
+            data: inventarioFiltrado.data,
+            pagination: {
+                total: inventarioFiltrado.total,
+                totalPages: inventarioFiltrado.totalPages,
+                currentPage: inventarioFiltrado.currentPage,
+                hasNext: inventarioFiltrado.hasNext,
+                hasPrev: inventarioFiltrado.hasPrev,
+                itemsPerPage
+            }
         });
     } catch (error) {
         next(error);

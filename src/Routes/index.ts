@@ -24,6 +24,8 @@ import passwordRoutes from './Password';
 import centroCostos from './CentroCostos';
 import usuarios from './Users';
 import asigna from './Asignacion';
+import acceso from './Accesos';
+import dependencias from './Dependencias';
 
 
 
@@ -53,5 +55,7 @@ export{
     passwordRoutes,
     centroCostos,
     usuarios,
-    asigna
+    asigna,
+    acceso,
+    dependencias
 }
