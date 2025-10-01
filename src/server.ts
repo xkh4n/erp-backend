@@ -181,7 +181,9 @@ import {
     usuarios,
     passwordRoutes,
     centroCostos,
-    asigna
+    asigna,
+    acceso,
+    dependencias
 } from './Routes/index';
 
 /* ROUTE CONFIGURATION */
@@ -212,6 +214,8 @@ app.use(base_path, persons);
 app.use(base_path, passwordRoutes);
 app.use(base_path, centroCostos);
 app.use(base_path, asigna);
+app.use(base_path, acceso);
+app.use(base_path, dependencias);
 
 /* HEALTH CHECK */
 app.get('/health', (req, res) => {
