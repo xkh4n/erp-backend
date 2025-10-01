@@ -15,6 +15,7 @@ import Permissions from '../../Models/permissionsModel';
 /* DEPENDENCIES */
 import { Request, Response } from 'express';
 import { getChileDateTime } from '../../Library/Utils/ManageDate';
+import { _discriminatedUnion } from 'zod/v4/core';
 
 const createPermission = async (req: Request, res: Response): Promise<void> => {
     try {
@@ -143,11 +144,52 @@ const getPermissionById = async (req: Request, res: Response): Promise<void> => 
     }
 };
 
+
+const getAllPermissions = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const permissions = await Permissions.find();
+        res.status(200).json({
+            codigo: 200,
+            data: permissions
+        });
+    } catch (error) {
+        console.log(error);
+        if (error instanceof CustomError) {
+            res.status(error.code).json(error.toJSON());
+        } else {
+            const serverError = createServerError('Sucedió un error inesperado al buscar los permisos');
+            res.status(serverError.code).json(serverError.toJSON());
+        }
+    }
+};
+
+const getAllPairPermissions = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const permissions = await Permissions.find();
+        const pairPermissions = permissions.map(p => ({ id: p._id, permiso: p.resource + ":" + p.action }));
+        res.status(200).json({
+            codigo: 200,
+            data: pairPermissions
+        });
+    } catch (error) {
+        console.log(error);
+        if (error instanceof CustomError) {
+            res.status(error.code).json(error.toJSON());
+        } else {
+            const serverError = createServerError('Sucedió un error inesperado al buscar los permisos');
+            res.status(serverError.code).json(serverError.toJSON());
+        }
+    }
+};
+
+
 // Importar nuevo controlador
 export { getValidPermissions } from './getValidPermissions';
 
 export {
     createPermission,
     getPermissionsId,
-    getPermissionById
+    getPermissionById,
+    getAllPermissions,
+    getAllPairPermissions
 };

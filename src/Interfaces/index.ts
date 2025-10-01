@@ -24,6 +24,8 @@ import IPasswordHistory from "./PasswordHistory";
 import IRefreshToken from "./RefreshToken";
 import ISession from "./Session";
 import ICentroCostos from "./CCostos";
+import IAccesoSala from "./AccesoSala";
+import IDependencia from "./Dependencias";
 
 export type{
     IUser,
@@ -53,5 +55,7 @@ export type{
     IPasswordHistory,
     IRefreshToken,
     ISession,
-    ICentroCostos
+    ICentroCostos,
+    IAccesoSala,
+    IDependencia
 }
