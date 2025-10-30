@@ -115,15 +115,47 @@ const createProveedor = async (req: Request, res: Response): Promise<void> => {
 
 const getAllProveedores = async (req: Request, res: Response): Promise<void> => {
     try {
-        const proveedores = await Proveedor.find()
-            .populate('comuna', 'nombre')
-            .populate('pais', 'nombre')
-            .populate('ciudad', 'nombre')
-            .sort({ createdAt: -1 });
+        const startTime = Date.now();
+        
+        // Query optimizada: usar lean() para mejorar performance
+        const proveedores = await Proveedor.find({}, {
+            // Seleccionar solo campos necesarios para listar
+            rut: 1,
+            razonSocial: 1,
+            giro: 1,
+            telefono: 1,
+            correo: 1,
+            direccion: 1,
+            contacto: 1,
+            fonoContacto: 1,
+            tipoServicio: 1,
+            estado: 1,
+            fechaCreacion: 1,
+            condicionesPago: 1,
+            condicionesEntrega: 1,
+            condicionesDespacho: 1,
+            pais: 1,
+            ciudad: 1,
+            comuna: 1
+        })
+            .populate('comuna', 'nombre', null, { lean: true })
+            .populate('pais', 'nombre', null, { lean: true })
+            .populate('ciudad', 'nombre', null, { lean: true })
+            .sort({ fechaCreacion: -1 }) // Usar fechaCreacion en lugar de createdAt
+            .lean(); // Retorna objetos planos de JavaScript (más rápido)
+        
+        const queryTime = Date.now() - startTime;
+        logger.debug(`Query getAllProveedores ejecutada en ${queryTime}ms`);
+        
         if (proveedores.length === 0) throw createNotFoundError('No Proveedores found');
+        
         res.status(200).json({
             message: 'Proveedores retrieved successfully',
-            data: proveedores
+            data: proveedores,
+            meta: {
+                count: proveedores.length,
+                queryTime: `${queryTime}ms`
+            }
         });
     } catch (error) {
         console.log(error);

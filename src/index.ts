@@ -97,6 +97,12 @@ switch (process.env.NODE_ENV) {
           configureSession(URI);
           logger.info('Sesiones configuradas correctamente');
           
+          // Crear índices de optimización
+          if (process.env.NODE_ENV === 'production') {
+              const { ensureIndexes } = await import('./Library/Database/ensureIndexes.js');
+              await ensureIndexes();
+          }
+          
           // Iniciar tareas de limpieza automática
           CleanupScheduler.start();
           
